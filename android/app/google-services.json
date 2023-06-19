@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "851468619929",
+    "project_id": "vallexplora",
+    "storage_bucket": "vallexplora.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851468619929:android:2dfbf0679d6885ae88e808",
+        "android_client_info": {
+          "package_name": "com.example.vallexplora"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851468619929-sop6orbog35pnvd2btel6ovo01gfa4kn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7bC4sSR2fepOGu8oG6sEaRRmHxmsTnvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851468619929-sop6orbog35pnvd2btel6ovo01gfa4kn.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "851468619929-0agdsklu443cp70kqiq1oq0rdjvs7bom.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.icesi.vallexplora"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
