@@ -3,7 +3,9 @@ import 'package:vallexplora/src/constants/asset_uris.dart';
 import 'package:vallexplora/src/constants/colors.dart';
 import 'package:vallexplora/src/constants/sizes.dart';
 import 'package:vallexplora/src/constants/text_strings.dart';
+import 'package:vallexplora/src/ui/login/login_screen.dart';
 import 'package:vallexplora/src/ui/register/sign_up_form_widget.dart';
+import 'package:vallexplora/src/ui/welcome_screen.dart';
 
 class UserRegisterScreen extends StatelessWidget {
   const UserRegisterScreen({super.key});
@@ -15,6 +17,14 @@ class UserRegisterScreen extends StatelessWidget {
         preferredSize: const Size.fromHeight(48),
         child: AppBar(
           foregroundColor: ColorResources.mayaBlue[50],
+          leading: BackButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+              );
+            },
+          ),
         ),
       ),
       body: Listener(
@@ -29,35 +39,48 @@ class UserRegisterScreen extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(SizeResources.defaultSize),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Text(
+                  StringResources.signUpTitle,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                  textAlign: TextAlign.center,
+                ),
+                const SignUpFormWidget(),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      StringResources.signUpTitle,
-                      style: Theme.of(context).textTheme.headlineSmall,
+                      StringResources.optionOr.toUpperCase(),
+                      textAlign: TextAlign.center,
                     ),
-                    const SignUpFormWidget(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Text(
-                          StringResources.optionOr.toUpperCase(),
-                          textAlign: TextAlign.center,
+                    const SizedBox(
+                      height: SizeResources.buttonHeight,
+                    ),
+                    OutlinedButton.icon(
+                      onPressed: () {},
+                      icon: const Image(
+                        image: AssetImage(AssetURIResources.googleLogo),
+                        width: 20.0,
+                      ),
+                      label: const Text(
+                        StringResources.signInWithGoogle,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: SizeResources.buttonTextSize,
                         ),
-                        OutlinedButton.icon(
-                          onPressed: () {},
-                          icon: const Image(
-                            image: AssetImage(AssetURIResources.googleLogo),
-                            width: 20.0,
-                          ),
-                          label: const Text(StringResources.signInWithGoogle),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text(StringResources.signUpLoginInstead),
-                        ),
-                      ],
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreen()),
+                        );
+                      },
+                      child: const Text(StringResources.signUpLoginInstead),
                     ),
                   ],
                 ),

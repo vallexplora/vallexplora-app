@@ -25,7 +25,7 @@ class SignUpFormWidget extends StatelessWidget {
               ],
               scrollPadding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom +
-                    SizeResources.buttonTextSize * 4,
+                    SizeResources.buttonTextSize * 8,
               ),
               decoration: const InputDecoration(
                 label: Text(StringResources.signUpFormFullName),
@@ -42,7 +42,7 @@ class SignUpFormWidget extends StatelessWidget {
               keyboardType: TextInputType.emailAddress,
               scrollPadding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom +
-                    SizeResources.buttonTextSize * 4,
+                    SizeResources.buttonTextSize * 8,
               ),
               decoration: const InputDecoration(
                 label: Text(StringResources.signUpFormEmail),
@@ -65,7 +65,7 @@ class SignUpFormWidget extends StatelessWidget {
               keyboardType: TextInputType.phone,
               scrollPadding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom +
-                    SizeResources.buttonTextSize * 4,
+                    SizeResources.buttonTextSize * 8,
               ),
               decoration: const InputDecoration(
                 label: Text(StringResources.signUpFormPhone +
@@ -78,16 +78,16 @@ class SignUpFormWidget extends StatelessWidget {
             ),
             TextFormField(
               autofillHints: const [
-                AutofillHints.newPassword,
+                AutofillHints.password,
               ],
               keyboardType: TextInputType.visiblePassword,
               scrollPadding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom +
-                    SizeResources.buttonTextSize * 4,
+                    SizeResources.buttonTextSize * 8,
               ),
               decoration: const InputDecoration(
                 label: Text(StringResources.signUpFormPassword),
-                prefixIcon: Icon(Icons.lock_outline_rounded),
+                prefixIcon: Icon(Icons.key_rounded),
               ),
             ),
             const SizedBox(
@@ -106,11 +106,11 @@ class SignUpFormWidget extends StatelessWidget {
               keyboardType: TextInputType.visiblePassword,
               scrollPadding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom +
-                    SizeResources.buttonTextSize * 16,
+                    SizeResources.buttonTextSize * 8,
               ),
               decoration: const InputDecoration(
                 label: Text(StringResources.signUpFormPasswordVerify),
-                prefixIcon: Icon(Icons.lock_reset_rounded),
+                prefixIcon: Icon(Icons.key_rounded),
               ),
             ),
             const SizedBox(
@@ -118,7 +118,13 @@ class SignUpFormWidget extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {},
-              child: const Text(StringResources.signUpFormSubmit),
+              child: const Text(
+                StringResources.signUpFormSubmit,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: SizeResources.buttonTextSize,
+                ),
+              ),
             )
           ],
         ),

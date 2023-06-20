@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vallexplora/src/constants/sizes.dart';
 import 'package:vallexplora/src/constants/text_strings.dart';
+import 'package:vallexplora/src/ui/login/login_screen.dart';
 import 'package:vallexplora/src/ui/register/user_register_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -56,7 +57,13 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: SizeResources.buttonHeight),
                   OutlinedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreen()),
+                      );
+                    },
                     child: const Text(
                       StringResources.login,
                       style: TextStyle(
