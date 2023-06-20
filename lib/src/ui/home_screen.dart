@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../blocs/home_bloc.dart';
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -10,12 +8,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _bloc = HomeBloc();
 
   @override
   void initState() {
     super.initState();
-    _bloc.fetchData();
   }
 
   @override
@@ -23,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: StreamBuilder<List<String>>(
-        stream: _bloc.dataStream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
@@ -50,7 +45,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _bloc.dispose();
     super.dispose();
   }
 }

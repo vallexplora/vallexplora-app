@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/ui/login/login_form_widget.dart';
-import 'package:vallexplora/src/ui/register/user_register_screen.dart';
+import 'package:vallexplora/src/ui/register/signup_screen.dart';
 
 import '../../constants/asset_uris.dart';
 import '../../constants/colors.dart';

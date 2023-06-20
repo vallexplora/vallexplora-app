@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:vallexplora/src/constants/sizes.dart';
 import 'package:vallexplora/src/constants/text_strings.dart';
 import 'package:vallexplora/src/ui/login/login_screen.dart';
-import 'package:vallexplora/src/ui/register/user_register_screen.dart';
+import 'package:vallexplora/src/ui/register/signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

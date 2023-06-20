@@ -1,13 +1,23 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vallexplora/src/blocs/auth/signup_bloc.dart';
 
 import '../../constants/sizes.dart';
 import '../../constants/text_strings.dart';
 
-class SignUpFormWidget extends StatelessWidget {
-  const SignUpFormWidget({
-    super.key,
-  });
+class SignUpFormWidget extends StatefulWidget {
+  const SignUpFormWidget({super.key});
+
+  @override
+  State<SignUpFormWidget> createState() => _SignUpFormState();
+}
+
+class _SignUpFormState extends State<SignUpFormWidget> {
+  final _bloc = SignUpBloc();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +31,7 @@ class SignUpFormWidget extends StatelessWidget {
           children: [
             TextFormField(
               autofillHints: const [
-                AutofillHints.name,
+                AutofillHints.username,
               ],
               scrollPadding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom +
@@ -31,6 +41,9 @@ class SignUpFormWidget extends StatelessWidget {
                 label: Text(StringResources.signUpFormFullName),
                 prefixIcon: Icon(Icons.person_outline_rounded),
               ),
+              onChanged: (value) {
+                _bloc.changeDisplayName(value);
+              },
             ),
             const SizedBox(
               height: SizeResources.buttonHeight,
@@ -48,6 +61,9 @@ class SignUpFormWidget extends StatelessWidget {
                 label: Text(StringResources.signUpFormEmail),
                 prefixIcon: Icon(Icons.alternate_email_rounded),
               ),
+              onChanged: (value) {
+                _bloc.changeEmail(value);
+              },
             ),
             const SizedBox(
               height: SizeResources.buttonHeight - 10,
@@ -72,6 +88,9 @@ class SignUpFormWidget extends StatelessWidget {
                     StringResources.optionalField),
                 prefixIcon: Icon(Icons.phone_outlined),
               ),
+              onChanged: (value) {
+                _bloc.changePhone(value);
+              },
             ),
             const SizedBox(
               height: SizeResources.buttonHeight,
@@ -89,6 +108,9 @@ class SignUpFormWidget extends StatelessWidget {
                 label: Text(StringResources.signUpFormPassword),
                 prefixIcon: Icon(Icons.key_rounded),
               ),
+              onChanged: (value) {
+                _bloc.changePassword(value);
+              },
             ),
             const SizedBox(
               height: SizeResources.buttonHeight - 10,
@@ -112,12 +134,17 @@ class SignUpFormWidget extends StatelessWidget {
                 label: Text(StringResources.signUpFormPasswordVerify),
                 prefixIcon: Icon(Icons.key_rounded),
               ),
+              onChanged: (value) {
+                _bloc.changeVerifyPassword(value);
+              },
             ),
             const SizedBox(
               height: SizeResources.buttonHeight,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                _bloc.registerUser();
+              },
               child: const Text(
                 StringResources.signUpFormSubmit,
                 style: TextStyle(

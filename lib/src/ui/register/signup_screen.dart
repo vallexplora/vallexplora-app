@@ -4,7 +4,7 @@ import 'package:vallexplora/src/constants/colors.dart';
 import 'package:vallexplora/src/constants/sizes.dart';
 import 'package:vallexplora/src/constants/text_strings.dart';
 import 'package:vallexplora/src/ui/login/login_screen.dart';
-import 'package:vallexplora/src/ui/register/sign_up_form_widget.dart';
+import 'package:vallexplora/src/ui/register/signup_form_widget.dart';
 import 'package:vallexplora/src/ui/welcome_screen.dart';
 
 class UserRegisterScreen extends StatelessWidget {
@@ -12,6 +12,7 @@ class UserRegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // var bloc = BlocProvider.of<SignUpBloc>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(48),

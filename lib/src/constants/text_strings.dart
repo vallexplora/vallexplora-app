@@ -15,7 +15,7 @@ class StringResources {
 
   /* Registration Screen */
   static const String signUpTitle = "¡Empieza a explorar el Valle!";
-  static const String signUpFormFullName = "Tu nombre completo";
+  static const String signUpFormFullName = "¿Cómo te llamamos?";
   static const String signUpFormEmail = "Tu correo";
   static const String signUpFormEmailInfo = "Lo usarás para iniciar sesión";
   static const String signUpFormPhone = "Tu número de teléfono";
@@ -26,6 +26,11 @@ class StringResources {
   static const String signUpFormSubmit = "¡Empecemos!";
   static const String signUpLoginInstead =
       "¿Ya tienes una cuenta? Inicia sesión aquí";
+
+  static const String emailIsInvalidError = "Ingresa un email válido";
+  static const String emailIsTakenError = "Ese correo ya está en uso";
+  static const String passTooShortError = "Tu contraseña es muy corta";
+  static const String passIsInvalidError = "Tu contraseña no es válida";
 
   /* Login Screen */
   static const String loginTitle = "Nos alegra verte de nuevo";
