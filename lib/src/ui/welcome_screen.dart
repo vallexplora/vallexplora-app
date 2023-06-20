@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:vallexplora/src/constants/colors.dart';
 import 'package:vallexplora/src/constants/sizes.dart';
 import 'package:vallexplora/src/constants/text_strings.dart';
+import 'package:vallexplora/src/ui/register/user_register_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -10,7 +10,9 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.dark,
+      value: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ),
       child: Scaffold(
         body: Container(
           padding: const EdgeInsets.all(SizeResources.defaultSize),
@@ -37,15 +39,13 @@ class WelcomeScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      foregroundColor: mayaBlue[50],
-                      padding: const EdgeInsets.all(SizeResources.buttonHeight),
-                      elevation: 0,
-                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UserRegisterScreen()),
+                      );
+                    },
                     child: const Text(
                       StringResources.register,
                       style: TextStyle(
@@ -57,13 +57,6 @@ class WelcomeScreen extends StatelessWidget {
                   const SizedBox(height: SizeResources.buttonHeight),
                   OutlinedButton(
                     onPressed: () {},
-                    style: OutlinedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      foregroundColor: twNeutral[500],
-                      padding: const EdgeInsets.all(SizeResources.buttonHeight),
-                    ),
                     child: const Text(
                       StringResources.login,
                       style: TextStyle(
