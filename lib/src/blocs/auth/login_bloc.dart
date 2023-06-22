@@ -11,12 +11,15 @@ class LoginBloc implements Bloc {
   final _repository = Repository();
   final _email = BehaviorSubject<String>();
   final _password = BehaviorSubject<String>();
+  final _passwordVisible = BehaviorSubject<bool>();
 
   Stream<String> get email => _email.stream.transform(_validateEmail);
   Stream<String> get password => _password.stream;
+  Stream<bool> get passwordVisible => _passwordVisible.stream;
 
   Function(String) get changeEmail => _email.sink.add;
   Function(String) get changePassword => _password.sink.add;
+  Function(bool) get changePasswordVisible => _passwordVisible.sink.add;
 
   final _validateEmail = StreamTransformer<String, String>.fromHandlers(
     handleData: (email, sink) {

@@ -3,6 +3,7 @@ import 'package:vallexplora/src/blocs/auth/signup_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../constants/sizes.dart';
 import '../../constants/text_strings.dart';
+import '../home_screen.dart';
 
 class SignUpFormWidget extends StatefulWidget {
   const SignUpFormWidget({
@@ -116,9 +117,11 @@ class _SignUpFormState extends State<SignUpFormWidget> {
                     label: const Text(StringResources.signUpFormPassword),
                     prefixIcon: const Icon(Icons.key_rounded),
                     suffixIcon: IconButton(
-                      icon: Icon(snapshot.data ?? false
-                          ? Icons.visibility
-                          : Icons.visibility_off),
+                      icon: Icon(
+                        snapshot.data ?? true
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
                       onPressed: () {
                         _bloc.changePasswordVisible(!snapshot.data!);
                       },
@@ -156,9 +159,11 @@ class _SignUpFormState extends State<SignUpFormWidget> {
                     label: const Text(StringResources.signUpFormPasswordVerify),
                     prefixIcon: const Icon(Icons.key_rounded),
                     suffixIcon: IconButton(
-                      icon: Icon(snapshot.data ?? false
-                          ? Icons.visibility
-                          : Icons.visibility_off),
+                      icon: Icon(
+                        snapshot.data ?? true
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
                       onPressed: () {
                         _bloc.changeVerifyPasswordVisible(!snapshot.data!);
                       },
@@ -176,14 +181,14 @@ class _SignUpFormState extends State<SignUpFormWidget> {
             ElevatedButton(
               onPressed: () {
                 _bloc.registerUser().then((regValue) async {
+                  await Fluttertoast.showToast(
+                      msg: regValue,
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 3,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
                   if (regValue == StringResources.signUpSuccess) {
-                    await Fluttertoast.showToast(
-                        msg: regValue,
-                        toastLength: Toast.LENGTH_LONG,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 3,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
                     _bloc.loginAfterRegister().then((logValue) async {
                       await Fluttertoast.showToast(
                           msg: logValue,
@@ -192,7 +197,14 @@ class _SignUpFormState extends State<SignUpFormWidget> {
                           timeInSecForIosWeb: 3,
                           textColor: Colors.white,
                           fontSize: 16.0);
-                    });
+                    }).then((value) => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const HomeScreen()),
+                          )
+                        });
+                    ;
                   }
                 });
               },

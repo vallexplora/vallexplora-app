@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vallexplora/src/blocs/auth/login_bloc.dart';
+import 'package:vallexplora/src/ui/home_screen.dart';
 
 import '../../constants/sizes.dart';
 import '../../constants/text_strings.dart';
@@ -20,6 +23,7 @@ class _LoginFormState extends State<LoginFormWidget> {
   @override
   void initState() {
     super.initState();
+    _bloc.changePasswordVisible(false);
   }
 
   @override
@@ -52,19 +56,38 @@ class _LoginFormState extends State<LoginFormWidget> {
             const SizedBox(
               height: SizeResources.buttonHeight,
             ),
-            TextFormField(
-              autofillHints: const [
-                AutofillHints.password,
-              ],
-              keyboardType: TextInputType.visiblePassword,
-              scrollPadding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom +
-                    SizeResources.buttonTextSize * 8,
-              ),
-              decoration: const InputDecoration(
-                label: Text(StringResources.loginFormPassword),
-                prefixIcon: Icon(Icons.key_rounded),
-              ),
+            StreamBuilder<bool>(
+              stream: _bloc.passwordVisible,
+              builder: (context, snapshot) {
+                return TextField(
+                  autofillHints: const [
+                    AutofillHints.password,
+                  ],
+                  obscureText: snapshot.data ?? true ? false : true,
+                  keyboardType: TextInputType.visiblePassword,
+                  scrollPadding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom +
+                        SizeResources.buttonTextSize * 8,
+                  ),
+                  decoration: InputDecoration(
+                    label: const Text(StringResources.signUpFormPassword),
+                    prefixIcon: const Icon(Icons.key_rounded),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        snapshot.data ?? true
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                      ),
+                      onPressed: () {
+                        _bloc.changePasswordVisible(!snapshot.data!);
+                      },
+                    ),
+                  ),
+                  onChanged: (value) {
+                    _bloc.changePassword(value);
+                  },
+                );
+              },
             ),
             const SizedBox(
               height: SizeResources.buttonHeight - 10,
@@ -79,7 +102,29 @@ class _LoginFormState extends State<LoginFormWidget> {
               height: SizeResources.buttonHeight,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                _bloc.logUserIn().then((logValue) async {
+                  await Fluttertoast.showToast(
+                      msg: logValue,
+                      toastLength: Toast.LENGTH_LONG,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 3,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+                    if (user != null) {
+                      if (logValue ==
+                          StringResources.loginSuccess(user.displayName!)) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomeScreen()),
+                        );
+                      }
+                    }
+                  });
+                });
+              },
               child: const Text(
                 StringResources.signUpFormSubmit,
                 style: TextStyle(
