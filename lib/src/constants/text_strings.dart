@@ -32,6 +32,13 @@ class StringResources {
   static const String passTooShortError = "Tu contraseña es muy corta";
   static const String passIsInvalidError = "Tu contraseña no es válida";
 
+  static const String signUpSuccess =
+      "Te has registrado con éxito. ¡Bienvenido a Vallexplora! Iniciando sesión...";
+  static const signUpErrorMessages = {
+    "Weak": "La contraseña no cumple con los requisitos mínimos de seguridad.",
+    "EmailTaken": "El correo ingresao ya está en uso.",
+  };
+
   /* Login Screen */
   static const String loginTitle = "Nos alegra verte de nuevo";
   static const String loginFormEmail = "Tu correo";
@@ -41,4 +48,8 @@ class StringResources {
   static const String loginLoading = "Iniciando sesión...";
   static const String loginSignUpInstead =
       "¿No tienes una cuenta todavía? Registrate aquí";
+
+  static loginSuccess(String displayName) =>
+      "Sesión iniciada correctamente. Bienvenido, $displayName";
+  static const loginErrorMessages = {};
 }

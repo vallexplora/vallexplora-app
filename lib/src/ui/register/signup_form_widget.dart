@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/blocs/auth/signup_bloc.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import '../../constants/sizes.dart';
 import '../../constants/text_strings.dart';
 
 class SignUpFormWidget extends StatefulWidget {
-  const SignUpFormWidget({super.key});
+  const SignUpFormWidget({
+    super.key,
+  });
 
   @override
   State<SignUpFormWidget> createState() => _SignUpFormState();
@@ -17,6 +19,8 @@ class _SignUpFormState extends State<SignUpFormWidget> {
   @override
   void initState() {
     super.initState();
+    _bloc.changePasswordVisible(false);
+    _bloc.changeVerifyPasswordVisible(false);
   }
 
   @override
@@ -95,21 +99,35 @@ class _SignUpFormState extends State<SignUpFormWidget> {
             const SizedBox(
               height: SizeResources.buttonHeight,
             ),
-            TextFormField(
-              autofillHints: const [
-                AutofillHints.password,
-              ],
-              keyboardType: TextInputType.visiblePassword,
-              scrollPadding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom +
-                    SizeResources.buttonTextSize * 8,
-              ),
-              decoration: const InputDecoration(
-                label: Text(StringResources.signUpFormPassword),
-                prefixIcon: Icon(Icons.key_rounded),
-              ),
-              onChanged: (value) {
-                _bloc.changePassword(value);
+            StreamBuilder<bool>(
+              stream: _bloc.passwordVisible,
+              builder: (context, snapshot) {
+                return TextField(
+                  autofillHints: const [
+                    AutofillHints.password,
+                  ],
+                  obscureText: snapshot.data ?? true ? false : true,
+                  keyboardType: TextInputType.visiblePassword,
+                  scrollPadding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom +
+                        SizeResources.buttonTextSize * 8,
+                  ),
+                  decoration: InputDecoration(
+                    label: const Text(StringResources.signUpFormPassword),
+                    prefixIcon: const Icon(Icons.key_rounded),
+                    suffixIcon: IconButton(
+                      icon: Icon(snapshot.data ?? false
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        _bloc.changePasswordVisible(!snapshot.data!);
+                      },
+                    ),
+                  ),
+                  onChanged: (value) {
+                    _bloc.changePassword(value);
+                  },
+                );
               },
             ),
             const SizedBox(
@@ -121,21 +139,35 @@ class _SignUpFormState extends State<SignUpFormWidget> {
             const SizedBox(
               height: SizeResources.buttonHeight,
             ),
-            TextFormField(
-              autofillHints: const [
-                AutofillHints.password,
-              ],
-              keyboardType: TextInputType.visiblePassword,
-              scrollPadding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom +
-                    SizeResources.buttonTextSize * 8,
-              ),
-              decoration: const InputDecoration(
-                label: Text(StringResources.signUpFormPasswordVerify),
-                prefixIcon: Icon(Icons.key_rounded),
-              ),
-              onChanged: (value) {
-                _bloc.changeVerifyPassword(value);
+            StreamBuilder<bool>(
+              stream: _bloc.verifyPasswordVisible,
+              builder: (context, snapshot) {
+                return TextField(
+                  autofillHints: const [
+                    AutofillHints.password,
+                  ],
+                  obscureText: snapshot.data ?? true ? false : true,
+                  keyboardType: TextInputType.visiblePassword,
+                  scrollPadding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom +
+                        SizeResources.buttonTextSize * 8,
+                  ),
+                  decoration: InputDecoration(
+                    label: const Text(StringResources.signUpFormPasswordVerify),
+                    prefixIcon: const Icon(Icons.key_rounded),
+                    suffixIcon: IconButton(
+                      icon: Icon(snapshot.data ?? false
+                          ? Icons.visibility
+                          : Icons.visibility_off),
+                      onPressed: () {
+                        _bloc.changeVerifyPasswordVisible(!snapshot.data!);
+                      },
+                    ),
+                  ),
+                  onChanged: (value) {
+                    _bloc.changeVerifyPassword(value);
+                  },
+                );
               },
             ),
             const SizedBox(
@@ -143,7 +175,26 @@ class _SignUpFormState extends State<SignUpFormWidget> {
             ),
             ElevatedButton(
               onPressed: () {
-                _bloc.registerUser();
+                _bloc.registerUser().then((regValue) async {
+                  if (regValue == StringResources.signUpSuccess) {
+                    await Fluttertoast.showToast(
+                        msg: regValue,
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 3,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                    _bloc.loginAfterRegister().then((logValue) async {
+                      await Fluttertoast.showToast(
+                          msg: logValue,
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 3,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                    });
+                  }
+                });
               },
               child: const Text(
                 StringResources.signUpFormSubmit,

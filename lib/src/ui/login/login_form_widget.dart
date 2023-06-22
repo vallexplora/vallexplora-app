@@ -1,13 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:vallexplora/src/blocs/auth/login_bloc.dart';
 
 import '../../constants/sizes.dart';
 import '../../constants/text_strings.dart';
 
-class LoginFormWidget extends StatelessWidget {
+class LoginFormWidget extends StatefulWidget {
   const LoginFormWidget({
     super.key,
   });
+
+  @override
+  State<LoginFormWidget> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginFormWidget> {
+  final _bloc = LoginBloc();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +45,9 @@ class LoginFormWidget extends StatelessWidget {
                 label: Text(StringResources.loginFormEmail),
                 prefixIcon: Icon(Icons.alternate_email_rounded),
               ),
+              onChanged: (value) {
+                _bloc.changeEmail(value);
+              },
             ),
             const SizedBox(
               height: SizeResources.buttonHeight,

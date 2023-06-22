@@ -6,9 +6,9 @@ class Repository {
 
   /// Authentication
   Stream<User?> get onAuthStateChange => _authResources.onAuthStateChange;
-  Future<int> loginWithEmailAndPassword(String email, String password) =>
+  Future<String> loginWithEmailAndPassword(String email, String password) =>
       _authResources.loginWithEmailAndPassword(email, password);
-  Future<int> signUpWithEmailAndPassword(
+  Future<String> signUpWithEmailAndPassword(
           String email, String password, String displayName) =>
       _authResources.signUpWithEmailAndPassword(email, password, displayName);
   Future<void> signOut() => _authResources.signOut;

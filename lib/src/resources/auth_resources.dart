@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:vallexplora/src/constants/text_strings.dart';
 
 class AuthenticationResources {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -11,40 +12,42 @@ class AuthenticationResources {
     return user!.uid;
   }
 
-  Future<int> signUpWithEmailAndPassword(
+  Future<String> signUpWithEmailAndPassword(
       String email, String password, String displayName) async {
     try {
       UserCredential credentials = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
-      // await setUserDisplayName(credentials.user!, displayName);
-      return 1;
+      await credentials.user?.updateDisplayName(displayName);
+      return StringResources.signUpSuccess;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
+        return StringResources.signUpErrorMessages["Weak"]!;
       } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
+        return StringResources.signUpErrorMessages["EmailTaken"]!;
+      } else {
+        return e.code;
       }
-      return -1;
     } catch (e) {
-      print("Exception: Authentication: $e");
-
-      return -2;
+      return "Exception: Authentication: $e";
     }
   }
 
-  Future<int> loginWithEmailAndPassword(String email, String password) async {
+  Future<String> loginWithEmailAndPassword(
+      String email, String password) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: email, password: password);
-
-      return 1;
+      UserCredential credentials = await _firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password);
+      return StringResources.loginSuccess(credentials.user!.displayName!);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        return 'Usuario no encontrado.';
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        return 'Contraseña incorrecta.';
+      } else {
+        return e.code;
       }
-      return -1;
+    } catch (e) {
+      return "Exception: Authentication: $e";
     }
   }
 
