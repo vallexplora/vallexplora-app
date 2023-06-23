@@ -3,7 +3,7 @@ import 'package:vallexplora/src/blocs/auth/signup_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../../constants/sizes.dart';
 import '../../constants/text_strings.dart';
-import '../home_screen.dart';
+import '../home_container_screen.dart';
 
 class SignUpFormWidget extends StatefulWidget {
   const SignUpFormWidget({
@@ -201,7 +201,8 @@ class _SignUpFormState extends State<SignUpFormWidget> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const HomeScreen()),
+                                builder: (context) =>
+                                    const HomeContainerScreen()),
                           )
                         });
                     ;

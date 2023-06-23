@@ -75,5 +75,3 @@ class ColorResources {
     900: Color(0xFF78350F),
   };
 }
-
-
