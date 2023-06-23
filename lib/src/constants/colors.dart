@@ -13,6 +13,7 @@ class ColorResources {
     800: Color(0xFF009BF5),
     900: Color(0xFF0081CC),
     1000: Color(0xFF005A8F),
+    1200: Color(0xFF00395C),
   };
 
   static const auxiliary = {

@@ -37,17 +37,17 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
             return NavigationBarTheme(
               data: NavigationBarThemeData(
                 height: 80,
-                backgroundColor: ColorResources.mayaBlue[50],
+                backgroundColor: ColorResources.mayaBlue[100],
                 indicatorColor: ColorResources.mayaBlue[200],
                 iconTheme: MaterialStateProperty.resolveWith((state) {
                   if (state.contains(MaterialState.selected)) {
                     return IconThemeData(
-                      color: ColorResources.mayaBlue[1000],
+                      color: ColorResources.mayaBlue[1200],
                       opticalSize: 64.0,
                     );
                   } else {
                     return IconThemeData(
-                      color: ColorResources.mayaBlue[900],
+                      color: ColorResources.mayaBlue[1200],
                     );
                   }
                 }),
@@ -66,7 +66,7 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
                     fontSize: 12,
                     fontWeight: FontWeight.w300,
                     color: MaterialColor(
-                      ColorResources.mayaBlue[900]!.value,
+                      ColorResources.mayaBlue[1200]!.value,
                       ColorResources.mayaBlue,
                     ),
                   );
