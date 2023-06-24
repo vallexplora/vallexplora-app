@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/blocs/home/challenges_bloc.dart';
-import 'package:vallexplora/src/constants/colors.dart';
 import 'package:vallexplora/src/models/challenge_model.dart';
 import 'package:vallexplora/src/ui/home_screens/challenges/challenge_card.dart';
 import 'package:vallexplora/src/ui/home_screens/challenges/new_challenge_screen.dart';
@@ -25,10 +24,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          child: Icon(
-            Icons.add_rounded,
-            color: ColorResources.mayaBlue[100],
-          ),
+          child: const Icon(Icons.add_rounded),
           onPressed: () {
             Navigator.push(
               context,

@@ -3,7 +3,6 @@ import 'package:vallexplora/src/ui/login/login_form_widget.dart';
 import 'package:vallexplora/src/ui/register/signup_screen.dart';
 
 import '../../constants/asset_uris.dart';
-import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 import '../../constants/text_strings.dart';
 import '../welcome_screen.dart';
@@ -14,18 +13,14 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(48),
-        child: AppBar(
-          foregroundColor: ColorResources.mayaBlue[50],
-          leading: BackButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const WelcomeScreen()),
-              );
-            },
-          ),
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+            );
+          },
         ),
       ),
       body: Listener(

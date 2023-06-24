@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vallexplora/src/constants/colors.dart';
 import 'package:vallexplora/src/constants/text_strings.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/events_view.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/sales_view.dart';
@@ -15,30 +16,56 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   final _bloc = HomeScreenBloc();
-  TabController? _controller;
+  late TabController _tabController;
 
   @override
   void initState() {
     super.initState();
     _bloc.changeActiveTab(0);
-    _controller = TabController(length: 2, vsync: this);
-    _controller?.addListener(() {
-      if (_controller!.indexIsChanging) {
-        _bloc.changeActiveTab(_controller!.index);
-      }
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(() {
+      _bloc.changeActiveTab(_tabController.index);
     });
   }
+
+  TabBar get _tabBar => TabBar(
+        controller: _tabController,
+        tabs: const [
+          Tab(
+            icon: Icon(Icons.event_outlined),
+            text: StringResources.eventsTabTitle,
+          ),
+          Tab(
+            icon: Icon(Icons.discount_outlined),
+            text: StringResources.discountsTabTitle,
+          ),
+        ],
+      );
 
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          toolbarHeight: 0,
+          bottom: PreferredSize(
+            preferredSize: _tabBar.preferredSize,
+            child: Material(
+              color: ColorResources.mayaBlue[200],
+              shadowColor: Colors.transparent,
+              child: _tabBar,
+            ),
+          ),
+        ),
         floatingActionButton: StreamBuilder<int>(
             stream: _bloc.activeTabIndex,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return FloatingActionButton(
+                  heroTag:
+                      snapshot.data == 0 ? "homeEventsFAB" : "homeSalesFAB",
                   child: Icon(snapshot.data == 0
                       ? Icons.event_outlined
                       : Icons.discount_outlined),
@@ -46,27 +73,18 @@ class _HomeScreenState extends State<HomeScreen>
                 );
               } else {
                 return FloatingActionButton(
+                  heroTag: "homeEmptyFAB",
+                  child: const Icon(Icons.access_time_outlined),
                   onPressed: () {},
                 );
               }
             }),
-        body: const Column(
+        body: Column(
           children: [
-            TabBar(
-              tabs: [
-                Tab(
-                  icon: Icon(Icons.event_outlined),
-                  text: StringResources.eventsTabTitle,
-                ),
-                Tab(
-                  icon: Icon(Icons.discount_outlined),
-                  text: StringResources.eventsTabTitle,
-                ),
-              ],
-            ),
             Expanded(
               child: TabBarView(
-                children: [
+                controller: _tabController,
+                children: const [
                   EventsViewTab(),
                   SalesViewTab(),
                 ],

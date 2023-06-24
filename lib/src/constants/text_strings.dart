@@ -65,6 +65,12 @@ class StringResources {
   static const String newEventStartDate = "¿Cuándo empieza?";
   static const String newEventPlace = "¿En qué municipio?";
   // Sales Tab
+  static const String newSaleTitle = "Nuevo descuento";
+  static const String newSaleName = "¿Cómo se llama el descuento?";
+  static const String newSaleDescription = "¿En qué consistirá?";
+  static const String newSaleExpirationDate = "¿Cuándo expira?";
+  static const String newSaleExpirationStackable = "Acumulable";
+  static const String newSalePlace = "¿En qué municipio?";
 
   /* Challenges Screen */
   static const String newChallengeTitle = "Nuevo desafío";

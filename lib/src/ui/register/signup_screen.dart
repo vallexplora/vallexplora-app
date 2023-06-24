@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/constants/asset_uris.dart';
-import 'package:vallexplora/src/constants/colors.dart';
 import 'package:vallexplora/src/constants/sizes.dart';
 import 'package:vallexplora/src/constants/text_strings.dart';
 import 'package:vallexplora/src/ui/login/login_screen.dart';
@@ -14,18 +13,14 @@ class UserRegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // var bloc = BlocProvider.of<SignUpBloc>(context);
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(48),
-        child: AppBar(
-          foregroundColor: ColorResources.mayaBlue[50],
-          leading: BackButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const WelcomeScreen()),
-              );
-            },
-          ),
+      appBar: AppBar(
+        leading: BackButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+            );
+          },
         ),
       ),
       body: Listener(
