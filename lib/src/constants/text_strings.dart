@@ -53,6 +53,19 @@ class StringResources {
       "Sesión iniciada correctamente. Bienvenido, $displayName";
   static const loginErrorMessages = {};
 
+  /* Home Screen */
+  static const String eventsTabTitle = "Eventos";
+  static const String discountsTabTitle = "Promociones";
+
+  // Events Tab
+  static const String newEventTitle = "Nuevo evento";
+  static const String newEventName = "¿Cómo se llama el evento?";
+  static const String newEventDescription = "¿En qué consistirá?";
+  static const String newEventEntryFee = "¿Cuál es el precio de la entrada?";
+  static const String newEventStartDate = "¿Cuándo empieza?";
+  static const String newEventPlace = "¿En qué municipio?";
+  // Sales Tab
+
   /* Challenges Screen */
   static const String newChallengeTitle = "Nuevo desafío";
   static const String newChallengeName = "¿Cómo se llama el desafío?";

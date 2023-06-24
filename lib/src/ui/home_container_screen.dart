@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/constants/colors.dart';
-import 'package:vallexplora/src/ui/home_screens/home_screen.dart';
+import 'package:vallexplora/src/ui/home_screens/feed/home_screen.dart';
 
 import '../blocs/home/home_container_bloc.dart';
 import 'home_screens/challenges/challenges_screen.dart';

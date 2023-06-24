@@ -21,6 +21,22 @@ class Repository {
 
   /// Home
 
+  // Events
+  Stream<QuerySnapshot> eventsList() => _dbResources.eventsList();
+  Future<void> addNewEvent({
+    required String name,
+    String description = "Sin descripción.",
+    required int entryFee,
+    required Timestamp startDate,
+    String city = "cali",
+  }) =>
+      _dbResources.addNewEvent(
+          name: name,
+          description: description,
+          entryFee: entryFee,
+          startDate: startDate,
+          city: city);
+
   /// Guide
 
   Stream<QuerySnapshot> citiesList() => _dbResources.citiesList();

@@ -9,6 +9,29 @@ class FirestoreResources {
       .orderBy("startDate", descending: false)
       .snapshots();
 
+  // This method only exists for demo purposes.
+  // Final product SHOULDN'T allow for in app
+  // administration, since that responsibility is
+  // relegated to the web admin panel.
+  Future<void> addNewEvent(
+      {required String name,
+      required description,
+      required int entryFee,
+      required Timestamp startDate,
+      required String city}) {
+    if (!CityModel.isValid(city)) {
+      city = "cali";
+    }
+
+    return _firestore.collection("events").add({
+      'name': name,
+      'description': description,
+      'entryFee': entryFee,
+      'startDate': startDate,
+      'city': _firestore.doc("/cities/$city"),
+    });
+  }
+
   Stream<QuerySnapshot> salesList() => _firestore
       .collection("sales")
       .orderBy("startDate", descending: false)
