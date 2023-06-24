@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:vallexplora/src/utils/theme/widget_themes/date_picker.dart';
 import 'package:vallexplora/src/utils/theme/widget_themes/elevated_button.dart';
 import 'package:vallexplora/src/utils/theme/widget_themes/outlined_button.dart';
 import 'package:vallexplora/src/utils/theme/widget_themes/text_field.dart';
@@ -30,6 +31,7 @@ class VAppTheme {
     outlinedButtonTheme: VOutlinedButtonTheme.lightOutlinedButtonTheme,
     elevatedButtonTheme: VElevatedButtonTheme.lightElevatedButtonTheme,
     inputDecorationTheme: VTextFieldTheme.lightInputDecorationTheme,
+    datePickerTheme: VDatePickerTheme.lightDatePickerTheme,
   );
 
   static ThemeData darkTheme = ThemeData(

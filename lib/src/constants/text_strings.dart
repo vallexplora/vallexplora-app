@@ -52,4 +52,13 @@ class StringResources {
   static loginSuccess(String displayName) =>
       "Sesión iniciada correctamente. Bienvenido, $displayName";
   static const loginErrorMessages = {};
+
+  /* Challenges Screen */
+  static const String newChallengeTitle = "Nuevo desafío";
+  static const String newChallengeName = "¿Cómo se llama el desafío?";
+  static const String newChallengeDescription = "¿En qué consistirá?";
+  static const String newChallengePoints = "¿Cuántos puntos vale?";
+  static const String newChallengeFrom = "¿Cuándo empieza?";
+  static const String newChallengeTo = "¿Cuándo vence?";
+  static const String newChallengePlace = "¿En qué municipio?";
 }

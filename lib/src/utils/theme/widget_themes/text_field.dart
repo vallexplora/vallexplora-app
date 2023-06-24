@@ -21,6 +21,7 @@ class VTextFieldTheme {
     ),
     prefixIconColor: ColorResources.mayaBlue[500],
     suffixIconColor: ColorResources.mayaBlue[500],
+    contentPadding: const EdgeInsets.symmetric(vertical: 20),
     floatingLabelStyle: TextStyle(
       color: ColorResources.mayaBlue[500],
     ),

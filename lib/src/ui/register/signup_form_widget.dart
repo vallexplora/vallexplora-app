@@ -197,15 +197,16 @@ class _SignUpFormState extends State<SignUpFormWidget> {
                           timeInSecForIosWeb: 3,
                           textColor: Colors.white,
                           fontSize: 16.0);
-                    }).then((value) => {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const HomeContainerScreen()),
-                          )
-                        });
-                    ;
+                    }).then(
+                      (value) => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const HomeContainerScreen()),
+                        ),
+                      },
+                    );
                   }
                 });
               },
