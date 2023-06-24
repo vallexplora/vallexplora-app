@@ -8,6 +8,10 @@ class VOutlinedButtonTheme {
 
   static final lightOutlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
+      side: BorderSide(
+        width: 2,
+        color: ColorResources.twNeutral[300]!,
+      ),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(8),
       ),

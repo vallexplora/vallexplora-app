@@ -29,12 +29,17 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      bottomNavigationBar: StreamBuilder<int>(
-          stream: _bloc.currentIndex,
-          builder: (context, snapshot) {
-            return NavigationBarTheme(
+    return StreamBuilder<int>(
+        stream: _bloc.currentIndex,
+        builder: (context, snapshot) {
+          return Scaffold(
+            appBar: AppBar(
+              leading: IconButton(
+                icon: const Icon(Icons.logout_rounded),
+                onPressed: () {},
+              ),
+            ),
+            bottomNavigationBar: NavigationBarTheme(
               data: NavigationBarThemeData(
                 height: 80,
                 backgroundColor: ColorResources.mayaBlue[100],
@@ -100,15 +105,10 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
                   _bloc.changeIndex(newIndex);
                 },
               ),
-            );
-          }),
-      body: StreamBuilder<int>(
-        stream: _bloc.currentIndex,
-        builder: (context, snapshot) {
-          return _screens[snapshot.data != null ? snapshot.data! : 0];
-        },
-      ),
-    );
+            ),
+            body: _screens[snapshot.data != null ? snapshot.data! : 0],
+          );
+        });
   }
 
   @override

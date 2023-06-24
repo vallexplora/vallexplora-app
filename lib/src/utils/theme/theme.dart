@@ -8,18 +8,32 @@ import '../../constants/colors.dart';
 
 class VAppTheme {
   static ThemeData lightTheme = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.light,
     textTheme: GoogleFonts.rubikTextTheme(),
     primarySwatch: MaterialColor(
       ColorResources.mayaBlue[500]!.value,
       ColorResources.mayaBlue,
     ),
+    colorScheme: ColorScheme(
+        brightness: Brightness.light,
+        primary: ColorResources.mayaBlue[500]!,
+        onPrimary: ColorResources.mayaBlue[50]!,
+        secondary: ColorResources.twAmber[500]!,
+        onSecondary: ColorResources.twAmber[50]!,
+        error: Colors.red[700]!,
+        onError: Colors.red[100]!,
+        background: ColorResources.twNeutral[50]!,
+        onBackground: Colors.black87,
+        surface: ColorResources.mayaBlue[500]!,
+        onSurface: ColorResources.mayaBlue[50]!),
     outlinedButtonTheme: VOutlinedButtonTheme.lightOutlinedButtonTheme,
     elevatedButtonTheme: VElevatedButtonTheme.lightElevatedButtonTheme,
     inputDecorationTheme: VTextFieldTheme.lightInputDecorationTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
+    useMaterial3: true,
     brightness: Brightness.dark,
     textTheme: GoogleFonts.rubikTextTheme(),
   );
