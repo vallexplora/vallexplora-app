@@ -30,7 +30,7 @@ class _GuideScreenState extends State<GuideScreen> {
             );
           } else if (snapshot.hasError) {
             return Center(
-              child: Text("An error occurred: ${snapshot.error}"),
+              child: Text("Ocurrió un error: ${snapshot.error}"),
             );
           } else {
             return const Center(

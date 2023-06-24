@@ -3,7 +3,7 @@ import 'package:vallexplora/src/constants/colors.dart';
 import 'package:vallexplora/src/ui/home_screens/home_screen.dart';
 
 import '../blocs/home/home_container_bloc.dart';
-import 'home_screens/challenges_screen.dart';
+import 'home_screens/challenges/challenges_screen.dart';
 import 'home_screens/guide_screen.dart';
 import 'home_screens/markers_screen.dart';
 

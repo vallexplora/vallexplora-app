@@ -19,7 +19,30 @@ class Repository {
   Future<UserCredential> signInWithGoogle() =>
       _authResources.singInWIthGoogle();
 
-  // Guide
+  /// Home
 
-  Stream<QuerySnapshot> citiesList() => _dbResources.citiesList(); 
+  /// Guide
+
+  Stream<QuerySnapshot> citiesList() => _dbResources.citiesList();
+
+  /// Challenges
+
+  Stream<QuerySnapshot> challengesList() => _dbResources.challengesList();
+  Future<void> addNewChallenge({
+    required String name,
+    String description = "Sin descripción.",
+    required int points,
+    required Timestamp startDate,
+    required Timestamp expiration,
+    String place = "cali",
+  }) =>
+      _dbResources.addNewChallenge(
+          name: name,
+          description: description,
+          points: points,
+          startDate: startDate,
+          expiration: expiration,
+          place: place);
+
+  // User markers
 }

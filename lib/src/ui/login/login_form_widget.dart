@@ -70,7 +70,7 @@ class _LoginFormState extends State<LoginFormWidget> {
                         SizeResources.buttonTextSize * 8,
                   ),
                   decoration: InputDecoration(
-                    label: const Text(StringResources.signUpFormPassword),
+                    label: const Text(StringResources.loginFormPassword),
                     prefixIcon: const Icon(Icons.key_rounded),
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -127,7 +127,7 @@ class _LoginFormState extends State<LoginFormWidget> {
                 });
               },
               child: const Text(
-                StringResources.signUpFormSubmit,
+                StringResources.loginFormSubmit,
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: SizeResources.buttonTextSize,
