@@ -64,13 +64,16 @@ class StringResources {
   static const String newEventEntryFee = "¿Cuál es el precio de la entrada?";
   static const String newEventStartDate = "¿Cuándo empieza?";
   static const String newEventPlace = "¿En qué municipio?";
+  static const String newEventSubmit = "Crear nuevo evento";
   // Sales Tab
   static const String newSaleTitle = "Nuevo descuento";
   static const String newSaleName = "¿Cómo se llama el descuento?";
   static const String newSaleDescription = "¿En qué consistirá?";
+  static const String newSaleCompanyID = "¿Cuál es el NIT de la compañía?";
   static const String newSaleExpirationDate = "¿Cuándo expira?";
-  static const String newSaleExpirationStackable = "Acumulable";
+  static const String newSaleStackable = "¿Es acumulable?";
   static const String newSalePlace = "¿En qué municipio?";
+  static const String newSaleSubmit = "Crear nueva promoción";
 
   /* Challenges Screen */
   static const String newChallengeTitle = "Nuevo desafío";
@@ -80,4 +83,5 @@ class StringResources {
   static const String newChallengeFrom = "¿Cuándo empieza?";
   static const String newChallengeTo = "¿Cuándo vence?";
   static const String newChallengePlace = "¿En qué municipio?";
+  static const String newChallengeSubmit = "Crear nuevo desafío";
 }

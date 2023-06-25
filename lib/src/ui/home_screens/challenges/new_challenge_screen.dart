@@ -26,7 +26,12 @@ class _NewChallengeScreenState extends State<NewChallengeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.close),
+        leading: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Listener(
         behavior: HitTestBehavior.opaque,
@@ -203,7 +208,7 @@ class _NewChallengeScreenState extends State<NewChallengeScreen> {
                                 });
                           },
                           child: const Text(
-                            StringResources.signUpFormSubmit,
+                            StringResources.newChallengeSubmit,
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: SizeResources.buttonTextSize,

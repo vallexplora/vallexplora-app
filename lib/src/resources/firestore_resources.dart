@@ -33,9 +33,34 @@ class FirestoreResources {
   }
 
   Stream<QuerySnapshot> salesList() => _firestore
-      .collection("sales")
-      .orderBy("startDate", descending: false)
+      .collection("discounts")
+      .orderBy("expirationDate", descending: false)
       .snapshots();
+
+  // This method only exists for demo purposes.
+  // Final product SHOULDN'T allow for in app
+  // administration, since that responsibility is
+  // relegated to the web admin panel.
+  Future<void> addNewSale(
+      {required String name,
+      required String description,
+      required String companyID,
+      required Timestamp expirationDate,
+      required bool stackable,
+      required String city}) {
+    if (!CityModel.isValid(city)) {
+      city = "cali";
+    }
+
+    return _firestore.collection("discounts").add({
+      'name': name,
+      'description': description,
+      'companyID': companyID,
+      'expirationDate': expirationDate,
+      'stackable': stackable,
+      'city': _firestore.doc("/cities/$city"),
+    });
+  }
 
   Stream<QuerySnapshot> citiesList() => _firestore
       .collection("cities")

@@ -37,6 +37,24 @@ class Repository {
           startDate: startDate,
           city: city);
 
+  // Sales
+  Stream<QuerySnapshot> salesList() => _dbResources.salesList();
+  Future<void> addNewSale({
+    required String name,
+    String description = "Sin descripción.",
+    required String companyID,
+    required Timestamp expirationDate,
+    required bool stackable,
+    String city = "cali",
+  }) =>
+      _dbResources.addNewSale(
+          name: name,
+          description: description,
+          companyID: companyID,
+          expirationDate: expirationDate,
+          stackable: stackable,
+          city: city);
+
   /// Guide
 
   Stream<QuerySnapshot> citiesList() => _dbResources.citiesList();

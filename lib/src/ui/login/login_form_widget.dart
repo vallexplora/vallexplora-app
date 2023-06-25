@@ -105,9 +105,9 @@ class _LoginFormState extends State<LoginFormWidget> {
                 _bloc.logUserIn().then((logValue) async {
                   await Fluttertoast.showToast(
                       msg: logValue,
-                      toastLength: Toast.LENGTH_LONG,
+                      toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 3,
+                      timeInSecForIosWeb: 1,
                       textColor: Colors.white,
                       fontSize: 16.0);
                   FirebaseAuth.instance.authStateChanges().listen((User? user) {

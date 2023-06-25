@@ -183,18 +183,18 @@ class _SignUpFormState extends State<SignUpFormWidget> {
                 _bloc.registerUser().then((regValue) async {
                   await Fluttertoast.showToast(
                       msg: regValue,
-                      toastLength: Toast.LENGTH_LONG,
+                      toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.BOTTOM,
-                      timeInSecForIosWeb: 3,
+                      timeInSecForIosWeb: 1,
                       textColor: Colors.white,
                       fontSize: 16.0);
                   if (regValue == StringResources.signUpSuccess) {
                     _bloc.loginAfterRegister().then((logValue) async {
                       await Fluttertoast.showToast(
                           msg: logValue,
-                          toastLength: Toast.LENGTH_LONG,
+                          toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 3,
+                          timeInSecForIosWeb: 1,
                           textColor: Colors.white,
                           fontSize: 16.0);
                     }).then(

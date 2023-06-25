@@ -34,12 +34,12 @@ class _EventsViewTabState extends State<EventsViewTab> {
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else {
-                List<EventModel> challenges = snapshot.data ?? [];
-                if (challenges.isNotEmpty) {
+                List<EventModel> events = snapshot.data ?? [];
+                if (events.isNotEmpty) {
                   return ListView.builder(
-                    itemCount: challenges.length,
+                    itemCount: events.length,
                     itemBuilder: (context, index) {
-                      var event = challenges[index];
+                      var event = events[index];
                       return EventCard(
                           name: event.name,
                           description: event.description,

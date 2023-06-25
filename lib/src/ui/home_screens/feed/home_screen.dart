@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:vallexplora/src/constants/colors.dart';
 import 'package:vallexplora/src/constants/text_strings.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/events_view.dart';
+import 'package:vallexplora/src/ui/home_screens/feed/new_event_screen.dart';
+import 'package:vallexplora/src/ui/home_screens/feed/new_sale_screen.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/sales_view.dart';
 
 import '../../../blocs/home/home_screen_bloc.dart';
@@ -36,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen>
             text: StringResources.eventsTabTitle,
           ),
           Tab(
-            icon: Icon(Icons.discount_outlined),
+            icon: Icon(Icons.local_activity_outlined),
             text: StringResources.discountsTabTitle,
           ),
         ],
@@ -68,8 +70,22 @@ class _HomeScreenState extends State<HomeScreen>
                       snapshot.data == 0 ? "homeEventsFAB" : "homeSalesFAB",
                   child: Icon(snapshot.data == 0
                       ? Icons.event_outlined
-                      : Icons.discount_outlined),
-                  onPressed: () {},
+                      : Icons.local_activity_outlined),
+                  onPressed: () {
+                    snapshot.data == 0
+                        ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const NewEventScreen(),
+                            ),
+                          )
+                        : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const NewSaleScreen(),
+                            ),
+                          );
+                  },
                 );
               } else {
                 return FloatingActionButton(

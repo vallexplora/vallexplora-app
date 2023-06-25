@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/home_screen.dart';
 
 import '../blocs/home/home_container_bloc.dart';
@@ -35,7 +36,18 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
             appBar: AppBar(
               leading: IconButton(
                 icon: const Icon(Icons.logout_rounded),
-                onPressed: () {},
+                onPressed: () {
+                  _bloc.logout().then((value) {
+                    Navigator.pop(context);
+                    return Fluttertoast.showToast(
+                        msg: "¡Chao!",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.BOTTOM,
+                        timeInSecForIosWeb: 1,
+                        textColor: Colors.white,
+                        fontSize: 16.0);
+                  });
+                },
               ),
             ),
             bottomNavigationBar: NavigationBar(

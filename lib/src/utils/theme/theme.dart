@@ -6,6 +6,7 @@ import 'package:vallexplora/src/utils/theme/widget_themes/elevated_button.dart';
 import 'package:vallexplora/src/utils/theme/widget_themes/floating_action_button.dart';
 import 'package:vallexplora/src/utils/theme/widget_themes/navigation_bar.dart';
 import 'package:vallexplora/src/utils/theme/widget_themes/outlined_button.dart';
+import 'package:vallexplora/src/utils/theme/widget_themes/switch.dart';
 import 'package:vallexplora/src/utils/theme/widget_themes/tabbar.dart';
 import 'package:vallexplora/src/utils/theme/widget_themes/text_field.dart';
 import 'package:vallexplora/src/utils/theme/widget_themes/time_picker.dart';
@@ -44,6 +45,7 @@ class VAppTheme {
     tabBarTheme: VTabBarTheme.lightTabBarTheme,
     floatingActionButtonTheme:
         VFloatingActionButtonTheme.lightFloatingActionButtonTheme,
+        switchTheme: VSwitchTheme.lightSwitchTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
