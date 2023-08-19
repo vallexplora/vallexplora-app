@@ -28,7 +28,7 @@ class FirestoreResources {
       'description': description,
       'entryFee': entryFee,
       'startDate': startDate,
-      'city': _firestore.doc("/cities/$city"),
+      'city': _firestore.doc("/city/$city"),
     });
   }
 
@@ -58,12 +58,12 @@ class FirestoreResources {
       'companyID': companyID,
       'expirationDate': expirationDate,
       'stackable': stackable,
-      'city': _firestore.doc("/cities/$city"),
+      'city': _firestore.doc("/city/$city"),
     });
   }
 
   Stream<QuerySnapshot> citiesList() => _firestore
-      .collection("cities")
+      .collection("city")
       .orderBy('canonicalName', descending: false)
       .snapshots();
 
@@ -93,7 +93,7 @@ class FirestoreResources {
       'points': points,
       'startDate': startDate,
       'expiration': expiration,
-      'place': _firestore.doc("/cities/$place"),
+      'place': _firestore.doc("/city/$place"),
     });
   }
 }

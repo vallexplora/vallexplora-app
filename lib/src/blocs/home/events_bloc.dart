@@ -43,8 +43,8 @@ class EventsBloc implements Bloc {
     DateTime? datePicked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
+      firstDate: DateTime(2023),
+      lastDate: DateTime(2028),
     );
 
     if (datePicked != null) {
@@ -70,7 +70,7 @@ class EventsBloc implements Bloc {
   Future<void> addNewEvent() => _repository.addNewEvent(
         name: _name.value,
         description: _description.value,
-        entryFee: int.parse(_entryFee.value),
+        entryFee: int.parse(_entryFee.value), // Puede causar problemas (prohibir valores decimales)
         startDate: _startDate.value,
         city: _city.value,
       );
