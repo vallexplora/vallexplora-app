@@ -9,15 +9,21 @@ class Repository {
 
   /// Authentication
   Stream<User?> get onAuthStateChange => _authResources.onAuthStateChange;
+
   Future<String> loginWithEmailAndPassword(String email, String password) =>
       _authResources.loginWithEmailAndPassword(email, password);
+
   Future<String> signUpWithEmailAndPassword(
           String email, String password, String displayName) =>
       _authResources.signUpWithEmailAndPassword(email, password, displayName);
   Future<void> signOut() => _authResources.signOut;
+
   Future<String> getUserUID() => _authResources.getUserUID();
+
   Future<UserCredential> signInWithGoogle() =>
       _authResources.singInWIthGoogle();
+
+  Future<String> resetPassword() => _authResources.updatePassword();
 
   /// Home
 

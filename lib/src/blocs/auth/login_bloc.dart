@@ -43,6 +43,10 @@ class LoginBloc implements Bloc {
     }
   }
 
+  Future<String> updatePassword() async {
+    return await _repository.resetPassword();
+  }
+
   @override
   void dispose() async {
     await _email.drain();

@@ -92,7 +92,9 @@ class _LoginFormState extends State<LoginFormWidget> {
               height: SizeResources.buttonHeight - 10,
             ),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                _bloc.updatePassword();
+              },
               child: const Text(
                 StringResources.loginFormForgot,
               ),
