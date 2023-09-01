@@ -23,9 +23,9 @@ class Repository {
   Future<UserCredential> signInWithGoogle() =>
       _authResources.singInWIthGoogle();
 
-  Future<String> resetPassword() => _authResources.updatePassword();
+  Future<String> resetPassword(email) => _authResources.updatePassword(email);
 
-  /// Home
+  // Home
 
   // Events
   Stream<QuerySnapshot> eventsList() => _dbResources.eventsList();

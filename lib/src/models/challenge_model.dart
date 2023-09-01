@@ -21,7 +21,7 @@ class ChallengeModel {
   });
 
   static Future<ChallengeModel> fromDocument(DocumentSnapshot document) async {
-    DocumentReference<Map<String, dynamic>> cityRef = document['place'];
+    DocumentReference<Map<String, dynamic>> cityRef = document['city'];
     String placeName;
 
     DocumentSnapshot docSnap =

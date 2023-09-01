@@ -1,40 +1,40 @@
 {
   "project_info": {
-    "project_number": "851468619929",
-    "project_id": "vallexplora",
-    "storage_bucket": "vallexplora.appspot.com"
+    "project_number": "272635505759",
+    "project_id": "vallexplora-icesi",
+    "storage_bucket": "vallexplora-icesi.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:851468619929:android:2dfbf0679d6885ae88e808",
+        "mobilesdk_app_id": "1:272635505759:android:f4c357201ec6bc8e787fea",
         "android_client_info": {
           "package_name": "com.example.vallexplora"
         }
       },
       "oauth_client": [
         {
-          "client_id": "851468619929-sop6orbog35pnvd2btel6ovo01gfa4kn.apps.googleusercontent.com",
+          "client_id": "272635505759-n81gtj0rnlu3jvq01ctbg4qnvdq8tvr0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB7bC4sSR2fepOGu8oG6sEaRRmHxmsTnvo"
+          "current_key": "AIzaSyDQdNAwVjsJ8JLKeUdCL-s5Lrv9AERAc7Y"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "851468619929-sop6orbog35pnvd2btel6ovo01gfa4kn.apps.googleusercontent.com",
+              "client_id": "272635505759-n81gtj0rnlu3jvq01ctbg4qnvdq8tvr0.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "851468619929-0agdsklu443cp70kqiq1oq0rdjvs7bom.apps.googleusercontent.com",
+              "client_id": "272635505759-b1fc15a6880c7npu64mh84hmlt42npti.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.icesi.vallexplora"
+                "bundle_id": "com.example.vallexplora"
               }
             }
           ]

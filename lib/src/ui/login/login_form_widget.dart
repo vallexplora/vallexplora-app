@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vallexplora/src/blocs/auth/login_bloc.dart';
 import 'package:vallexplora/src/ui/home_container_screen.dart';
+import 'package:vallexplora/src/ui/login/forgot_password_screen.dart';
 
 import '../../constants/sizes.dart';
 import '../../constants/text_strings.dart';
@@ -93,7 +94,11 @@ class _LoginFormState extends State<LoginFormWidget> {
             ),
             TextButton(
               onPressed: () {
-                _bloc.updatePassword();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ForgotPasswordScreen()),
+                );
               },
               child: const Text(
                 StringResources.loginFormForgot,

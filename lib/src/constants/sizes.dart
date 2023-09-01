@@ -3,4 +3,8 @@ class SizeResources {
   static const buttonHeight = 16.0;
   static const buttonTextSize = 16.0;
   static const formHeight = 32.0;
+
+  static const textH1 = 32.0;
+  static const textH2 = 16.0;
+  static const textH3 = 8.0;
 }

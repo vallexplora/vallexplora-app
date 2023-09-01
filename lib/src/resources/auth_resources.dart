@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:vallexplora/src/constants/text_strings.dart';
@@ -76,14 +74,12 @@ class AuthenticationResources {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  Future<String> updatePassword() async {
-    //Cant be null since the user already has a (forgotten) password.
-    String email = _firebaseAuth.currentUser!.email!;
+  Future<String> updatePassword(email) async {
     try {
       _firebaseAuth.sendPasswordResetEmail(email: email);
     } catch (e) {
-      return e.isNull ? "" : e.toString();
+      return e.toString();
     }
-    return "Password updated.";
+    return "Correo de restablecimiento enviado a $email";
   }
 }

@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB7bC4sSR2fepOGu8oG6sEaRRmHxmsTnvo',
-    appId: '1:851468619929:android:2dfbf0679d6885ae88e808',
-    messagingSenderId: '851468619929',
-    projectId: 'vallexplora',
-    storageBucket: 'vallexplora.appspot.com',
+    apiKey: 'AIzaSyDQdNAwVjsJ8JLKeUdCL-s5Lrv9AERAc7Y',
+    appId: '1:272635505759:android:f4c357201ec6bc8e787fea',
+    messagingSenderId: '272635505759',
+    projectId: 'vallexplora-icesi',
+    storageBucket: 'vallexplora-icesi.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBDqIKm7RQEc1WnklRgZRFKIZ3i_DqqPwc',
-    appId: '1:851468619929:ios:2fbafc8b8fd79ec988e808',
-    messagingSenderId: '851468619929',
-    projectId: 'vallexplora',
-    storageBucket: 'vallexplora.appspot.com',
-    iosClientId: '851468619929-agivbhlc56a81ge6kjnhu23cmvjitbgo.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAAJvOp6H4ehmpzrvEi2CVkvzF5FHnamTw',
+    appId: '1:272635505759:ios:c7adda2f05edf370787fea',
+    messagingSenderId: '272635505759',
+    projectId: 'vallexplora-icesi',
+    storageBucket: 'vallexplora-icesi.appspot.com',
+    iosClientId: '272635505759-b1fc15a6880c7npu64mh84hmlt42npti.apps.googleusercontent.com',
     iosBundleId: 'com.example.vallexplora',
   );
 }

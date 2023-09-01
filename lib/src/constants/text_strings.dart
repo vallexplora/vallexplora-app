@@ -53,6 +53,19 @@ class StringResources {
       "Sesión iniciada correctamente. Bienvenido, $displayName";
   static const loginErrorMessages = {};
 
+  /* Password forgotten screen */
+  static const String forgottenPasswordSubmitRestore = "Enviar";
+  static const String forgottenPasswordSteps =
+      "Para restablecer tu contraseña te enviaremos un correo que te permitirá actualizarla.";
+
+  /* Profile */
+  static const String profileTitle = "Mi perfil";
+  static const String updateData = "Actualiza tus datos. :)";
+  static const String nameField = "Nombre";
+  static const String emailField = "Correo electrónico";
+  static const String passwordField = "Contraseña";
+  static const String phoneField = "Teléfono";
+
   /* Home Screen */
   static const String eventsTabTitle = "Eventos";
   static const String discountsTabTitle = "Promociones";
