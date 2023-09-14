@@ -136,10 +136,6 @@ class _LoginFormState extends State<LoginFormWidget> {
               },
               child: const Text(
                 StringResources.loginFormSubmit,
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: SizeResources.buttonTextSize,
-                ),
               ),
             ),
             Column(

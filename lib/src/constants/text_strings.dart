@@ -55,8 +55,10 @@ class StringResources {
 
   /* Password forgotten screen */
   static const String forgottenPasswordSubmitRestore = "Enviar";
+  static const String forgottenPasswordTitle = "Restablecer contraseña";
   static const String forgottenPasswordSteps =
-      "Para restablecer tu contraseña te enviaremos un correo que te permitirá actualizarla.";
+      "Te enviaremos un correo con las instrucciones para restaurar tu contraseña si ya tienes una cuenta.";
+  static const String forgottenPasswordLogin = "Volver a inicio de sesión";
 
   /* Profile */
   static const String profileTitle = "Mi perfil";
@@ -69,32 +71,4 @@ class StringResources {
   /* Home Screen */
   static const String eventsTabTitle = "Eventos";
   static const String discountsTabTitle = "Promociones";
-
-  // Events Tab
-  static const String newEventTitle = "Nuevo evento";
-  static const String newEventName = "¿Cómo se llama el evento?";
-  static const String newEventDescription = "¿En qué consistirá?";
-  static const String newEventEntryFee = "¿Cuál es el precio de la entrada?";
-  static const String newEventStartDate = "¿Cuándo empieza?";
-  static const String newEventPlace = "¿En qué municipio?";
-  static const String newEventSubmit = "Crear nuevo evento";
-  // Sales Tab
-  static const String newSaleTitle = "Nuevo descuento";
-  static const String newSaleName = "¿Cómo se llama el descuento?";
-  static const String newSaleDescription = "¿En qué consistirá?";
-  static const String newSaleCompanyID = "¿Cuál es el NIT de la compañía?";
-  static const String newSaleExpirationDate = "¿Cuándo expira?";
-  static const String newSaleStackable = "¿Es acumulable?";
-  static const String newSalePlace = "¿En qué municipio?";
-  static const String newSaleSubmit = "Crear nueva promoción";
-
-  /* Challenges Screen */
-  static const String newChallengeTitle = "Nuevo desafío";
-  static const String newChallengeName = "¿Cómo se llama el desafío?";
-  static const String newChallengeDescription = "¿En qué consistirá?";
-  static const String newChallengePoints = "¿Cuántos puntos vale?";
-  static const String newChallengeFrom = "¿Cuándo empieza?";
-  static const String newChallengeTo = "¿Cuándo vence?";
-  static const String newChallengePlace = "¿En qué municipio?";
-  static const String newChallengeSubmit = "Crear nuevo desafío";
 }

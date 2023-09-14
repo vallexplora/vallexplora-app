@@ -14,6 +14,10 @@ class VElevatedButtonTheme {
       foregroundColor: ColorResources.mayaBlue[50],
       padding: const EdgeInsets.all(SizeResources.buttonHeight),
       elevation: 0,
+      textStyle: const TextStyle(
+        fontWeight: FontWeight.w600,
+        fontSize: SizeResources.buttonTextSize,
+      ),
     ),
   );
 }
