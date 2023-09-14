@@ -20,7 +20,7 @@ class Repository {
 
   Future<String> getUserUID() => _authResources.getUserUID();
 
-  Future<UserCredential> signInWithGoogle() =>
+  Future<String> signInWithGoogle() =>
       _authResources.singInWIthGoogle();
 
   Future<String> resetPassword(email) => _authResources.updatePassword(email);

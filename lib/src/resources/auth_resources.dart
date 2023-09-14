@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -70,20 +68,25 @@ class AuthenticationResources {
 
   Future<void> get signOut async {
     _firebaseAuth.signOut();
-    //  _googleSignIn.signOut();
+    GoogleSignIn().signOut();
   }
 
-  Future<UserCredential> singInWIthGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+  Future<String> singInWIthGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
 
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
-
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      UserCredential credentials =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      return StringResources.loginSuccess(credentials.user!.displayName!);
+    } catch (e) {
+      return "Error iniciando sesión con Google: $e";
+    }
   }
 
   Future<String> updatePassword(email) async {

@@ -5,8 +5,10 @@ import 'package:vallexplora/src/blocs/auth/login_bloc.dart';
 import 'package:vallexplora/src/ui/home_container_screen.dart';
 import 'package:vallexplora/src/ui/login/forgot_password_screen.dart';
 
+import '../../constants/asset_uris.dart';
 import '../../constants/sizes.dart';
 import '../../constants/text_strings.dart';
+import '../register/signup_screen.dart';
 
 class LoginFormWidget extends StatefulWidget {
   const LoginFormWidget({
@@ -139,6 +141,73 @@ class _LoginFormState extends State<LoginFormWidget> {
                   fontSize: SizeResources.buttonTextSize,
                 ),
               ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(
+                  height: SizeResources.buttonHeight,
+                ),
+                Text(
+                  StringResources.optionOr.toUpperCase(),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: SizeResources.buttonHeight,
+                ),
+                OutlinedButton.icon(
+                  onPressed: () {
+                    _bloc.signInWithGoogle().then((logValue) async {
+                      await Fluttertoast.showToast(
+                          msg: logValue,
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          timeInSecForIosWeb: 1,
+                          textColor: Colors.white,
+                          fontSize: 16.0);
+                      FirebaseAuth.instance
+                          .authStateChanges()
+                          .listen((User? user) {
+                        if (user != null) {
+                          if (logValue.contains(
+                              "Sesión iniciada correctamente. Bienvenido,")) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const HomeContainerScreen()),
+                            );
+                          }
+                        }
+                      });
+                    });
+                  },
+                  icon: const Image(
+                    image: AssetImage(AssetURIResources.googleLogo),
+                    width: 20.0,
+                  ),
+                  label: const Text(
+                    StringResources.signInWithGoogle,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: SizeResources.buttonTextSize,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const UserRegisterScreen()),
+                    );
+                  },
+                  child: const Text(
+                    StringResources.loginSignUpInstead,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
             ),
           ],
         ),

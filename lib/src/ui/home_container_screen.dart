@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/home_screen.dart';
 import 'package:vallexplora/src/ui/profile/profile_screen.dart';
+import 'package:vallexplora/src/ui/welcome_screen.dart';
 
 import '../blocs/home/home_container_bloc.dart';
 import 'home_screens/challenges/challenges_screen.dart';
@@ -39,7 +40,7 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
                 icon: const Icon(Icons.logout_rounded),
                 onPressed: () {
                   _bloc.logout().then((value) {
-                    Navigator.pop(context);
+                    Navigator.popUntil(context, (route) => route.isFirst);
                     return Fluttertoast.showToast(
                         msg: "¡Chao!",
                         toastLength: Toast.LENGTH_SHORT,

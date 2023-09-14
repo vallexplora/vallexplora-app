@@ -43,6 +43,10 @@ class LoginBloc implements Bloc {
     }
   }
 
+  Future<String> signInWithGoogle() async {
+    return await _repository.signInWithGoogle();
+  }
+
   @override
   void dispose() async {
     await _email.drain();
