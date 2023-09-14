@@ -17,16 +17,17 @@ class _ProfileScreen extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return const AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle(
-            statusBarColor: Colors.transparent,
-            statusBarBrightness: Brightness.light),
-        child: Scaffold(
-          body: Column(
-            children: [
-              Text(StringResources.profileTitle),
-              TextField(),
-            ],
-          ),
-        ));
+      value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarBrightness: Brightness.light),
+      child: Scaffold(
+        body: Column(
+          children: [
+            Text(StringResources.profileTitle),
+            TextField(),
+          ],
+        ),
+      ),
+    );
   }
 }

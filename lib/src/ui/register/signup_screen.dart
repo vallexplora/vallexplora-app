@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vallexplora/src/constants/asset_uris.dart';
 import 'package:vallexplora/src/constants/sizes.dart';
 import 'package:vallexplora/src/constants/text_strings.dart';
-import 'package:vallexplora/src/ui/login/login_screen.dart';
 import 'package:vallexplora/src/ui/register/signup_form_widget.dart';
 import 'package:vallexplora/src/ui/welcome_screen.dart';
 
@@ -14,6 +12,7 @@ class UserRegisterScreen extends StatelessWidget {
     // var bloc = BlocProvider.of<SignUpBloc>(context);
     return Scaffold(
       appBar: AppBar(
+        title: const Text("Crea tu cuenta"),
         leading: BackButton(
           onPressed: () {
             Navigator.push(
@@ -44,42 +43,6 @@ class UserRegisterScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SignUpFormWidget(),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      StringResources.optionOr.toUpperCase(),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(
-                      height: SizeResources.buttonHeight,
-                    ),
-                    OutlinedButton.icon(
-                      onPressed: () {},
-                      icon: const Image(
-                        image: AssetImage(AssetURIResources.googleLogo),
-                        width: 20.0,
-                      ),
-                      label: const Text(
-                        StringResources.signInWithGoogle,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          fontSize: SizeResources.buttonTextSize,
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginScreen()),
-                        );
-                      },
-                      child: const Text(StringResources.signUpLoginInstead),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),

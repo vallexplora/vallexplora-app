@@ -11,7 +11,6 @@ class SignUpBloc implements Bloc {
   final _repository = Repository();
   final _email = BehaviorSubject<String>();
   final _displayName = BehaviorSubject<String>();
-  final _phone = BehaviorSubject<String>();
   final _password = BehaviorSubject<String>();
   final _verifyPassword = BehaviorSubject<String>();
   final _isLoggedIn = BehaviorSubject<bool>();
@@ -20,7 +19,6 @@ class SignUpBloc implements Bloc {
 
   Stream<String> get email => _email.stream.transform(_validateEmail);
   Stream<String> get displayName => _displayName.stream;
-  Stream<String> get phone => _phone.stream;
   Stream<String> get password => _password.stream;
   Stream<String> get verifyPassword => _verifyPassword.stream;
   Stream<bool> get passwordVisible => _passwordVisible.stream;
@@ -29,7 +27,6 @@ class SignUpBloc implements Bloc {
 
   Function(String) get changeEmail => _email.sink.add;
   Function(String) get changeDisplayName => _displayName.sink.add;
-  Function(String) get changePhone => _phone.sink.add;
   Function(String) get changePassword => _password.sink.add;
   Function(String) get changeVerifyPassword => _verifyPassword.sink.add;
   Function(bool) get changePasswordVisible => _passwordVisible.sink.add;
@@ -81,8 +78,6 @@ class SignUpBloc implements Bloc {
     _email.close();
     await _displayName.drain();
     _displayName.close();
-    await _phone.drain();
-    _phone.close();
     await _password.drain();
     _password.close();
     await _verifyPassword.drain();

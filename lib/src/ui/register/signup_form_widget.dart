@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/blocs/auth/signup_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import '../../constants/asset_uris.dart';
 import '../../constants/sizes.dart';
 import '../../constants/text_strings.dart';
 import '../home_container_screen.dart';
+import '../login/login_screen.dart';
 
 class SignUpFormWidget extends StatefulWidget {
   const SignUpFormWidget({
@@ -75,27 +77,6 @@ class _SignUpFormState extends State<SignUpFormWidget> {
             ),
             const Text(
               StringResources.signUpFormEmailInfo,
-            ),
-            const SizedBox(
-              height: SizeResources.buttonHeight,
-            ),
-            TextFormField(
-              autofillHints: const [
-                AutofillHints.telephoneNumber,
-              ],
-              keyboardType: TextInputType.phone,
-              scrollPadding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom +
-                    SizeResources.buttonTextSize * 8,
-              ),
-              decoration: const InputDecoration(
-                label: Text(StringResources.signUpFormPhone +
-                    StringResources.optionalField),
-                prefixIcon: Icon(Icons.phone_outlined),
-              ),
-              onChanged: (value) {
-                _bloc.changePhone(value);
-              },
             ),
             const SizedBox(
               height: SizeResources.buttonHeight,
@@ -217,7 +198,46 @@ class _SignUpFormState extends State<SignUpFormWidget> {
                   fontSize: SizeResources.buttonTextSize,
                 ),
               ),
-            )
+            ),
+            const SizedBox(
+              height: SizeResources.buttonHeight,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  StringResources.optionOr.toUpperCase(),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(
+                  height: SizeResources.buttonHeight,
+                ),
+                OutlinedButton.icon(
+                  onPressed: () {},
+                  icon: const Image(
+                    image: AssetImage(AssetURIResources.googleLogo),
+                    width: 20.0,
+                  ),
+                  label: const Text(
+                    StringResources.signInWithGoogle,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: SizeResources.buttonTextSize,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const LoginScreen()),
+                    );
+                  },
+                  child: const Text(StringResources.signUpLoginInstead),
+                ),
+              ],
+            ),
           ],
         ),
       ),

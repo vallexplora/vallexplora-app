@@ -12,6 +12,9 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text(
+          "Inicia sesión",
+        ),
         leading: BackButton(
           onPressed: () {
             Navigator.push(

@@ -18,7 +18,12 @@ class AuthenticationResources {
     try {
       UserCredential credentials = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
-      await credentials.user?.updateDisplayName(displayName);
+      var db = FirebaseFirestore.instance;
+      db.collection("users").doc(credentials.user!.uid).set({
+        "displayName": displayName,
+        "email": email,
+        "roles": ["tourist"],
+      }).onError((e, _) => "Error writing document: $e");
       return StringResources.signUpSuccess;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -41,29 +46,29 @@ class AuthenticationResources {
 
       var db = FirebaseFirestore.instance;
       final docRef = db.collection("users").doc(credentials.user!.uid);
+
       return docRef.get().then(
         (DocumentSnapshot doc) {
           final data = doc.data() as Map<String, dynamic>;
-          return StringResources.loginSuccess(data["displayName"]);
+          if (data["roles"].contains("tourist")) {
+            return StringResources.loginSuccess(data["displayName"]);
+          } else {
+            throw FirebaseAuthException(code: "unauthorized-user");
+          }
         },
         onError: (e) => {throw e},
       );
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
+      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+        return 'Usuario o contraseña incorrectos.';
+      } else if (e.code == 'unauthorized-user') {
         return 'Usuario no encontrado.';
-      } else if (e.code == 'wrong-password') {
-        return 'Contraseña incorrecta.';
       } else {
         return e.code;
       }
     } catch (e) {
       return "Exception: Authentication: $e";
     }
-  }
-
-  Future<void> setUserDisplayName(User user, String displayName) async {
-    // TODO: actually set up a method to add display name and user given user in firestore_resources.dart. This is just an infinite recursion.
-    await setUserDisplayName(user, displayName);
   }
 
   Future<void> get signOut async {
@@ -83,6 +88,20 @@ class AuthenticationResources {
       );
       UserCredential credentials =
           await FirebaseAuth.instance.signInWithCredential(credential);
+
+      final User? user = credentials.user;
+
+      if (credentials.additionalUserInfo!.isNewUser) {
+        if (user != null) {
+          var db = FirebaseFirestore.instance;
+          db.collection("users").doc(user.uid).set({
+            "displayName": user.displayName,
+            "email": user.email,
+            "roles": ["tourist"],
+          }).onError((e, _) => "Error writing document: $e");
+        }
+      }
+
       return StringResources.loginSuccess(credentials.user!.displayName!);
     } catch (e) {
       return "Error iniciando sesión con Google: $e";
