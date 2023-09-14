@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:vallexplora/src/constants/text_strings.dart';
@@ -37,7 +40,16 @@ class AuthenticationResources {
     try {
       UserCredential credentials = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
-      return StringResources.loginSuccess(credentials.user!.displayName!);
+
+      var db = FirebaseFirestore.instance;
+      final docRef = db.collection("users").doc(credentials.user!.uid);
+      return docRef.get().then(
+        (DocumentSnapshot doc) {
+          final data = doc.data() as Map<String, dynamic>;
+          return StringResources.loginSuccess(data["displayName"]);
+        },
+        onError: (e) => {throw e},
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return 'Usuario no encontrado.';

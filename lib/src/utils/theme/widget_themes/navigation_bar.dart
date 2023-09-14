@@ -7,17 +7,17 @@ class VNavigationBarTheme {
 
   static final lightNavigationBarTheme = NavigationBarThemeData(
     height: 80,
-    backgroundColor: ColorResources.mayaBlue[100],
-    indicatorColor: ColorResources.mayaBlue[200],
+    backgroundColor: ColorResources.mayaBlue[600],
+    indicatorColor: ColorResources.mayaBlue[900],
     iconTheme: MaterialStateProperty.resolveWith((state) {
       if (state.contains(MaterialState.selected)) {
         return IconThemeData(
-          color: ColorResources.mayaBlue[1200],
+          color: ColorResources.mayaBlue[100],
           opticalSize: 64.0,
         );
       } else {
         return IconThemeData(
-          color: ColorResources.mayaBlue[1200],
+          color: ColorResources.mayaBlue[900],
         );
       }
     }),
@@ -27,7 +27,7 @@ class VNavigationBarTheme {
           fontSize: 12,
           fontWeight: FontWeight.w700,
           color: MaterialColor(
-            ColorResources.mayaBlue[1000]!.value,
+            ColorResources.mayaBlue[100]!.value,
             ColorResources.mayaBlue,
           ),
         );
@@ -36,7 +36,7 @@ class VNavigationBarTheme {
         fontSize: 12,
         fontWeight: FontWeight.w300,
         color: MaterialColor(
-          ColorResources.mayaBlue[1200]!.value,
+          ColorResources.mayaBlue[900]!.value,
           ColorResources.mayaBlue,
         ),
       );

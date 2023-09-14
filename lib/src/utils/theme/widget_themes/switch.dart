@@ -9,27 +9,27 @@ class VSwitchTheme {
     thumbColor: MaterialStateColor.resolveWith(
       (states) {
         if (states.contains(MaterialState.selected)) {
-          return ColorResources.mayaBlue[100]!;
+          return ColorResources.mayaBlue[50]!;
         } else {
-          return ColorResources.twNeutral[400]!;
+          return ColorResources.twNeutral[500]!;
         }
       },
     ),
     trackColor: MaterialStateColor.resolveWith(
       (states) {
         if (states.contains(MaterialState.selected)) {
-          return ColorResources.mayaBlue[300]!;
+          return ColorResources.mayaBlue[600]!;
         } else {
-          return ColorResources.twNeutral[100]!;
+          return ColorResources.twNeutral[50]!;
         }
       },
     ),
     trackOutlineColor: MaterialStateColor.resolveWith(
       (states) {
         if (states.contains(MaterialState.selected)) {
-          return ColorResources.mayaBlue[300]!;
+          return ColorResources.mayaBlue[600]!;
         } else {
-          return ColorResources.twNeutral[300]!;
+          return ColorResources.twNeutral[500]!;
         }
       },
     ),

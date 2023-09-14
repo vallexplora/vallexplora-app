@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vallexplora/src/blocs/auth/login_bloc.dart';
 
-import '../../constants/sizes.dart';
 import '../../constants/text_strings.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -25,7 +24,7 @@ class _ProfileScreen extends State<ProfileScreen> {
           body: Column(
             children: [
               Text(StringResources.profileTitle),
-              TextField(StringResources.emailField),
+              TextField(),
             ],
           ),
         ));

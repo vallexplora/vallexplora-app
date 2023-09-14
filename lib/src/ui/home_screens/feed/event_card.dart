@@ -44,6 +44,7 @@ class _EventCardState extends State<EventCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      clipBehavior: Clip.hardEdge,
       height: 320,
       margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: ShapeDecoration(
@@ -55,9 +56,9 @@ class _EventCardState extends State<EventCard> {
           ),
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Wrap(
+        alignment: WrapAlignment.start,
+        crossAxisAlignment: WrapCrossAlignment.start,
         children: [
           Container(
             height: 128,

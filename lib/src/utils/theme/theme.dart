@@ -32,8 +32,8 @@ class VAppTheme {
       onError: Colors.red[100]!,
       background: ColorResources.twNeutral[50]!,
       onBackground: Colors.black87,
-      surface: ColorResources.mayaBlue[400]!,
-      onSurface: ColorResources.mayaBlue[900]!,
+      surface: ColorResources.mayaBlue[700]!,
+      onSurface: ColorResources.mayaBlue[100]!,
     ),
     appBarTheme: VAppBarTheme.lightAppBarTheme,
     outlinedButtonTheme: VOutlinedButtonTheme.lightOutlinedButtonTheme,
@@ -45,7 +45,7 @@ class VAppTheme {
     tabBarTheme: VTabBarTheme.lightTabBarTheme,
     floatingActionButtonTheme:
         VFloatingActionButtonTheme.lightFloatingActionButtonTheme,
-        switchTheme: VSwitchTheme.lightSwitchTheme,
+    switchTheme: VSwitchTheme.lightSwitchTheme,
   );
 
   static ThemeData darkTheme = ThemeData(

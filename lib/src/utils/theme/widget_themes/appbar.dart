@@ -6,7 +6,7 @@ class VAppBarTheme {
 
   static final lightAppBarTheme = AppBarTheme(
     toolbarHeight: 52,
-    backgroundColor: ColorResources.mayaBlue[200],
-    foregroundColor: ColorResources.mayaBlue[1200],
+    backgroundColor: ColorResources.mayaBlue[600],
+    foregroundColor: ColorResources.mayaBlue[50],
   );
 }

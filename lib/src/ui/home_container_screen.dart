@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/home_screen.dart';
+import 'package:vallexplora/src/ui/profile/profile_screen.dart';
 
 import '../blocs/home/home_container_bloc.dart';
 import 'home_screens/challenges/challenges_screen.dart';
@@ -49,6 +50,18 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
                   });
                 },
               ),
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.account_circle_rounded),
+                  onPressed: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfileScreen()),
+                    )
+                  },
+                )
+              ],
             ),
             bottomNavigationBar: NavigationBar(
               destinations: const [

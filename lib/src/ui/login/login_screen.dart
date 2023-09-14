@@ -76,7 +76,10 @@ class LoginScreen extends StatelessWidget {
                               builder: (context) => const UserRegisterScreen()),
                         );
                       },
-                      child: const Text(StringResources.loginSignUpInstead),
+                      child: const Text(
+                        StringResources.loginSignUpInstead,
+                        textAlign: TextAlign.center,
+                      ),
                     ),
                   ],
                 ),

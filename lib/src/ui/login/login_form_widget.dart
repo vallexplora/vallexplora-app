@@ -97,7 +97,7 @@ class _LoginFormState extends State<LoginFormWidget> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ForgotPasswordScreen()),
+                      builder: (context) => const ForgotPasswordScreen()),
                 );
               },
               child: const Text(
@@ -119,8 +119,8 @@ class _LoginFormState extends State<LoginFormWidget> {
                       fontSize: 16.0);
                   FirebaseAuth.instance.authStateChanges().listen((User? user) {
                     if (user != null) {
-                      if (logValue ==
-                          StringResources.loginSuccess(user.displayName!)) {
+                      if (logValue.contains(
+                          "Sesión iniciada correctamente. Bienvenido,")) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
