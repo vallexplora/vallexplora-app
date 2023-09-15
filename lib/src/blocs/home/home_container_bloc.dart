@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:vallexplora/src/resources/repository.dart';
 
@@ -14,6 +15,8 @@ class HomeContainerBloc implements Bloc {
   Future<void> logout() async {
     return await _repository.signOut();
   }
+
+  Stream<QuerySnapshot> profileImage() => _repository.eventsList();
 
   @override
   void dispose() async {

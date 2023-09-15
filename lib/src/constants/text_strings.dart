@@ -61,12 +61,11 @@ class StringResources {
   static const String forgottenPasswordLogin = "Volver a inicio de sesión";
 
   /* Profile */
-  static const String profileTitle = "Mi perfil";
-  static const String updateData = "Actualiza tus datos. :)";
+  static const String profileTitle = "Tu perfil";
+  static const String updateData = "Actualiza tus datos.";
   static const String nameField = "Nombre";
   static const String emailField = "Correo electrónico";
   static const String passwordField = "Contraseña";
-  static const String phoneField = "Teléfono";
 
   /* Home Screen */
   static const String eventsTabTitle = "Eventos";

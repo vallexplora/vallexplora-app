@@ -72,11 +72,7 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ForgotPasswordScreen()),
-                      );
+                      Navigator.pop(context);
                     },
                     child: const Text(
                       StringResources.forgottenPasswordLogin,

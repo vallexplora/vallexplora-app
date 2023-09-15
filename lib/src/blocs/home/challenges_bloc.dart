@@ -76,15 +76,6 @@ class ChallengesBloc implements Bloc {
     }
   }
 
-  Future<void> addNewChallenge() => _repository.addNewChallenge(
-        name: _name.value,
-        description: _description.value,
-        points: int.parse(_points.value),
-        startDate: _startDate.value,
-        expiration: _expiration.value,
-        place: _place.value,
-      );
-
   @override
   void dispose() async {
     await _name.drain();

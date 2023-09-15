@@ -20,8 +20,7 @@ class Repository {
 
   Future<String> getUserUID() => _authResources.getUserUID();
 
-  Future<String> signInWithGoogle() =>
-      _authResources.singInWIthGoogle();
+  Future<String> signInWithGoogle() => _authResources.singInWIthGoogle();
 
   Future<String> resetPassword(email) => _authResources.updatePassword(email);
 
@@ -29,37 +28,9 @@ class Repository {
 
   // Events
   Stream<QuerySnapshot> eventsList() => _dbResources.eventsList();
-  Future<void> addNewEvent({
-    required String name,
-    String description = "Sin descripción.",
-    required int entryFee,
-    required Timestamp startDate,
-    String city = "cali",
-  }) =>
-      _dbResources.addNewEvent(
-          name: name,
-          description: description,
-          entryFee: entryFee,
-          startDate: startDate,
-          city: city);
 
   // Sales
   Stream<QuerySnapshot> salesList() => _dbResources.salesList();
-  Future<void> addNewSale({
-    required String name,
-    String description = "Sin descripción.",
-    required String companyID,
-    required Timestamp expirationDate,
-    required bool stackable,
-    String city = "cali",
-  }) =>
-      _dbResources.addNewSale(
-          name: name,
-          description: description,
-          companyID: companyID,
-          expirationDate: expirationDate,
-          stackable: stackable,
-          city: city);
 
   /// Guide
 
@@ -68,21 +39,6 @@ class Repository {
   /// Challenges
 
   Stream<QuerySnapshot> challengesList() => _dbResources.challengesList();
-  Future<void> addNewChallenge({
-    required String name,
-    String description = "Sin descripción.",
-    required int points,
-    required Timestamp startDate,
-    required Timestamp expiration,
-    String place = "cali",
-  }) =>
-      _dbResources.addNewChallenge(
-          name: name,
-          description: description,
-          points: points,
-          startDate: startDate,
-          expiration: expiration,
-          place: place);
 
   // User markers
 }

@@ -23,6 +23,7 @@ class AuthenticationResources {
         "displayName": displayName,
         "email": email,
         "roles": ["tourist"],
+        //"photoURL": "",
       }).onError((e, _) => "Error writing document: $e");
       return StringResources.signUpSuccess;
     } on FirebaseAuthException catch (e) {
@@ -104,7 +105,7 @@ class AuthenticationResources {
 
       return StringResources.loginSuccess(credentials.user!.displayName!);
     } catch (e) {
-      return "Error iniciando sesión con Google: $e";
+      return "$e";
     }
   }
 

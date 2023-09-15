@@ -70,15 +70,6 @@ class SalesBloc implements Bloc {
     }
   }
 
-  Future<void> addNewSale() => _repository.addNewSale(
-        name: _name.value,
-        description: _description.value,
-        companyID: _companyID.value,
-        expirationDate: _expirationDate.value,
-        stackable: _stackable.value,
-        city: _city.value,
-      );
-
   @override
   void dispose() async {
     await _name.drain();

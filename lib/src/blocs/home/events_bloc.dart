@@ -67,14 +67,6 @@ class EventsBloc implements Bloc {
     }
   }
 
-  Future<void> addNewEvent() => _repository.addNewEvent(
-        name: _name.value,
-        description: _description.value,
-        entryFee: int.parse(_entryFee.value), // Puede causar problemas (prohibir valores decimales)
-        startDate: _startDate.value,
-        city: _city.value,
-      );
-
   @override
   void dispose() async {
     await _name.drain();
