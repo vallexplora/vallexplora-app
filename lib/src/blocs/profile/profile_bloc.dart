@@ -1,6 +1,8 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:vallexplora/src/models/user_model.dart';
 import 'package:vallexplora/src/resources/repository.dart';
 
 import '../../constants/text_strings.dart';
@@ -17,6 +19,7 @@ class ProfileBloc implements Bloc {
   final _confirmPassword = BehaviorSubject<String>();
   final _pictureURL = BehaviorSubject<String>();
   final _originPlace = BehaviorSubject<String>();
+  final _municipalitiesVisited = BehaviorSubject<int>();
   final _notificationsGlobal = BehaviorSubject<bool>();
   final _notificationsGeo = BehaviorSubject<bool>();
   final _deleteAccountStep = BehaviorSubject<int>();
@@ -31,6 +34,7 @@ class ProfileBloc implements Bloc {
   Stream<String> get confirmPassword => _confirmPassword.stream;
   Stream<String> get pictureURL => _pictureURL.stream;
   Stream<String> get originPlace => _originPlace.stream;
+  Stream<int> get municipalitiesVisited => _municipalitiesVisited.stream;
   Stream<bool> get notificationsGlobal => _notificationsGlobal.stream;
   Stream<bool> get notificationsGeo => _notificationsGeo.stream;
   Stream<int> get deleteAccountStep => _deleteAccountStep.stream;
@@ -63,6 +67,13 @@ class ProfileBloc implements Bloc {
     },
   );
 
+  Future<Stream<UserModel>> getUserInfo() async {
+    Stream<DocumentSnapshot<Map<String, dynamic>>> rawUserInfo =
+        await _repository.getUserInfo(_repository.getUserUID());
+
+    return rawUserInfo.map(UserModel.fromDocument);
+  }
+
   @override
   void dispose() async {
     await _email.drain();
@@ -79,6 +90,8 @@ class ProfileBloc implements Bloc {
     _pictureURL.close();
     await _originPlace.drain();
     _originPlace.close();
+    await _municipalitiesVisited.drain();
+    _municipalitiesVisited.close();
     await _notificationsGlobal.drain();
     _notificationsGlobal.close();
     await _notificationsGeo.drain();
@@ -91,5 +104,13 @@ class ProfileBloc implements Bloc {
     _confirmPasswordVissible.close();
     await _newPasswordVisible.drain();
     _newPasswordVisible.close();
+  }
+
+  String getDownloadedPicURL() {
+    final user = _repository.getCurrentUser();
+    if (user.providerData[0].providerId == "google.com") {
+      return user.photoURL!;
+    }
+    return "";
   }
 }

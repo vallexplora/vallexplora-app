@@ -9,9 +9,9 @@ class UserRegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var bloc = BlocProvider.of<SignUpBloc>(context);
     return Scaffold(
       appBar: AppBar(
+        
         title: const Text("Crea tu cuenta"),
         leading: BackButton(
           onPressed: () {

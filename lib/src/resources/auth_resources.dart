@@ -117,4 +117,6 @@ class AuthenticationResources {
     }
     return "Correo de restablecimiento enviado a $email";
   }
+
+  User get getCurrentUser => _firebaseAuth.currentUser!;
 }

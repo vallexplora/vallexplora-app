@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vallexplora/src/resources/auth_resources.dart';
 import 'package:vallexplora/src/resources/firestore_resources.dart';
 
+
 class Repository {
   final _authResources = AuthenticationResources();
   final _dbResources = FirestoreResources();
@@ -19,6 +20,8 @@ class Repository {
   Future<void> signOut() => _authResources.signOut;
 
   Future<String> getUserUID() => _authResources.getUserUID();
+
+  User getCurrentUser() => _authResources.getCurrentUser;
 
   Future<String> signInWithGoogle() => _authResources.singInWIthGoogle();
 
@@ -39,6 +42,12 @@ class Repository {
   /// Challenges
 
   Stream<QuerySnapshot> challengesList() => _dbResources.challengesList();
+
+  /// Profile
+
+  Future<Stream<DocumentSnapshot<Map<String, dynamic>>>> getUserInfo(
+          Future<String> uid) =>
+      _dbResources.getUserInfo(uid);
 
   // User markers
 }

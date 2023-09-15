@@ -96,4 +96,8 @@ class FirestoreResources {
       'place': _firestore.doc("/city/$place"),
     });
   }
+
+  Future<Stream<DocumentSnapshot<Map<String, dynamic>>>> getUserInfo(
+          Future<String> uid) async =>
+      _firestore.collection("users").doc(await uid).snapshots();
 }
