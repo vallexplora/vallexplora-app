@@ -34,7 +34,7 @@ class LoginScreen extends StatelessWidget {
             decelerationRate: ScrollDecelerationRate.fast,
           ),
           child: Container(
-            padding: const EdgeInsets.all(SizeResources.defaultSize),
+            padding: const EdgeInsets.all(SizeResources.defaultSpacing),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.start,

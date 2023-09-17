@@ -32,7 +32,7 @@ class _LoginFormState extends State<LoginFormWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        vertical: SizeResources.formHeight,
+        vertical: SizeResources.verticalFormPadding,
       ),
       child: Form(
         child: Column(

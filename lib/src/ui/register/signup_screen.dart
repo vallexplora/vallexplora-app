@@ -11,7 +11,6 @@ class UserRegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        
         title: const Text("Crea tu cuenta"),
         leading: BackButton(
           onPressed: () {
@@ -32,7 +31,7 @@ class UserRegisterScreen extends StatelessWidget {
             decelerationRate: ScrollDecelerationRate.fast,
           ),
           child: Container(
-            padding: const EdgeInsets.all(SizeResources.defaultSize),
+            padding: const EdgeInsets.all(SizeResources.defaultSpacing),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.start,

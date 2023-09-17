@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:vallexplora/src/blocs/bloc.dart';
 import 'package:vallexplora/src/models/event_model.dart';
@@ -37,34 +36,6 @@ class EventsBloc implements Bloc {
     }
 
     return events;
-  }
-
-  Future<void> selectDate(BuildContext context) async {
-    DateTime? datePicked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2023),
-      lastDate: DateTime(2028),
-    );
-
-    if (datePicked != null) {
-      TimeOfDay? timePicked = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay.now(),
-      );
-
-      DateTime? picked = timePicked != null
-          ? DateTime(
-              datePicked.year,
-              datePicked.month,
-              datePicked.day,
-              timePicked.hour,
-              timePicked.minute,
-            )
-          : DateTime.parse(datePicked.toString());
-
-      changeStartDate(Timestamp.fromDate(picked));
-    }
   }
 
   @override

@@ -1,103 +1,64 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:vallexplora/src/models/city_model.dart';
 
 class FirestoreResources {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  // Events
 
   Stream<QuerySnapshot> eventsList() => _firestore
       .collection("events")
       .orderBy("startDate", descending: false)
       .snapshots();
 
-  // This method only exists for demo purposes.
-  // Final product SHOULDN'T allow for in app
-  // administration, since that responsibility is
-  // relegated to the web admin panel.
-  Future<void> addNewEvent(
-      {required String name,
-      required description,
-      required int entryFee,
-      required Timestamp startDate,
-      required String city}) {
-    if (!CityModel.isValid(city)) {
-      city = "cali";
-    }
-
-    return _firestore.collection("events").add({
-      'name': name,
-      'description': description,
-      'entryFee': entryFee,
-      'startDate': startDate,
-      'city': _firestore.doc("/city/$city"),
-    });
-  }
+  // Sales
 
   Stream<QuerySnapshot> salesList() => _firestore
       .collection("discounts")
       .orderBy("expirationDate", descending: false)
       .snapshots();
 
-  // This method only exists for demo purposes.
-  // Final product SHOULDN'T allow for in app
-  // administration, since that responsibility is
-  // relegated to the web admin panel.
-  Future<void> addNewSale(
-      {required String name,
-      required String description,
-      required String companyID,
-      required Timestamp expirationDate,
-      required bool stackable,
-      required String city}) {
-    if (!CityModel.isValid(city)) {
-      city = "cali";
-    }
-
-    return _firestore.collection("discounts").add({
-      'name': name,
-      'description': description,
-      'companyID': companyID,
-      'expirationDate': expirationDate,
-      'stackable': stackable,
-      'city': _firestore.doc("/city/$city"),
-    });
-  }
+  // Map
 
   Stream<QuerySnapshot> citiesList() => _firestore
       .collection("city")
       .orderBy('canonicalName', descending: false)
       .snapshots();
 
+  // Challenges
+
   Stream<QuerySnapshot> challengesList() => _firestore
       .collection("challenges")
       .orderBy('points', descending: true)
       .snapshots();
 
-  // This method only exists for demo purposes.
-  // Final product SHOULDN'T allow for in app
-  // administration, since that responsibility is
-  // relegated to the web admin panel.
-  Future<void> addNewChallenge(
-      {required String name,
-      required description,
-      required int points,
-      required Timestamp startDate,
-      required Timestamp expiration,
-      required String place}) {
-    if (!CityModel.isValid(place)) {
-      place = "cali";
-    }
-
-    return _firestore.collection("challenges").add({
-      'name': name,
-      'description': description,
-      'points': points,
-      'startDate': startDate,
-      'expiration': expiration,
-      'place': _firestore.doc("/city/$place"),
-    });
-  }
+  // Profile
 
   Future<Stream<DocumentSnapshot<Map<String, dynamic>>>> getUserInfo(
           Future<String> uid) async =>
       _firestore.collection("users").doc(await uid).snapshots();
+
+  Future<void> updateUsername(
+          {required String id, required String username}) async =>
+      _firestore
+          .collection("users")
+          .doc(id)
+          .set({"displayName": username}, SetOptions(merge: true));
+
+  Future<void> updateEmail({required String id, required String email}) async =>
+      _firestore
+          .collection("users")
+          .doc(id)
+          .set({"email": email}, SetOptions(merge: true));
+
+  void updateGlobalNotifications({required String id, required bool value}) =>
+      _firestore
+          .collection("users")
+          .doc(id)
+          .set({"globalNotifications": value}, SetOptions(merge: true));
+
+  void updateGeoNotifications({required String id, required bool value}) =>
+      _firestore
+          .collection("users")
+          .doc(id)
+          .set({"geoNotifications": value}, SetOptions(merge: true));
 }

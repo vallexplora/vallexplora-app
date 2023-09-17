@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vallexplora/src/resources/auth_resources.dart';
 import 'package:vallexplora/src/resources/firestore_resources.dart';
 
-
 class Repository {
   final _authResources = AuthenticationResources();
   final _dbResources = FirestoreResources();
@@ -25,7 +24,8 @@ class Repository {
 
   Future<String> signInWithGoogle() => _authResources.singInWIthGoogle();
 
-  Future<String> resetPassword(email) => _authResources.updatePassword(email);
+  Future<String> resetPassword(email) =>
+      _authResources.sendPasswordResetEmail(email);
 
   // Home
 
@@ -48,6 +48,43 @@ class Repository {
   Future<Stream<DocumentSnapshot<Map<String, dynamic>>>> getUserInfo(
           Future<String> uid) =>
       _dbResources.getUserInfo(uid);
+
+  Future<bool> uploadPassword(
+      String newPassword, String email, String password) {
+    return _authResources
+        .updatePassword(
+            email: email, password: password, newPassword: newPassword)
+        .then((value) => true)
+        .onError((error, stackTrace) => false);
+  }
+
+  Future<bool> uploadEmail(String newEmail, String email, String password) {
+    return _authResources
+        .updateEmail(password: password, email: email, newEmail: newEmail)
+        .then((value) async {
+      if (value) {
+        return _dbResources
+            .updateEmail(id: await getUserUID(), email: newEmail)
+            .then((value) => true)
+            .onError((error, stackTrace) => false);
+      } else {
+        return false;
+      }
+    });
+  }
+
+  Future<void> uploadUsername(String username) async =>
+      _dbResources.updateUsername(id: await getUserUID(), username: username);
+
+  Future<void> updateNotificationsGlobal(bool value) async {
+    _dbResources.updateGlobalNotifications(
+        id: await _authResources.getUserUID(), value: value);
+  }
+
+  Future<void> updateNotificationsGeo(bool value) async {
+    _dbResources.updateGeoNotifications(
+        id: await _authResources.getUserUID(), value: value);
+  }
 
   // User markers
 }

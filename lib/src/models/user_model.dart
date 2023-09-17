@@ -13,7 +13,7 @@ class UserModel {
   UserModel({
     required this.displayName,
     required this.email,
-    this.pictureURL = "",
+    required this.pictureURL,
     required this.roles,
     required this.origin,
     required this.municipalitiesVisited,
@@ -24,12 +24,14 @@ class UserModel {
   static UserModel fromDocument(
       DocumentSnapshot<Map<String, dynamic>> document) {
     return UserModel(
-        displayName: document['displayName'],
-        email: document['email'],
-        roles: document['roles'],
-        origin: document['origin'],
-        municipalitiesVisited: document['municipalitiesVisited'],
-        globalNotifications: document['globalNotifications'],
-        geoNotifications: document['geoNotifications']);
+      displayName: document['displayName'],
+      email: document['email'],
+      roles: document['roles'],
+      origin: document['origin'],
+      municipalitiesVisited: document['municipalitiesVisited'],
+      globalNotifications: document['globalNotifications'],
+      geoNotifications: document['geoNotifications'],
+      pictureURL: document['pictureURL'],
+    );
   }
 }

@@ -16,7 +16,7 @@ class VElevatedButtonTheme {
       elevation: 0,
       textStyle: const TextStyle(
         fontWeight: FontWeight.w600,
-        fontSize: SizeResources.buttonTextSize,
+        fontSize: SizeResources.textBase,
       ),
     ),
   );

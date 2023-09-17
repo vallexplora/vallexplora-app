@@ -23,7 +23,7 @@ class WelcomeScreen extends StatelessWidget {
           foregroundColor: ColorResources.twNeutral[900],
         ),
         body: Container(
-          padding: const EdgeInsets.all(SizeResources.defaultSize),
+          padding: const EdgeInsets.all(SizeResources.defaultSpacing),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,7 +32,7 @@ class WelcomeScreen extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(
-                      top: SizeResources.defaultSize,
+                      top: SizeResources.defaultSpacing,
                     ),
                     child: Text(
                       StringResources.welcomeTitle,
@@ -42,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: SizeResources.defaultSize),
+              const SizedBox(height: SizeResources.defaultSpacing),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [

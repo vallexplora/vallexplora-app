@@ -32,7 +32,7 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
               ),
             ),
             body: Container(
-              padding: const EdgeInsets.all(SizeResources.defaultSize),
+              padding: const EdgeInsets.all(SizeResources.defaultSpacing),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.start,

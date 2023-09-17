@@ -8,6 +8,8 @@ class AuthenticationResources {
 
   Stream<User?> get onAuthStateChange => _firebaseAuth.authStateChanges();
 
+  User get getCurrentUser => _firebaseAuth.currentUser!;
+
   Future<String> getUserUID() async {
     final User? user = _firebaseAuth.currentUser;
     return user!.uid;
@@ -109,7 +111,7 @@ class AuthenticationResources {
     }
   }
 
-  Future<String> updatePassword(email) async {
+  Future<String> sendPasswordResetEmail(email) async {
     try {
       _firebaseAuth.sendPasswordResetEmail(email: email);
     } catch (e) {
@@ -118,5 +120,29 @@ class AuthenticationResources {
     return "Correo de restablecimiento enviado a $email";
   }
 
-  User get getCurrentUser => _firebaseAuth.currentUser!;
+  Future<bool> updatePassword(
+      {required newPassword, required email, required password}) {
+    var authCredential =
+        EmailAuthProvider.credential(email: email, password: password);
+    return getCurrentUser
+        .reauthenticateWithCredential(authCredential)
+        .then((user) => user.user!
+            .updatePassword(password)
+            .then((value) => true)
+            .onError((error, stackTrace) => false))
+        .onError((error, stackTrace) => false);
+  }
+
+  Future<bool> updateEmail(
+      {required newEmail, required email, required password}) {
+    var authCredential =
+        EmailAuthProvider.credential(email: email, password: password);
+    return getCurrentUser
+        .reauthenticateWithCredential(authCredential)
+        .then((user) => user.user!
+            .updateEmail(newEmail)
+            .then((value) => true)
+            .onError((error, stackTrace) => false))
+        .onError((error, stackTrace) => false);
+  }
 }

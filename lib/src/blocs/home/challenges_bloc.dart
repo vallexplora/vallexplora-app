@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:vallexplora/src/blocs/bloc.dart';
 import 'package:vallexplora/src/resources/repository.dart';
@@ -42,38 +41,6 @@ class ChallengesBloc implements Bloc {
     }
 
     return challenges;
-  }
-
-  Future<void> selectDate(BuildContext context, {bool endMode = false}) async {
-    DateTime? datePicked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
-    );
-
-    if (datePicked != null) {
-      TimeOfDay? timePicked = await showTimePicker(
-        context: context,
-        initialTime: TimeOfDay.now(),
-      );
-
-      DateTime? picked = timePicked != null
-          ? DateTime(
-              datePicked.year,
-              datePicked.month,
-              datePicked.day,
-              timePicked.hour,
-              timePicked.minute,
-            )
-          : DateTime.parse(datePicked.toString());
-
-      if (endMode) {
-        changeExpiration(Timestamp.fromDate(picked));
-      } else {
-        changeStartDate(Timestamp.fromDate(picked));
-      }
-    }
   }
 
   @override

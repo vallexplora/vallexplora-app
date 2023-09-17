@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:vallexplora/src/models/user_model.dart';
 import 'package:vallexplora/src/resources/repository.dart';
@@ -55,7 +57,9 @@ class ProfileBloc implements Bloc {
   Function(bool) get changePasswordVisible => _passwordVissible.sink.add;
   Function(bool) get changeConfirmPasswordVisible =>
       _confirmPasswordVissible.sink.add;
-  Function(bool) get changeNewPasswordVissible => _newPasswordVisible.sink.add;
+  Function(bool) get changeNewPasswordVisible => _newPasswordVisible.sink.add;
+
+  User get _user => _repository.getCurrentUser();
 
   final _validateEmail = StreamTransformer<String, String>.fromHandlers(
     handleData: (email, sink) {
@@ -73,6 +77,33 @@ class ProfileBloc implements Bloc {
 
     return rawUserInfo.map(UserModel.fromDocument);
   }
+
+  bool isGoogleAccount() {
+    return _user.providerData[0].providerId == "google.com";
+  }
+
+  String getDownloadedPicURL() {
+    if (isGoogleAccount()) {
+      return _user.photoURL!;
+    }
+    return "";
+  }
+
+  void uploadUsername() => _repository.uploadUsername(_username.value);
+
+  void uploadPassword(String email) =>
+      _repository.uploadPassword(_newPassword.value, email, _password.value);
+
+  void uploadEmail(String email) =>
+      _repository.uploadEmail(_email.value, email, _password.value);
+
+  void updateNotificationsGlobal(bool value) => _repository
+      .updateNotificationsGlobal(value)
+      .then((_) => changeNotificationsGlobal(value));
+
+  void updateNotificationsGeo(bool value) => _repository
+      .updateNotificationsGeo(value)
+      .then((_) => changeNotificationsGeo(value));
 
   @override
   void dispose() async {
@@ -106,11 +137,11 @@ class ProfileBloc implements Bloc {
     _newPasswordVisible.close();
   }
 
-  String getDownloadedPicURL() {
-    final user = _repository.getCurrentUser();
-    if (user.providerData[0].providerId == "google.com") {
-      return user.photoURL!;
-    }
-    return "";
+  Future<String> getProfilePictureDownloadURL(String pictureURL) {
+    return FirebaseStorage.instance
+        .ref()
+        .child(pictureURL)
+        .getDownloadURL()
+        .onError((error, stackTrace) => "");
   }
 }
