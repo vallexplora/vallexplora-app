@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.vallexplora">
-   <application
+    
+    <uses-permission android:name="android.permissions.ACCESS_FINE_LOCATION" />
+
+    <application
         android:label="Vallexplora"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
@@ -30,5 +33,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDNGXeUgLtyBJ-HCqh1EQhDAvkH0uriDi0" />
     </application>
 </manifest>

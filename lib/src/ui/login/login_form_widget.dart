@@ -163,7 +163,7 @@ class _LoginFormState extends State<LoginFormWidget> {
                           fontSize: 16.0);
                       FirebaseAuth.instance
                           .authStateChanges()
-                          .listen((User? user) {
+                          .listen((User? user) async {
                         if (user != null) {
                           if (logValue.contains(
                               "Sesión iniciada correctamente. Bienvenido,")) {

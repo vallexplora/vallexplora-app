@@ -47,5 +47,12 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<key>io.flutter.embedded_views_preview</key>
+	<value>YES</value>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<value>So we can track you while you use the app</value>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<value>So we can always track you</value>
 </dict>
 </plist>

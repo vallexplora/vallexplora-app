@@ -5,7 +5,7 @@ import 'package:vallexplora/src/ui/profile/profile_screen.dart';
 
 import '../blocs/home/home_container_bloc.dart';
 import 'home_screens/challenges/challenges_screen.dart';
-import 'home_screens/guide_screen.dart';
+import 'home_screens/guide/guide_screen.dart';
 import 'home_screens/markers_screen.dart';
 
 class HomeContainerScreen extends StatefulWidget {
@@ -26,6 +26,7 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
   @override
   void initState() {
     super.initState();
+    _bloc.requestPermissions();
   }
 
   @override
