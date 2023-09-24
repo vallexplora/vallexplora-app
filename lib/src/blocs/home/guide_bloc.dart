@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:logger/logger.dart';
+import 'package:maps_toolkit/maps_toolkit.dart' as mtkt;
 import 'package:vallexplora/src/blocs/bloc.dart';
 import 'package:vallexplora/src/constants/colors.dart';
 import 'package:vallexplora/src/resources/repository.dart';
@@ -18,12 +20,42 @@ class GuideBloc implements Bloc {
 
   final center = const LatLng(3.8009, -76.6413);
 
+  get circles {
+    return {
+      Circle(
+        circleId: const CircleId("1"),
+        center: const LatLng(3.3418193443937687, -76.53016789666331),
+        radius: 130,
+        strokeColor: ColorResources.mayaBlue[500]!,
+        strokeWidth: 3,
+        fillColor: ColorResources.mayaBlue[500]!.withOpacity(0.2),
+      ),
+    };
+  }
+
   Stream<QuerySnapshot> citiesList() => _repository.citiesList();
 
   void onMapCreated(GoogleMapController controller) {
     _mapController = controller;
     _getJsonFile("assets/json/map_style.json")
         .then((value) => _setMapStyle(value, _mapController));
+
+    _location.onLocationChanged.listen((location) {
+      Logger log = Logger(level: Level.info);
+      for (Circle circle in circles) {
+        var center = circle.center;
+        final distanceFromCenter = mtkt.SphericalUtil.computeDistanceBetween(
+            mtkt.LatLng(center.latitude, center.longitude),
+            mtkt.LatLng(location.latitude!, location.longitude!));
+        if (distanceFromCenter > circle.radius) {
+          // Outside
+          log.i("Joven NO icesista, probablemente de la jave");
+        } else {
+          // Inside
+          log.i("Joven icesista, el mejor amigo de Andy");
+        }
+      }
+    });
   }
 
   void _setMapStyle(String mapStyle, GoogleMapController mapController) {

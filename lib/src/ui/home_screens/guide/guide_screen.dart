@@ -74,7 +74,6 @@ class _GuideScreenState extends State<GuideScreen> {
                   myLocationEnabled: true,
                   myLocationButtonEnabled: false,
                   mapToolbarEnabled: false,
-                  // cloudMapId: "b8a6bb007582dfc8",
                   cameraTargetBounds: CameraTargetBounds(
                     LatLngBounds(
                       northeast: const LatLng(4.5009, -76.0413),
@@ -83,6 +82,7 @@ class _GuideScreenState extends State<GuideScreen> {
                   ),
                   buildingsEnabled: true,
                   indoorViewEnabled: true,
+                  circles: _bloc.circles,
                 ),
               ],
             );
