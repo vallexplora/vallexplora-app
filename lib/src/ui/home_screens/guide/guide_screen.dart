@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:vallexplora/src/blocs/home/guide_bloc.dart';
 import 'package:vallexplora/src/constants/sizes.dart';
+import 'package:vallexplora/src/ui/home_screens/guide/search.dart';
 
 class GuideScreen extends StatefulWidget {
   const GuideScreen({super.key});
@@ -22,6 +23,7 @@ class _GuideScreenState extends State<GuideScreen> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
+            heroTag: "find_center",
             mini: true,
             onPressed: () => _bloc.animateToCenter(),
             child: const Icon(
@@ -29,6 +31,7 @@ class _GuideScreenState extends State<GuideScreen> {
             ),
           ),
           FloatingActionButton(
+            heroTag: "find_user",
             mini: true,
             onPressed: () => _bloc.animateToUser(),
             child: const Icon(
@@ -39,7 +42,15 @@ class _GuideScreenState extends State<GuideScreen> {
             height: SizeResources.smallHeight,
           ),
           FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                clipBehavior: Clip.none,
+                builder: (context) => const Search(),
+              );
+            },
             child: const Icon(
               Icons.search,
             ),
@@ -70,7 +81,6 @@ class _GuideScreenState extends State<GuideScreen> {
                   ),
                   buildingsEnabled: true,
                   indoorViewEnabled: true,
-                  polygons: _bloc.drawValle(),
                 ),
               ],
             );

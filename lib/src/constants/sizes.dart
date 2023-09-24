@@ -27,4 +27,6 @@ class SizeResources {
   static const avatarRadiusInner = 32.0;
   static const defaultDividerHeight = 80.0;
   static const smallCardContainerHeight = 128.0;
+
+  static const modalMinSize = 384.0;
 }

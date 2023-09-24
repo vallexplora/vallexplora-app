@@ -88,4 +88,24 @@ class StringResources {
   /* Home Screen */
   static const String eventsTabTitle = "Eventos";
   static const String discountsTabTitle = "Promociones";
+
+  /* Guide screen */
+  static const String guideSearchPlaceholder = "Busca y filtra...";
+  static const String guideSearchCategories = "Categorías";
+  static const String guideSearchSportsShows = "Deportes y Espectáculo";
+  static const String guideSearchGastro = "Gastronomía";
+  static const String guideSearchHistoryArchitecture =
+      "Historia y Arquitectura";
+  static const String guideSearchArtCulture = "Arte y Cultura";
+  static const String guideSearchEco = "Ecoturismo";
+  static const String guideSearchRegions = "Regiones";
+  static const String guideSearchNorth = "Norte";
+  static const String guideSearchEast = "Oriente";
+  static const String guideSearchSouth = "Sur";
+  static const String guideSearchWest = "Occidente";
+  static const String guideSearchCenter = "Centro";
+  static const String guideSearchClassification = "Clasificación";
+  static const String guideSearchEvent = "Evento";
+  static const String guideSearchPOI = "Punto de interés";
+  static const String guideSearchSale = "Promoción";
 }

@@ -53,7 +53,7 @@ class _HeadingSectionState extends State<HeadingSection> {
                 future: profilePictureURL,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
+                    return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError || !snapshot.hasData) {
                     return CircleAvatar(
                       backgroundColor: ColorResources.twNeutral[100],
