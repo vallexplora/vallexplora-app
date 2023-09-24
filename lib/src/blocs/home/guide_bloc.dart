@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:vallexplora/src/blocs/bloc.dart';
@@ -19,6 +22,18 @@ class GuideBloc implements Bloc {
 
   void onMapCreated(GoogleMapController controller) {
     _mapController = controller;
+    _getJsonFile("assets/json/map_style.json")
+        .then((value) => _setMapStyle(value, _mapController));
+  }
+
+  void _setMapStyle(String mapStyle, GoogleMapController mapController) {
+    mapController.setMapStyle(mapStyle);
+  }
+
+  Future<String> _getJsonFile(String path) async {
+    ByteData byte = await rootBundle.load(path);
+    var list = byte.buffer.asUint8List(byte.offsetInBytes, byte.lengthInBytes);
+    return utf8.decode(list);
   }
 
   animateToUser() async {
@@ -30,7 +45,8 @@ class GuideBloc implements Bloc {
             pos.latitude!,
             pos.longitude!,
           ),
-          zoom: 12,
+          zoom: 19,
+          tilt: 85,
         ),
       ),
     );

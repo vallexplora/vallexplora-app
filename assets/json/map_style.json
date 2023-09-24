@@ -1,0 +1,44 @@
+[
+    {
+      "featureType": "administrative.locality",
+      "elementType": "geometry.stroke",
+      "stylers": [
+        {
+          "color": "#ff3d3d"
+        }
+      ]
+    },
+    {
+      "featureType": "administrative.province",
+      "stylers": [
+        {
+          "color": "#3d4aff"
+        }
+      ]
+    },
+    {
+      "featureType": "poi",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "road",
+      "elementType": "labels.icon",
+      "stylers": [
+        {
+          "visibility": "off"
+        }
+      ]
+    },
+    {
+      "featureType": "transit",
+      "stylers": [
+        {
+          "visibility": "on"
+        }
+      ]
+    }
+  ]
