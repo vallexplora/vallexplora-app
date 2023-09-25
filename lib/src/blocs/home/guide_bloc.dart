@@ -134,7 +134,7 @@ class GuideBloc implements Bloc {
   }
 
   @override
-  void dispose() {
-    // TODO: implement dispose
+  Future<void> dispose() async {
+    await _location.onLocationChanged.drain();
   }
 }

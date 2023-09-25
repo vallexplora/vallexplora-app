@@ -41,11 +41,16 @@ class _EventsViewTabState extends State<EventsViewTab> {
                     itemBuilder: (context, index) {
                       var event = events[index];
                       return EventCard(
-                          name: event.name,
-                          description: event.description,
-                          entryFee: event.entryFee,
-                          startDate: event.startDate,
-                          place: event.city);
+                        name: event.name,
+                        description: event.description,
+                        entryFee: event.entryFee,
+                        startDate: event.startDate,
+                        city: event.city,
+                        endDate: event.endDate,
+                        eventType: event.eventType,
+                        imagePath: event.imagePath,
+                        location: event.location,
+                      );
                     },
                   );
                 } else {

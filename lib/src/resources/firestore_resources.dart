@@ -7,7 +7,7 @@ class FirestoreResources {
 
   Stream<QuerySnapshot> eventsList() => _firestore
       .collection("events")
-      .orderBy("startDate", descending: false)
+      .orderBy("eventJson.startDate", descending: false)
       .snapshots();
 
   // Sales
