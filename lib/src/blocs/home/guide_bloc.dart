@@ -86,6 +86,15 @@ class GuideBloc implements Bloc {
     geoStream.listen((List<DocumentSnapshot> documentList) {
       _updateMarkers(documentList);
     });
+    eventMarkers.listen((events) {
+      _showARButton.add(false);
+      for (Marker event in events.values) {
+        if (isAtEvent(160, event)) {
+          _showARButton.add(true);
+          break;
+        }
+      }
+    });
   }
 
   void _setMapStyle(String mapStyle, GoogleMapController mapController) {
@@ -109,6 +118,17 @@ class GuideBloc implements Bloc {
       events[marker.markerId] = marker;
     }
     changeEventMarkers(events);
+  }
+
+  bool isAtEvent(double radius, Marker marker) {
+    if (mtkt.SphericalUtil.computeDistanceBetween(
+            mtkt.LatLng(marker.position.latitude, marker.position.longitude),
+            mtkt.LatLng(_lastPos.latitude!, _lastPos.longitude!)) <
+        radius) {
+      _showARButton.add(true);
+      return true;
+    }
+    return false;
   }
 
   Future<String> _getJsonFile(String path) async {
