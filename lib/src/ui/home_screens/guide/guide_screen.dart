@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:vallexplora/src/blocs/home/guide_bloc.dart';
@@ -14,6 +13,12 @@ class GuideScreen extends StatefulWidget {
 
 class _GuideScreenState extends State<GuideScreen> {
   final _bloc = GuideBloc();
+
+  @override
+  void initState() {
+    _bloc.changeShowARButton(false);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,15 +60,45 @@ class _GuideScreenState extends State<GuideScreen> {
               Icons.search,
             ),
           ),
+          StreamBuilder<bool>(
+            stream: _bloc.showARButton,
+            builder: (builder, snapshot) {
+              if (snapshot.hasData) {
+                if (snapshot.data!) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      const SizedBox(
+                        height: SizeResources.smallHeight,
+                      ),
+                      FloatingActionButton(
+                        onPressed: () {},
+                        child: const Icon(
+                          Icons.view_in_ar_rounded,
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return const SizedBox(
+                    width: 16,
+                  );
+                }
+              } else {
+                return const SizedBox(
+                  width: 16,
+                );
+              }
+            },
+          ),
         ],
       ),
-      body: StreamBuilder<QuerySnapshot>(
-        stream: _bloc.citiesList(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Stack(
-              children: [
-                GoogleMap(
+      body: Stack(
+        children: [
+          StreamBuilder<Map<MarkerId, Marker>>(
+              stream: _bloc.eventMarkers,
+              builder: (context, snapshot) {
+                return GoogleMap(
                   compassEnabled: true,
                   initialCameraPosition: CameraPosition(
                     target: _bloc.center,
@@ -82,20 +117,10 @@ class _GuideScreenState extends State<GuideScreen> {
                   ),
                   buildingsEnabled: true,
                   indoorViewEnabled: true,
-                  circles: _bloc.circles,
-                ),
-              ],
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text("Ocurrió un error: ${snapshot.error}"),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
+                  markers: (snapshot.data ?? {}).values.toSet(),
+                );
+              }),
+        ],
       ),
     );
   }

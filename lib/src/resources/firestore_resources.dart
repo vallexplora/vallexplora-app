@@ -61,4 +61,8 @@ class FirestoreResources {
           .collection("users")
           .doc(id)
           .set({"geoNotifications": value}, SetOptions(merge: true));
+
+  Query<Object?> eventsListQuery() {
+    return _firestore.collection("events");
+  }
 }

@@ -10,7 +10,8 @@ class EventModel {
   Timestamp endDate;
   String city;
   String imagePath;
-  Map<String, dynamic> location;
+  Map<String, dynamic>? location;
+  List<Map<String, dynamic>>? points;
 
   EventModel({
     required this.id,
@@ -22,7 +23,8 @@ class EventModel {
     required this.endDate,
     required this.city,
     required this.imagePath,
-    required this.location,
+    this.location,
+    this.points,
   });
 
   static Future<EventModel> fromDocument(DocumentSnapshot document) async {
@@ -37,6 +39,27 @@ class EventModel {
       city: document["eventJson"]['city'],
       imagePath: document["eventJson"]['imagePath'],
       location: document["eventJson"]['location'],
+      points: document["eventJson"]['points'],
+    );
+  }
+
+  static EventModel fromDocSnap(QueryDocumentSnapshot<Object?> doc) {
+    return EventModel(
+      id: doc.id,
+      name: doc.get("eventJson.name"),
+      description: doc.get("eventJson.description"),
+      entryFee: doc.get("eventJson.entryFee"),
+      eventType: doc.get("eventJson.eventType"),
+      startDate: doc.get("eventJson.startDate"),
+      endDate: doc.get("eventJson.endDate"),
+      city: doc.get("eventJson.city"),
+      imagePath: doc.get("eventJson.imagePath"),
+      location: doc.data().toString().contains("location")
+          ? doc.get("eventJson.location")
+          : null,
+      points: doc.data().toString().contains("points")
+          ? doc.get("eventJson.points")
+          : null,
     );
   }
 }

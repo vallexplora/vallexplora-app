@@ -86,5 +86,9 @@ class Repository {
         id: await _authResources.getUserUID(), value: value);
   }
 
+  Query<Object?> eventsListQuery() {
+    return _dbResources.eventsListQuery();
+  }
+
   // User markers
 }

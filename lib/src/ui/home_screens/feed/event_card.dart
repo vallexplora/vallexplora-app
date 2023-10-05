@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:vallexplora/src/constants/event_types.dart';
 
 import '../../../constants/colors.dart';
-import '../../../constants/sizes.dart';
 
 class EventCard extends StatefulWidget {
   final String name;
@@ -17,7 +15,8 @@ class EventCard extends StatefulWidget {
   final Timestamp endDate;
   final String city;
   final String imagePath;
-  final Map<String, dynamic> location;
+  final Map<String, dynamic>? location;
+  final List<Map<String, dynamic>>? points;
 
   const EventCard({
     super.key,
@@ -29,7 +28,8 @@ class EventCard extends StatefulWidget {
     required this.eventType,
     required this.endDate,
     required this.imagePath,
-    required this.location,
+    this.location,
+    this.points,
   });
 
   @override
@@ -45,7 +45,8 @@ class _EventCardState extends State<EventCard> {
   late DateTime endDate;
   late String city;
   late String imagePath;
-  late Map<String, dynamic> location;
+  late Map<String, dynamic>? location;
+  late List<Map<String, dynamic>>? points;
 
   @override
   void initState() {
@@ -59,6 +60,7 @@ class _EventCardState extends State<EventCard> {
     city = widget.city;
     imagePath = widget.imagePath;
     location = widget.location;
+    points = widget.points;
   }
 
   @override
