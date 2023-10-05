@@ -46,32 +46,6 @@ class GuideBloc implements Bloc {
     });
   }
 
-  mtkt.LatLng _centroid(List<mtkt.LatLng> points) {
-    // Calculate the area of the polygon
-
-    double area = 0;
-    for (int i = 0; i < points.length - 1; i++) {
-      area += (points[i].latitude * points[i + 1].longitude -
-              points[i + 1].latitude * points[i].longitude) /
-          2;
-    }
-
-    // I literally do not understand this
-
-    double cx = 0;
-    double cy = 0;
-    for (int i = 0; i < points.length - 1; i++) {
-      mtkt.LatLng p1 = points[i];
-      mtkt.LatLng p2 = points[i + 1];
-      double areaContribution =
-          (p1.latitude * p2.longitude - p2.latitude * p1.longitude) / 2;
-      cx += (p1.latitude + p2.latitude) * areaContribution / 6;
-      cy += (p1.longitude + p2.longitude) * areaContribution / 6;
-    }
-
-    return mtkt.LatLng(cx / area, cy / area);
-  }
-
   Future<void> onMapCreated(GoogleMapController controller) async {
     _location.getLocation().then((loc) => _pos.add(loc));
     _mapController = controller;

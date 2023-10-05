@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:vallexplora/src/blocs/home/guide_bloc.dart';
 import 'package:vallexplora/src/constants/sizes.dart';
+import 'package:vallexplora/src/ui/home_screens/guide/ar_view.dart';
 import 'package:vallexplora/src/ui/home_screens/guide/search.dart';
 
 class GuideScreen extends StatefulWidget {
@@ -72,7 +73,15 @@ class _GuideScreenState extends State<GuideScreen> {
                         height: SizeResources.smallHeight,
                       ),
                       FloatingActionButton(
-                        onPressed: () {},
+                        heroTag: "ar_view",
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ARView(),
+                            ),
+                          );
+                        },
                         child: const Icon(
                           Icons.view_in_ar_rounded,
                         ),
