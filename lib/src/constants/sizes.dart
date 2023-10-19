@@ -23,10 +23,10 @@ class SizeResources {
   static const text8XLarge = 96.0;
   static const text9XLarge = 128.0;
 
-  static const avatarRadiusOuter = 34.0;
-  static const avatarRadiusInner = 32.0;
+  static const avatarRadiusOuter = 70.0;
+  static const avatarRadiusInner = 64.0;
   static const defaultDividerHeight = 80.0;
-  static const smallCardContainerHeight = 128.0;
+  static const smallCardContainerHeight = 144.0;
 
   static const modalMinSize = 384.0;
 }

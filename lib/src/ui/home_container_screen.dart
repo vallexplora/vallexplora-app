@@ -54,8 +54,16 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
               actions: [
                 IconButton(
                   icon: const Icon(Icons.account_circle_rounded),
-                  onPressed: () => {Navigator.of(context).push(_createRoute())},
-                )
+                  onPressed: () => {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      clipBehavior: Clip.none,
+                      builder: (context) => const ProfileScreen(),
+                    ),
+                  },
+                ),
               ],
             ),
             bottomNavigationBar: NavigationBar(
@@ -92,30 +100,5 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
             ),
           );
         });
-  }
-
-  Route _createRoute() {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) =>
-          const ProfileScreen(),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(0.0, 1.0);
-        const end = Offset.zero;
-        const curve = Curves.decelerate;
-
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-
-        return SlideTransition(
-          position: animation.drive(tween),
-          child: child,
-        );
-      },
-    );
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 }

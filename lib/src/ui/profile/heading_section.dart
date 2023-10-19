@@ -46,7 +46,8 @@ class _HeadingSectionState extends State<HeadingSection> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             FutureBuilder<String>(
@@ -78,78 +79,155 @@ class _HeadingSectionState extends State<HeadingSection> {
                     ),
                   );
                 }),
-            const SizedBox(width: SizeResources.defaultSpacing),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            const SizedBox(height: SizeResources.smallHeight),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   username,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context)
+                      .textTheme
+                      .titleLarge!
+                      .merge(TextStyle(color: ColorResources.twNeutral[600])),
+                ),
+                const SizedBox(
+                  width: SizeResources.smallHeight,
+                ),
+                Icon(
+                  Icons.edit_outlined,
+                  color: ColorResources.mayaBlue[500],
                 ),
               ],
             ),
           ],
         ),
-        Divider(
-          height: SizeResources.defaultDividerHeight,
-          color: ColorResources.twNeutral[400],
-        ),
-        Container(
-          height: SizeResources.smallCardContainerHeight,
-          padding: const EdgeInsets.only(
-            left: SizeResources.defaultPadding,
-            right: SizeResources.defaultPadding,
-            top: SizeResources.defaultPadding,
-          ),
-          decoration: ShapeDecoration(
-            color: ColorResources.mayaBlue[50],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                SizeResources.defaultBorderRadius,
-              ),
-              side: BorderSide(
-                color: ColorResources.mayaBlue[600]!,
-              ),
-            ),
-          ),
-          child: Row(
-            children: [
-              Text(municipalitiesVisited.toString()),
-              const Text(
-                StringResources.profileVisitedMunicipalities,
-              ),
-            ],
-          ),
-        ),
         const SizedBox(
-          height: SizeResources.defaultHeight,
+          height: 24,
         ),
-        Container(
-          height: SizeResources.smallCardContainerHeight,
-          padding: const EdgeInsets.only(
-            left: SizeResources.defaultPadding,
-            right: SizeResources.defaultPadding,
-            top: SizeResources.defaultPadding,
-          ),
-          decoration: ShapeDecoration(
-            color: ColorResources.mayaBlue[50],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(
-                SizeResources.defaultBorderRadius,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              height: SizeResources.smallCardContainerHeight,
+              width: SizeResources.smallCardContainerHeight,
+              decoration: ShapeDecoration(
+                color: ColorResources.mayaBlue[600],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    SizeResources.defaultBorderRadius,
+                  ),
+                  side: BorderSide(
+                    color: ColorResources.mayaBlue[600]!,
+                  ),
+                ),
               ),
-              side: BorderSide(
-                color: ColorResources.mayaBlue[600]!,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    StringResources.profileVisitedMunicipalities,
+                    style: Theme.of(context).textTheme.bodySmall!.merge(
+                          const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                  ),
+                  const SizedBox(
+                    height: SizeResources.smallHeight,
+                  ),
+                  Text(
+                    municipalitiesVisited.toString(),
+                    style: Theme.of(context).textTheme.displayMedium!.merge(
+                          TextStyle(
+                            color: ColorResources.mayaBlue[50],
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                  ),
+                ],
               ),
             ),
-          ),
-          child: Row(
-            children: [
-              Text(
-                StringResources.profileOriginPlace(origin),
+            const SizedBox(
+              width: 16,
+            ),
+            Container(
+              height: SizeResources.smallCardContainerHeight,
+              width: SizeResources.smallCardContainerHeight,
+              decoration: ShapeDecoration(
+                color: ColorResources.mayaBlue[600],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(
+                    SizeResources.defaultBorderRadius,
+                  ),
+                  side: BorderSide(
+                    color: ColorResources.mayaBlue[600]!,
+                  ),
+                ),
               ),
-            ],
-          ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    StringResources.profileOriginPlace,
+                    style: Theme.of(context).textTheme.bodySmall!.merge(
+                          const TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                  ),
+                  const SizedBox(
+                    height: SizeResources.smallHeight,
+                  ),
+                  Text(
+                    origin,
+                    style: Theme.of(context).textTheme.displayMedium!.merge(
+                          TextStyle(
+                            color: ColorResources.mayaBlue[50],
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                  ),
+                ],
+              ),
+            ),
+            // Container(
+            //   child: Row(
+            //     children: [
+
+            //     ],
+            //   ),
+            // ),
+            // Container(
+            //   height: SizeResources.smallCardContainerHeight,
+            //   padding: const EdgeInsets.only(
+            //     left: SizeResources.defaultPadding,
+            //     right: SizeResources.defaultPadding,
+            //     top: SizeResources.defaultPadding,
+            //   ),
+            //   decoration: ShapeDecoration(
+            //     color: ColorResources.mayaBlue[50],
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(
+            //         SizeResources.defaultBorderRadius,
+            //       ),
+            //       side: BorderSide(
+            //         color: ColorResources.mayaBlue[600]!,
+            //       ),
+            //     ),
+            //   ),
+            //   child: Row(
+            //     children: [
+            //       Text(
+            //         StringResources.profileOriginPlace(origin),
+            //       ),
+            //     ],
+            //   ),
+            // ),
+          ],
         ),
         Divider(
           height: SizeResources.defaultDividerHeight,

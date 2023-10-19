@@ -63,7 +63,7 @@ class StringResources {
   /* Profile */
   static const String profileTitle = "Tu perfil";
   static const String profileVisitedMunicipalities = "Municipios visitados";
-  static profileOriginPlace(String origin) => "Soy de $origin";
+  static const String profileOriginPlace = "Soy de";
   static const String profilePersonalInfo = "Información Personal";
   static const String profileUsername = "Nombre de usuario";
   static const String profileConfirmUsernameButton =
