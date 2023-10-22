@@ -70,11 +70,11 @@ class _EventCardState extends State<EventCard> {
       height: 360,
       margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: ShapeDecoration(
-        color: ColorResources.twNeutral[500],
+        color: neutralRef.value50,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: BorderSide(
-            color: ColorResources.twNeutral[300]!,
+            color: neutralRef.value80,
           ),
         ),
       ),
@@ -103,8 +103,8 @@ class _EventCardState extends State<EventCard> {
                     begin: const Alignment(0.00, -1.00),
                     end: const Alignment(0, 1),
                     colors: [
-                      ColorResources.mayaBlue[900]!.withOpacity(0.01),
-                      ColorResources.mayaBlue[1000]!,
+                      primaryRef.value12.withOpacity(0.01),
+                      primaryRef.value5,
                     ],
                   ),
                   shape: RoundedRectangleBorder(
@@ -136,90 +136,7 @@ class _EventCardState extends State<EventCard> {
             left: 16,
             child: Icon(
               EventTypeInformation.numberInfoMap[eventType].icon,
-              color: ColorResources.mayaBlue[300],
-            ),
-          ),
-          Positioned(
-            bottom: 16,
-            left: 0,
-            right: 0,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-                  child: Container(
-                    height: 128,
-                    padding: const EdgeInsets.all(16),
-                    decoration: ShapeDecoration(
-                      color: ColorResources.mayaBlue[100]!.withOpacity(0.25),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              name,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 20,
-                                color: ColorResources.mayaBlue[100],
-                              ),
-                            ),
-                            Text(
-                              description,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "\$$entryFee",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                    color: ColorResources.mayaBlue[200],
-                                  ),
-                                ),
-                                Text(
-                                  city,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 12,
-                                    color: ColorResources.mayaBlue[200],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              color: Colors.black,
             ),
           ),
         ],

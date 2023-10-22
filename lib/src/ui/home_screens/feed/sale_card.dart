@@ -51,11 +51,11 @@ class _SaleCardState extends State<SaleCard> {
       height: 320,
       margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: ShapeDecoration(
-        color: ColorResources.twNeutral[50],
+        color: neutralRef.value96,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: BorderSide(
-            color: ColorResources.twNeutral[300]!,
+            color: neutralRef.value80,
           ),
         ),
       ),
@@ -67,7 +67,7 @@ class _SaleCardState extends State<SaleCard> {
             height: 128,
             padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
             decoration: ShapeDecoration(
-              color: ColorResources.mayaBlue[100],
+              color: primaryRef.value92,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),

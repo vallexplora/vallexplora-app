@@ -20,7 +20,7 @@ class WelcomeScreen extends StatelessWidget {
           automaticallyImplyLeading: false,
           elevation: 0,
           backgroundColor: Theme.of(context).canvasColor,
-          foregroundColor: ColorResources.twNeutral[900],
+          foregroundColor: neutralRef.value17,
         ),
         body: Container(
           padding: const EdgeInsets.all(SizeResources.defaultSpacing),

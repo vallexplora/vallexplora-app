@@ -79,8 +79,8 @@ class _NotificationsDangerZoneState extends State<NotificationsDangerZone> {
                         ? Icons.notifications_active
                         : Icons.notifications_off_outlined,
                     color: snapshot.data!
-                        ? ColorResources.mayaBlue[600]
-                        : ColorResources.twNeutral[500],
+                        ? primaryRef.value50
+                        : neutralRef.value50,
                   ),
                   value: snapshot.data!,
                   onChanged: (value) {
@@ -118,8 +118,8 @@ class _NotificationsDangerZoneState extends State<NotificationsDangerZone> {
                         ? Icons.notifications_active
                         : Icons.notifications_off_outlined,
                     color: snapshot.data!
-                        ? ColorResources.mayaBlue[600]
-                        : ColorResources.twNeutral[500],
+                        ? primaryRef.value50
+                        : neutralRef.value50,
                   ),
                   value: snapshot.data!,
                   onChanged: (value) {

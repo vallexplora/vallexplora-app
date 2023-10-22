@@ -53,7 +53,7 @@ class _HomeScreenState extends State<HomeScreen>
           bottom: PreferredSize(
             preferredSize: _tabBar.preferredSize,
             child: Material(
-              color: ColorResources.mayaBlue[600],
+              color: primaryRef.value40,
               shadowColor: Colors.transparent,
               child: _tabBar,
             ),

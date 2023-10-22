@@ -57,11 +57,11 @@ class _HeadingSectionState extends State<HeadingSection> {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError || !snapshot.hasData) {
                     return CircleAvatar(
-                      backgroundColor: ColorResources.twNeutral[100],
+                      backgroundColor: neutralRef.value92,
                       radius: SizeResources.avatarRadiusOuter,
                       child: CircleAvatar(
                         radius: SizeResources.avatarRadiusInner,
-                        backgroundColor: ColorResources.twNeutral[50],
+                        backgroundColor: neutralRef.value96,
                         backgroundImage: const AssetImage(
                           AssetURIResources.googleLogo,
                         ),
@@ -69,7 +69,7 @@ class _HeadingSectionState extends State<HeadingSection> {
                     );
                   }
                   return CircleAvatar(
-                    backgroundColor: ColorResources.twNeutral[100],
+                    backgroundColor: neutralRef.value92,
                     radius: SizeResources.avatarRadiusOuter,
                     child: CircleAvatar(
                       radius: SizeResources.avatarRadiusInner,
@@ -89,14 +89,14 @@ class _HeadingSectionState extends State<HeadingSection> {
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge!
-                      .merge(TextStyle(color: ColorResources.twNeutral[600])),
+                      .merge(TextStyle(color: neutralRef.value60)),
                 ),
                 const SizedBox(
                   width: SizeResources.smallHeight,
                 ),
                 Icon(
                   Icons.edit_outlined,
-                  color: ColorResources.mayaBlue[500],
+                  color: primaryRef.value50,
                 ),
               ],
             ),
@@ -113,13 +113,13 @@ class _HeadingSectionState extends State<HeadingSection> {
               height: SizeResources.smallCardContainerHeight,
               width: SizeResources.smallCardContainerHeight,
               decoration: ShapeDecoration(
-                color: ColorResources.mayaBlue[600],
+                color: primaryRef.value50,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(
                     SizeResources.defaultBorderRadius,
                   ),
                   side: BorderSide(
-                    color: ColorResources.mayaBlue[600]!,
+                    color: primaryRef.value50,
                   ),
                 ),
               ),
@@ -142,7 +142,7 @@ class _HeadingSectionState extends State<HeadingSection> {
                     municipalitiesVisited.toString(),
                     style: Theme.of(context).textTheme.displayMedium!.merge(
                           TextStyle(
-                            color: ColorResources.mayaBlue[50],
+                            color: primaryRef.value92,
                             fontWeight: FontWeight.w800,
                           ),
                         ),
@@ -157,13 +157,13 @@ class _HeadingSectionState extends State<HeadingSection> {
               height: SizeResources.smallCardContainerHeight,
               width: SizeResources.smallCardContainerHeight,
               decoration: ShapeDecoration(
-                color: ColorResources.mayaBlue[600],
+                color: primaryRef.value50,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(
                     SizeResources.defaultBorderRadius,
                   ),
                   side: BorderSide(
-                    color: ColorResources.mayaBlue[600]!,
+                    color: primaryRef.value50,
                   ),
                 ),
               ),
@@ -186,7 +186,7 @@ class _HeadingSectionState extends State<HeadingSection> {
                     origin,
                     style: Theme.of(context).textTheme.displayMedium!.merge(
                           TextStyle(
-                            color: ColorResources.mayaBlue[50],
+                            color: primaryRef.value92,
                             fontWeight: FontWeight.w800,
                           ),
                         ),
@@ -194,44 +194,10 @@ class _HeadingSectionState extends State<HeadingSection> {
                 ],
               ),
             ),
-            // Container(
-            //   child: Row(
-            //     children: [
-
-            //     ],
-            //   ),
-            // ),
-            // Container(
-            //   height: SizeResources.smallCardContainerHeight,
-            //   padding: const EdgeInsets.only(
-            //     left: SizeResources.defaultPadding,
-            //     right: SizeResources.defaultPadding,
-            //     top: SizeResources.defaultPadding,
-            //   ),
-            //   decoration: ShapeDecoration(
-            //     color: ColorResources.mayaBlue[50],
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(
-            //         SizeResources.defaultBorderRadius,
-            //       ),
-            //       side: BorderSide(
-            //         color: ColorResources.mayaBlue[600]!,
-            //       ),
-            //     ),
-            //   ),
-            //   child: Row(
-            //     children: [
-            //       Text(
-            //         StringResources.profileOriginPlace(origin),
-            //       ),
-            //     ],
-            //   ),
-            // ),
           ],
         ),
-        Divider(
+        const Divider(
           height: SizeResources.defaultDividerHeight,
-          color: ColorResources.twNeutral[400],
         ),
       ],
     );

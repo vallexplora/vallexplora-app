@@ -43,11 +43,11 @@ class _SearchResultCardState extends State<SearchResultCard> {
       height: 96,
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: ShapeDecoration(
-        color: ColorResources.twNeutral[50],
+        color: neutralRef.value92,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: BorderSide(
-            color: ColorResources.twNeutral[300]!,
+            color: neutralRef.value70,
           ),
         ),
       ),
@@ -60,11 +60,11 @@ class _SearchResultCardState extends State<SearchResultCard> {
             width: 64,
             padding: const EdgeInsets.all(8),
             decoration: ShapeDecoration(
-              color: ColorResources.mayaBlue[50],
+              color: neutralRef.value92,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
                 side: BorderSide(
-                  color: ColorResources.mayaBlue[300]!,
+                  color: neutralRef.value70,
                 ),
               ),
             ),
@@ -82,7 +82,7 @@ class _SearchResultCardState extends State<SearchResultCard> {
                                   ? Icons.eco_outlined
                                   : Icons.block_outlined,
               size: 32,
-              color: ColorResources.mayaBlue[500],
+              color: primaryRef.value50,
             ),
           ),
           const SizedBox(

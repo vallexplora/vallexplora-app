@@ -51,11 +51,11 @@ class _ChallengeCardState extends State<ChallengeCard> {
       height: 320,
       margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       decoration: ShapeDecoration(
-        color: ColorResources.twNeutral[50],
+        color: neutralRef.value94,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: BorderSide(
-            color: ColorResources.twNeutral[300]!,
+            color: neutralRef.value70,
           ),
         ),
       ),
@@ -67,7 +67,7 @@ class _ChallengeCardState extends State<ChallengeCard> {
             height: 128,
             padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
             decoration: ShapeDecoration(
-              color: ColorResources.mayaBlue[100],
+              color: primaryRef.value92,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),

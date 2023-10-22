@@ -57,26 +57,26 @@ class _SearchBarWrapperState extends State<SearchBarWrapper> {
               },
               style: ButtonStyle(
                 iconColor: MaterialStateProperty.all(
-                  ColorResources.mayaBlue[500],
+                  primaryRef.value50,
                 ),
                 padding: MaterialStateProperty.all(EdgeInsets.zero),
               ),
             ),
             suffixIcon: Icon(
               Icons.tune,
-              color: ColorResources.mayaBlue[500],
+              color: primaryRef.value50,
             ),
             onSuffixTap: () {
               changeShowFilters(!(snapshot.data ?? false));
             },
             suffixMode: OverlayVisibilityMode.always,
             decoration: BoxDecoration(
-              color: ColorResources.twNeutral[100],
+              color: neutralRef.value90,
               borderRadius: const BorderRadius.all(
                 Radius.circular(32),
               ),
               border: Border.all(
-                color: ColorResources.twNeutral[400]!,
+                color: neutralRef.value80,
               ),
             ),
             suffixInsets:

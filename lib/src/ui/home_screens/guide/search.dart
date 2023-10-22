@@ -67,7 +67,7 @@ class _SearchState extends State<Search> {
                       child: Container(
                         height: 4,
                         width: 56,
-                        color: ColorResources.twNeutral[300]!,
+                        color: neutralRef.value70,
                       ),
                     ),
                   ],

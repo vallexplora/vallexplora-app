@@ -90,7 +90,7 @@ class _FiltersState extends State<Filters> {
                                   },
                                   avatar: const Icon(Icons.sports_soccer),
                                   showCheckmark: false,
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                 ),
                                 const SizedBox(
                                   width: 12,
@@ -106,7 +106,7 @@ class _FiltersState extends State<Filters> {
                                   selected: categorySnapshot.data!
                                       .contains(StringResources.guideSearchGastro),
                                   showCheckmark: false,
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                 ),
                                 const SizedBox(
                                   width: 12,
@@ -122,7 +122,7 @@ class _FiltersState extends State<Filters> {
                                   selected: categorySnapshot.data!
                                       .contains(StringResources.guideSearchHistoryArchitecture),
                                   showCheckmark: false,
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                 ),
                                 const SizedBox(
                                   width: 12,
@@ -137,7 +137,7 @@ class _FiltersState extends State<Filters> {
                                   selected: categorySnapshot.data!
                                       .contains(StringResources.guideSearchArtCulture),
                                   showCheckmark: false,
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                 ),
                                 const SizedBox(
                                   width: 12,
@@ -152,7 +152,7 @@ class _FiltersState extends State<Filters> {
                                   selected: categorySnapshot.data!
                                       .contains(StringResources.guideSearchEco),
                                   showCheckmark: false,
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                 ),
                               ],
                             ),
@@ -183,7 +183,7 @@ class _FiltersState extends State<Filters> {
                                   },
                                   showCheckmark: false,
                                   avatar: const Icon(Icons.north),
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                 ),
                                 const SizedBox(
                                   width: 12,
@@ -196,7 +196,7 @@ class _FiltersState extends State<Filters> {
                                     setState(() {});
                                     modifyRegionFilters(StringResources.guideSearchEast);
                                   },
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                   showCheckmark: false,
                                   avatar: const Icon(Icons.east),
                                 ),
@@ -211,7 +211,7 @@ class _FiltersState extends State<Filters> {
                                     setState(() {});
                                     modifyRegionFilters(StringResources.guideSearchCenter);
                                   },
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                   showCheckmark: false,
                                   avatar: const Icon(Icons.adjust),
                                 ),
@@ -226,7 +226,7 @@ class _FiltersState extends State<Filters> {
                                     setState(() {});
                                     modifyRegionFilters(StringResources.guideSearchSouth);
                                   },
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                   showCheckmark: false,
                                   avatar: const Icon(Icons.south),
                                 ),
@@ -241,7 +241,7 @@ class _FiltersState extends State<Filters> {
                                     setState(() {});
                                     modifyRegionFilters(StringResources.guideSearchWest);
                                   },
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                   showCheckmark: false,
                                   avatar: const Icon(Icons.west),
                                 ),
@@ -274,7 +274,7 @@ class _FiltersState extends State<Filters> {
                                   },
                                   showCheckmark: false,
                                   avatar: const Icon(Icons.event_outlined),
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                 ),
                                 const SizedBox(
                                   width: 12,
@@ -288,7 +288,7 @@ class _FiltersState extends State<Filters> {
                                     modifyClassificationFilters(
                                         StringResources.guideSearchPOI);
                                   },
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                   showCheckmark: false,
                                   avatar:
                                       const Icon(Icons.attractions_outlined),
@@ -304,7 +304,7 @@ class _FiltersState extends State<Filters> {
                                     setState(() {});
                                     modifyClassificationFilters(StringResources.guideSearchSale);
                                   },
-                                  selectedColor: ColorResources.mayaBlue[400],
+                                  selectedColor: primaryRef.value80,
                                   showCheckmark: false,
                                   avatar:
                                       const Icon(Icons.local_activity_outlined),

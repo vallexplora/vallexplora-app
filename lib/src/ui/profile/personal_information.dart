@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/constants/text_strings.dart';
 
-import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
 class PersonalInformation extends StatefulWidget {
@@ -367,9 +366,8 @@ class _PersonalInformationState extends State<PersonalInformation> {
               ),
             ],
           ),
-        Divider(
+        const Divider(
           height: SizeResources.defaultDividerHeight,
-          color: ColorResources.twNeutral[400],
         ),
       ],
     );

@@ -1,15 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vallexplora/src/utils/theme/widget_themes/appbar.dart';
-import 'package:vallexplora/src/utils/theme/widget_themes/date_picker.dart';
-import 'package:vallexplora/src/utils/theme/widget_themes/elevated_button.dart';
-import 'package:vallexplora/src/utils/theme/widget_themes/floating_action_button.dart';
-import 'package:vallexplora/src/utils/theme/widget_themes/navigation_bar.dart';
-import 'package:vallexplora/src/utils/theme/widget_themes/outlined_button.dart';
-import 'package:vallexplora/src/utils/theme/widget_themes/switch.dart';
-import 'package:vallexplora/src/utils/theme/widget_themes/tabbar.dart';
-import 'package:vallexplora/src/utils/theme/widget_themes/text_field.dart';
-import 'package:vallexplora/src/utils/theme/widget_themes/time_picker.dart';
+import 'package:vallexplora/src/utils/theme/extended.dart';
+import 'package:vallexplora/src/utils/theme/ref.dart';
 
 import '../../constants/colors.dart';
 
@@ -18,39 +10,128 @@ class VAppTheme {
     useMaterial3: true,
     brightness: Brightness.light,
     textTheme: GoogleFonts.rubikTextTheme(),
-    primarySwatch: MaterialColor(
-      ColorResources.mayaBlue[500]!.value,
-      ColorResources.mayaBlue,
-    ),
-    colorScheme: ColorScheme(
+    colorScheme: const ColorScheme(
       brightness: Brightness.light,
-      primary: ColorResources.mayaBlue[500]!,
-      onPrimary: ColorResources.mayaBlue[50]!,
-      secondary: ColorResources.twAmber[500]!,
-      onSecondary: ColorResources.twAmber[50]!,
-      error: Colors.red[700]!,
-      onError: Colors.red[100]!,
-      background: ColorResources.twNeutral[50]!,
-      onBackground: Colors.black87,
-      surface: ColorResources.mayaBlue[700]!,
-      onSurface: ColorResources.mayaBlue[100]!,
+      primary: Color(0xFF00639C),
+      onPrimary: Color(0xFFFFFFFF),
+      primaryContainer: Color(0xFFCEE5FF),
+      onPrimaryContainer: Color(0xFF001D33),
+      secondary: Color(0xFF006495),
+      onSecondary: Color(0xFFFFFFFF),
+      secondaryContainer: Color(0xFFCBE6FF),
+      onSecondaryContainer: Color(0xFF001E30),
+      tertiary: Color(0xFF456812),
+      onTertiary: Color(0xFFFFFFFF),
+      tertiaryContainer: Color(0xFFC5F08B),
+      onTertiaryContainer: Color(0xFF102000),
+      error: Color(0xFFAB3237),
+      onError: Color(0xFFFFFFFF),
+      errorContainer: Color(0xFFFFDAD8),
+      onErrorContainer: Color(0xFF410006),
+      outline: Color(0xFF72777F),
+      background: Color(0xFFFCFCFF),
+      onBackground: Color(0xFF1A1C1E),
+      surface: Color(0xFFF9F9FC),
+      onSurface: Color(0xFF1A1C1E),
+      surfaceVariant: Color(0xFFDEE3EB),
+      onSurfaceVariant: Color(0xFF42474E),
+      inverseSurface: Color(0xFF2F3033),
+      onInverseSurface: Color(0xFFF1F0F4),
+      inversePrimary: Color(0xFF98CBFF),
+      shadow: Color(0xFF000000),
+      surfaceTint: Color(0xFF00639C),
+      outlineVariant: Color(0xFFC2C7CF),
+      scrim: Color(0xFF000000),
     ),
-    appBarTheme: VAppBarTheme.lightAppBarTheme,
-    outlinedButtonTheme: VOutlinedButtonTheme.lightOutlinedButtonTheme,
-    elevatedButtonTheme: VElevatedButtonTheme.lightElevatedButtonTheme,
-    inputDecorationTheme: VTextFieldTheme.lightInputDecorationTheme,
-    datePickerTheme: VDatePickerTheme.lightDatePickerTheme,
-    timePickerTheme: VTimePickerTheme.lightTimePickerTheme,
-    navigationBarTheme: VNavigationBarTheme.lightNavigationBarTheme,
-    tabBarTheme: VTabBarTheme.lightTabBarTheme,
-    floatingActionButtonTheme:
-        VFloatingActionButtonTheme.lightFloatingActionButtonTheme,
-    switchTheme: VSwitchTheme.lightSwitchTheme,
+    extensions: <ThemeExtension<dynamic>>[
+      RefColors(
+        primary: primaryRef,
+        secondary: secondaryRef,
+        tertiary: tertiaryRef,
+        error: errorRef,
+        neutral: neutralRef,
+        neutralVariant: neutralVariantRef,
+      ),
+      ExtendedColors(
+        tertiaryAlt: tertiaryAltEx,
+        categoryEco: categoryEcoEx,
+        categoryArch: categoryArchEx,
+        categoryFood: categoryFoodEx,
+        categoryArt: categoryArtEx,
+        categorySport: categorySportEx,
+        gold: goldEx,
+        bronze: bronzeEx,
+      ),
+    ],
+    // appBarTheme: VAppBarTheme.lightAppBarTheme,
+    // outlinedButtonTheme: VOutlinedButtonTheme.lightOutlinedButtonTheme,
+    // elevatedButtonTheme: VElevatedButtonTheme.lightElevatedButtonTheme,
+    // inputDecorationTheme: VTextFieldTheme.lightInputDecorationTheme,
+    // datePickerTheme: VDatePickerTheme.lightDatePickerTheme,
+    // timePickerTheme: VTimePickerTheme.lightTimePickerTheme,
+    // navigationBarTheme: VNavigationBarTheme.lightNavigationBarTheme,
+    // tabBarTheme: VTabBarTheme.lightTabBarTheme,
+    // floatingActionButtonTheme:
+    //     VFloatingActionButtonTheme.lightFloatingActionButtonTheme,
+    // switchTheme: VSwitchTheme.lightSwitchTheme,
   );
 
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     brightness: Brightness.dark,
     textTheme: GoogleFonts.rubikTextTheme(),
+    colorScheme: const ColorScheme(
+      brightness: Brightness.dark,
+      primary: Color(0xFF98CBFF),
+      onPrimary: Color(0xFF003354),
+      primaryContainer: Color(0xFF004A77),
+      onPrimaryContainer: Color(0xFFCEE5FF),
+      secondary: Color(0xFF8FCDFF),
+      onSecondary: Color(0xFF003450),
+      secondaryContainer: Color(0xFF004B71),
+      onSecondaryContainer: Color(0xFFCBE6FF),
+      tertiary: Color(0xFFA9D472),
+      onTertiary: Color(0xFF203700),
+      tertiaryContainer: Color(0xFF304F00),
+      onTertiaryContainer: Color(0xFFC5F08B),
+      error: Color(0xFFFFB3B0),
+      onError: Color(0xFF680010),
+      errorContainer: Color(0xFF8A1922),
+      onErrorContainer: Color(0xFFFFDAD8),
+      outline: Color(0xFF8C9199),
+      background: Color(0xFF1A1C1E),
+      onBackground: Color(0xFFE2E2E5),
+      surface: Color(0xFF121416),
+      onSurface: Color(0xFFC6C6C9),
+      surfaceVariant: Color(0xFF42474E),
+      onSurfaceVariant: Color(0xFFC2C7CF),
+      inverseSurface: Color(0xFFE2E2E5),
+      onInverseSurface: Color(0xFF1A1C1E),
+      inversePrimary: Color(0xFF00639C),
+      shadow: Color(0xFF000000),
+      surfaceTint: Color(0xFF98CBFF),
+      outlineVariant: Color(0xFF42474E),
+      scrim: Color(0xFF000000),
+    ),
+    extensions: <ThemeExtension<dynamic>>[
+      RefColors(
+        primary: primaryRef,
+        secondary: secondaryRef,
+        tertiary: tertiaryRef,
+        error: errorRef,
+        neutral: neutralRef,
+        neutralVariant: neutralVariantRef,
+      ),
+      ExtendedColors(
+        tertiaryAlt: tertiaryAltEx.merge(sys: tertiaryAltExDark),
+        categoryEco: categoryEcoEx.merge(sys: categoryEcoExDark),
+        categoryArch: categoryArchEx.merge(sys: categoryArchExDark),
+        categoryFood: categoryFoodEx.merge(sys: categoryFoodExDark),
+        categoryArt: categoryArtEx.merge(sys: categoryArtExDark),
+        categorySport: categorySportEx.merge(sys: categorySportExDark),
+        gold: goldEx.merge(sys: goldExDark),
+        bronze: bronzeEx.merge(sys: bronzeExDark),
+      ),
+    ],
   );
 }
