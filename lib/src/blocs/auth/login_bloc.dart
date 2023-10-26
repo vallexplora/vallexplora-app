@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:rxdart/rxdart.dart';
 import 'package:vallexplora/src/resources/repository.dart';
 
-import '../../constants/text_strings.dart';
-import '../../utils/validator.dart';
 import '../bloc.dart';
 
 class LoginBloc implements Bloc {
@@ -13,7 +11,7 @@ class LoginBloc implements Bloc {
   final _password = BehaviorSubject<String>();
   final _passwordVisible = BehaviorSubject<bool>();
 
-  Stream<String> get email => _email.stream.transform(_validateEmail);
+  Stream<String> get email => _email.stream;
   Stream<String> get password => _password.stream;
   Stream<bool> get passwordVisible => _passwordVisible.stream;
 
@@ -21,17 +19,7 @@ class LoginBloc implements Bloc {
   Function(String) get changePassword => _password.sink.add;
   Function(bool) get changePasswordVisible => _passwordVisible.sink.add;
 
-  final _validateEmail = StreamTransformer<String, String>.fromHandlers(
-    handleData: (email, sink) {
-      if (Validator.validateEmail(email)) {
-        sink.add(email);
-      } else {
-        sink.addError(StringResources.emailIsInvalidError);
-      }
-    },
-  );
-
-  Future<String> logUserIn() async {
+  Future<int> logUserIn() async {
     bool emailFine = _email.hasValue;
     bool passwordFine = _password.hasValue;
 
@@ -39,11 +27,11 @@ class LoginBloc implements Bloc {
       return await _repository.loginWithEmailAndPassword(
           _email.value, _password.value);
     } else {
-      return "Datos incompletos";
+      return 3;
     }
   }
 
-  Future<String> signInWithGoogle() async {
+  Future<int> signInWithGoogle() async {
     return await _repository.signInWithGoogle();
   }
 

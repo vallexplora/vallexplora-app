@@ -2,8 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vallexplora/src/blocs/auth/login_bloc.dart';
+import 'package:vallexplora/src/constants/errors.dart';
 import 'package:vallexplora/src/ui/home_container_screen.dart';
+import 'package:vallexplora/src/ui/home_screens/feed/home_screen.dart';
 import 'package:vallexplora/src/ui/login/forgot_password_screen.dart';
+import 'package:vallexplora/src/ui/register/register_part_2_screen.dart';
 
 import '../../constants/asset_uris.dart';
 import '../../constants/sizes.dart';
@@ -113,7 +116,7 @@ class _LoginFormState extends State<LoginFormWidget> {
               onPressed: () {
                 _bloc.logUserIn().then((logValue) async {
                   await Fluttertoast.showToast(
-                      msg: logValue,
+                      msg: loginErrorCodes(context)[logValue]!,
                       toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.BOTTOM,
                       timeInSecForIosWeb: 1,
@@ -121,8 +124,7 @@ class _LoginFormState extends State<LoginFormWidget> {
                       fontSize: 16.0);
                   FirebaseAuth.instance.authStateChanges().listen((User? user) {
                     if (user != null) {
-                      if (logValue.contains(
-                          "Sesión iniciada correctamente. Bienvenido,")) {
+                      if (logValue == 0) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -155,7 +157,9 @@ class _LoginFormState extends State<LoginFormWidget> {
                   onPressed: () {
                     _bloc.signInWithGoogle().then((logValue) async {
                       await Fluttertoast.showToast(
-                          msg: logValue,
+                          msg: logValue != -1
+                              ? "¡Bienvenido a Vallexplora!"
+                              : "Error iniciando sesión",
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
                           timeInSecForIosWeb: 1,
@@ -165,13 +169,18 @@ class _LoginFormState extends State<LoginFormWidget> {
                           .authStateChanges()
                           .listen((User? user) async {
                         if (user != null) {
-                          if (logValue.contains(
-                              "Sesión iniciada correctamente. Bienvenido,")) {
+                          if (logValue == 0) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      const HomeContainerScreen()),
+                                      const RegisterPart2Screen()),
+                            );
+                          } else if (logValue == 1) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const HomeScreen()),
                             );
                           }
                         }

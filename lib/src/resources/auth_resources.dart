@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:vallexplora/src/constants/text_strings.dart';
 
 class AuthenticationResources {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -15,7 +14,7 @@ class AuthenticationResources {
     return user!.uid;
   }
 
-  Future<String> signUpWithEmailAndPassword(
+  Future<int> signUpWithEmailAndPassword(
       String email, String password, String displayName) async {
     try {
       UserCredential credentials = await _firebaseAuth
@@ -27,21 +26,21 @@ class AuthenticationResources {
         "roles": ["tourist"],
         //"photoURL": "",
       }).onError((e, _) => "Error writing document: $e");
-      return StringResources.signUpSuccess;
+      return 0;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        return StringResources.signUpErrorMessages["Weak"]!;
+        return 1;
       } else if (e.code == 'email-already-in-use') {
-        return StringResources.signUpErrorMessages["EmailTaken"]!;
+        return 2;
       } else {
-        return e.code;
+        return -1;
       }
     } catch (e) {
-      return "Exception: Authentication: $e";
+      return -1;
     }
   }
 
-  Future<String> loginWithEmailAndPassword(
+  Future<int> loginWithEmailAndPassword(
       String email, String password) async {
     try {
       UserCredential credentials = await _firebaseAuth
@@ -54,7 +53,7 @@ class AuthenticationResources {
         (DocumentSnapshot doc) {
           final data = doc.data() as Map<String, dynamic>;
           if (data["roles"].contains("tourist")) {
-            return StringResources.loginSuccess(data["displayName"]);
+            return 0;
           } else {
             throw FirebaseAuthException(code: "unauthorized-user");
           }
@@ -63,14 +62,14 @@ class AuthenticationResources {
       );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found' || e.code == 'wrong-password') {
-        return 'Usuario o contraseña incorrectos.';
+        return 1;
       } else if (e.code == 'unauthorized-user') {
-        return 'Usuario no encontrado.';
+        return 2;
       } else {
-        return e.code;
+        return -1;
       }
     } catch (e) {
-      return "Exception: Authentication: $e";
+      return -1;
     }
   }
 
@@ -79,7 +78,7 @@ class AuthenticationResources {
     GoogleSignIn().signOut();
   }
 
-  Future<String> singInWIthGoogle() async {
+  Future<int> singInWIthGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       final GoogleSignInAuthentication? googleAuth =
@@ -93,8 +92,8 @@ class AuthenticationResources {
           await FirebaseAuth.instance.signInWithCredential(credential);
 
       final User? user = credentials.user;
-
-      if (credentials.additionalUserInfo!.isNewUser) {
+      bool isNewUser = credentials.additionalUserInfo!.isNewUser;
+      if (isNewUser) {
         if (user != null) {
           var db = FirebaseFirestore.instance;
           db.collection("users").doc(user.uid).set({
@@ -105,9 +104,9 @@ class AuthenticationResources {
         }
       }
 
-      return StringResources.loginSuccess(credentials.user!.displayName!);
+      return isNewUser ? 0 : 1;
     } catch (e) {
-      return "$e";
+      return -1;
     }
   }
 

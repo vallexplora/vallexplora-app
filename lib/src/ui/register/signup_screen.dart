@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:vallexplora/src/constants/sizes.dart';
-import 'package:vallexplora/src/constants/text_strings.dart';
 import 'package:vallexplora/src/ui/register/signup_form_widget.dart';
 import 'package:vallexplora/src/ui/welcome_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class UserRegisterScreen extends StatelessWidget {
   const UserRegisterScreen({super.key});
@@ -11,7 +10,7 @@ class UserRegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Crea tu cuenta"),
+        title: Text(AppLocalizations.of(context)!.sRegisterAppBarTitle),
         leading: BackButton(
           onPressed: () {
             Navigator.push(
@@ -31,14 +30,16 @@ class UserRegisterScreen extends StatelessWidget {
             decelerationRate: ScrollDecelerationRate.fast,
           ),
           child: Container(
-            padding: const EdgeInsets.all(SizeResources.defaultSpacing),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  StringResources.signUpTitle,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  AppLocalizations.of(context)!.sRegisterTitle,
+                  style: Theme.of(context).textTheme.titleMedium!.merge(
+                      TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface)),
                   textAlign: TextAlign.center,
                 ),
                 const SignUpFormWidget(),

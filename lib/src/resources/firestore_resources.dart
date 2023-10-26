@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class FirestoreResources {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final FirebaseStorage _storage = FirebaseStorage.instance;
 
   // Events
 
@@ -42,7 +46,7 @@ class FirestoreResources {
       _firestore
           .collection("users")
           .doc(id)
-          .set({"displayName": username}, SetOptions(merge: true));
+          .set({"isplayName": username}, SetOptions(merge: true));
 
   Future<void> updateEmail({required String id, required String email}) async =>
       _firestore
@@ -64,5 +68,21 @@ class FirestoreResources {
 
   Query<Object?> eventsListQuery() {
     return _firestore.collection("events");
+  }
+
+  Future<void> addUserMetaData(String id, List<String> interests, String origin,
+      String pictureURL) async {
+    var ending = "";
+    if (pictureURL.isNotEmpty) {
+      ending = pictureURL.split(".").last;
+      Reference imageReference = _storage.ref("users/profile/$id.$ending");
+      await imageReference.putFile(
+          File(pictureURL), SettableMetadata(contentType: "image/$ending"));
+    }
+    _firestore.collection("users").doc(id).set({
+      "interests": interests,
+      "origin": origin,
+      "pictureURL": pictureURL.isNotEmpty ? "users/profile/$id.$ending" : ""
+    }, SetOptions(merge: true));
   }
 }

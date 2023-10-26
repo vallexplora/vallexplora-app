@@ -7,12 +7,12 @@ import 'package:rxdart/rxdart.dart';
 import 'package:vallexplora/src/models/user_model.dart';
 import 'package:vallexplora/src/resources/repository.dart';
 
-import '../../constants/text_strings.dart';
-import '../../utils/validator.dart';
 import '../bloc.dart';
+
 
 class ProfileBloc implements Bloc {
   final _repository = Repository();
+
 
   final _email = BehaviorSubject<String>();
   final _username = BehaviorSubject<String>();
@@ -29,7 +29,7 @@ class ProfileBloc implements Bloc {
   final _confirmPasswordVissible = BehaviorSubject<bool>();
   final _newPasswordVisible = BehaviorSubject<bool>();
 
-  Stream<String> get email => _email.stream.transform(_validateEmail);
+  Stream<String> get email => _email.stream;
   Stream<String> get username => _username.stream;
   Stream<String> get password => _password.stream;
   Stream<String> get newPassword => _newPassword.stream;
@@ -60,16 +60,6 @@ class ProfileBloc implements Bloc {
   Function(bool) get changeNewPasswordVisible => _newPasswordVisible.sink.add;
 
   User get _user => _repository.getCurrentUser();
-
-  final _validateEmail = StreamTransformer<String, String>.fromHandlers(
-    handleData: (email, sink) {
-      if (Validator.validateEmail(email)) {
-        sink.add(email);
-      } else {
-        sink.addError(StringResources.emailIsInvalidError);
-      }
-    },
-  );
 
   Future<Stream<UserModel>> getUserInfo() async {
     Stream<DocumentSnapshot<Map<String, dynamic>>> rawUserInfo =

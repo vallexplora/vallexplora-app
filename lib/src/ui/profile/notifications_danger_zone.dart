@@ -157,13 +157,13 @@ class _NotificationsDangerZoneState extends State<NotificationsDangerZone> {
           height: SizeResources.smallHeight,
         ),
         ElevatedButton(
-          style: Theme.of(context).elevatedButtonTheme.style!.merge(
-                ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(255, 248, 243, 243)),
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(Colors.redAccent)),
-              ),
+          // style: Theme.of(context).elevatedButtonTheme.style!.merge(
+          //       ButtonStyle(
+          //           foregroundColor: MaterialStateProperty.all<Color>(
+          //               const Color.fromARGB(255, 248, 243, 243)),
+          //           backgroundColor:
+          //               MaterialStateProperty.all<Color>(Colors.redAccent)),
+          //     ),
           child: const Text(
             StringResources.profileDeleteAccountButton,
             style: TextStyle(

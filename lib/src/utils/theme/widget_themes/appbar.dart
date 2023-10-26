@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:vallexplora/src/utils/theme/color_schemes.dart';
 
 class VAppBarTheme {
   VAppBarTheme._();
 
   static final lightAppBarTheme = AppBarTheme(
-    // toolbarHeight: 56,
-    // backgroundColor: ColorResources.mayaBlue[600],
-    // foregroundColor: ColorResources.mayaBlue[50],
-    // titleTextStyle: const TextStyle(
-    //   fontSize: 20,
-    // ),
+    backgroundColor: lightScheme.surfaceContainerLow,
   );
 }

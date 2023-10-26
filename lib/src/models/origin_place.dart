@@ -1,0 +1,52 @@
+enum OriginPlaceLabel {
+  world("world", "El Mundo"),
+  colombia("colombia", "Colombia"),
+  aguila("aguila", "El Águila"),
+  alcala("alcala", "Alcalá"),
+  andalucia("andalucia", "Andalucía"),
+  ansermanuevo("ansermanuevo", "Ansermanuevo"),
+  argelia("argelia", "Argelia"),
+  bolivar("bolivar", "Bolivar"),
+  buenaventura("buenaventura", "Buenaventura"),
+  buga("buga", "Buga"),
+  bugalagrande("bugalagrande", "Bugalagrande"),
+  caicedonia("caicedonia", "Caicedonia"),
+  cairo("cairo", "El Cairo"),
+  cali("cali", "Cali"),
+  calima("calima", "Calima"),
+  candelaria("candelaria", "Candelaria"),
+  cartago("cartago", "Cartago"),
+  cerrito("cerrito", "El Cerrito"),
+  cumbre("cumbre", "La Cumbre"),
+  dagua("dagua", "Dagua"),
+  dovio("dovio", "El Dovio"),
+  florida("florida", "Florida"),
+  ginebra("ginebra", "Ginebra"),
+  guacari("guacari", "Guacarí"),
+  jamundi("jamundi", "Jamundí"),
+  union("launion", "La Unión"),
+  obando("obando", "Obando"),
+  palmira("palmira", "Palmira"),
+  pradera("pradera", "Pradera"),
+  restrepo("restrepo", "Restrepo"),
+  riofrio("riofrio", "Riofrío"),
+  roldanillo("roldanillo", "Roldanillo"),
+  sanpedro("sanpedro", "San Pedro"),
+  sevilla("sevilla", "Sevilla"),
+  toro("toro", "Toro"),
+  trujillo("trujillo", "Trujillo"),
+  tuliua("tulua", "Tulua"),
+  ulloa("ulloa", "Ulloa"),
+  versalles("versalles", "Versalles"),
+  victoria("victoria", "La Victoria"),
+  vijes("vijes", "Vijes"),
+  yotoco("yotoco", "Yotoco"),
+  yumbo("yumbo", "Yumbo"),
+  zarzal("zarzal", "Zarzal");
+
+  const OriginPlaceLabel(this.id, this.name);
+  final String id;
+  final String name;
+
+  static String idByName(String name) => OriginPlaceLabel.values.firstWhere((element) => element.name == name).id;
+}

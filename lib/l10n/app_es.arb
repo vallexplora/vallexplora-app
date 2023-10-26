@@ -1,0 +1,187 @@
+{
+    "@@locale": "es",
+    "appTitle": "Vallexplora",
+    "@appTitle": {
+        "description": "The name of the app."
+    },
+    "gOr": "o",
+    "@gOr": {
+        "description": "The corresponding text for the word 'or'."
+    },
+    "sWelcomeTitle": "Te damos la bienvenida a Vallexplora",
+    "@sWelcomeTitle": {
+        "description": "Used in the welcome screen. A neutral welcome message."
+    },
+    "sWelcomeCopy": "La app que te lleva a descubrir el Valle del Cauca a través de la realidad aumentada",
+    "@sWelcomeCopy": {
+        "description": "Used in the welcome screen. A complementary copy text to the welcoming message." 
+    },
+    "sWelcomeLogin": "¿Ya tienes una?",
+    "@sWelcomeLogin": {
+        "description": "Used in the welcome screen. The label of the login button."
+    },
+    "sWelcomeRegister": "Crea tu cuenta",
+    "@sWelcomeRegister": {
+        "description": "Used in the welcome screen. The label of the register button."
+    },
+    "sRegisterAppBarTitle": "Crea tu cuenta",
+    "@sRegisterAppBarTitle": {
+        "description": "Used in the register screen. The title on the app bar."
+    },
+    "sRegisterTitle": "¡Empieza a explorar el Valle!",
+    "@sRegisterTitle": {
+        "description": "Used in the register screen. The title of the form."
+    },
+    "sRegisterUsername": "¿Cómo te llamamos?",
+    "@sRegisterUsername": {
+        "description": "Used in the register screen. The prompt for the username field."
+    },
+    "sRegisterEmail": "Tu correo",
+    "@sRegisterEmail": {
+        "description": "Used in the register screen. The prompt for the email field."
+    },
+    "sRegisterEmailHint": "Lo usarás para iniciar sesión",
+    "@sRegisterEmailHint": {
+        "description": "Used in the register screen. A description as to how the user will use the email in the context fo the app."
+    },
+    "sRegisterPassword": "Escribe una contraseña",
+    "@sRegisterPassword": {
+        "description": "Used in the register screen. The prompt for the password field"
+    },
+    "sRegisterPasswordHint": "Una fuerte, que puedas recordar",
+    "@sRegisterPasswordHint": {
+        "description": "Used in the register screen. A description as to how the password is recommended to be created."
+    },
+    "sRegisterPasswordConfirm": "Escríbela otra vez",
+    "@sRegisterPasswordConfirm": {
+        "description": "Used in the register screen. The prompt for the confirm password field."
+    },
+    "sRegisterConfirm": "¡Empezemos!",
+    "@sRegisterConfirm": {
+        "description": "Used in the register screen. The label of the form's submit button."
+    },
+    "sRegisterGoogle": "Crea tu cuenta con Google",
+    "@sRegisterGoogle": {
+        "description": "Used in the register screen. The label of the Singup with Google button."
+    },
+    "sRegisterInvalidEmail": "Ingresa un email válido.",
+    "@sRegisterInvalidEmail": {
+        "description": "Used in the register screen. The error message when the provided email is invalid."
+    },
+    "sRegisterEmailTaken": "Ese correo ya está en uso.",
+    "@sRegisterEmailTaken": {
+        "description": "Used in the register screen. The error message when the provided email is taken."
+    },
+    "sRegisterPassTooShort": "Tu contraseña es muy corta.",
+    "@sRegisterPassTooShort": {
+        "description": "Used in the register screen. The error message when the provided password is too short."
+    },
+    "sRegisterInvalidPass": "Tu contraseña no cumple con los requisitos mínimos de seguridad.",
+    "@sRegisterInvalidPass": {
+        "description": "Used in the register screen. The error message when the provided password is invalid."
+    },
+    "sRegisterLoginInstead": "¿Ya tienes una cuenta? Inicia sesión aquí",
+    "@sRegisterLoginInstead": {
+        "description": "Used in the register screen. The label of the login instead button."
+    },
+    "sRegisterSuccess": "¡Cuenta creada con éxito!",
+    "@sRegisterSuccess": {
+        "description": "Used in the register screen. The toast message for initial account registration."
+    },
+    "sRegister2Title": "Nos alegra tenerte a bordo",
+    "@sRegister2Title": {
+        "description": "Used in the onboarding register screen. The title of the first onboarding screen."
+    },
+    "sRegister2Subtitle": "Antes de continuar, queremos saber más sobre ti",
+    "@sRegister2Subtitle": {
+        "description": "Used in the onboarding register screen. The subtitle of the first onboarding screen."
+    },
+    "sRegister2PhotoPick": "Escoge una foto de perfil (opcional)",
+    "@sRegister2PhotoPick": {
+        "description": "Used in the onboarding register screen. The prompt for the profile picture picker."
+    },
+    "sRegister2Origin": "Actualmente, ¿dónde vives?",
+    "@sRegister2Origin": {
+        "description": "Used in the onboarding register screen. The label for the place of origin picker."
+    },
+    "sRegister2SelectOne": "Por favor, selecciona una opción",
+    "@sRegister2SelectOne": {
+        "description": "Used in the onboarding register screen. The prompt for the place of origin picker."
+    },
+    "sRegister2WorldLabel": "Afuera de Colombia",
+    "@sRegister2WorldLabel": {
+        "description": "Used in the onboarding register screen. The label for living anywhere in the world except colombia."
+    },
+    "sRegister2ColombiaLabel": "Afuera del Valle",
+    "@sRegister2ColombiaLabel": {
+        "description": "Used in the onboarding register screen. The label for living anywhere in the country except Valle del Cauca."
+    },
+    "sRegister2Interests": "Escoge tus intereses favoritos (máximo 3)",
+    "@sRegister2Interests": {
+        "description": "Used in the onboarding register screen. The prompt for picking interests."
+    },
+    "gSportsCategory": "Deportes y Espectáculo",
+    "@gSportsCategory": {
+        "description": "The sports and shows category label."
+    },
+    "gEcoCategory": "Ecoturismo",
+    "@gEcoCategory": {
+        "description": "The ecotourism category label."
+    },
+    "gArtCategory": "Arte y Cultura",
+    "@gArtCategory": {
+        "description": "The art and culture category label."
+    },
+    "gHistoryCategory": "Historia y Arquitectura",
+    "@gHistoryCategory": {
+        "description": "The history and architechture category label."
+    },
+    "gGastroCategory": "Gastronomia",
+    "@gGastroCategory": {
+        "description": "The gastronomy category label."
+    },
+    "gBackButton": "Volver",
+    "@gBackButton": {
+        "description": "The back button label."
+    },
+    "gConfirmButton": "Confirmar",
+    "@gConfirmButton": {
+        "description": "The confirm button label."
+    },
+    "gContinueButton": "Continuar",
+    "@gContinueButton": {
+        "description": "The continue button label."
+    },
+    "gNextButton": "Siguiente",
+    "@gNextButton": {
+        "description": "The next button label."
+    },
+    "gFinishButton": "Finalizar",
+    "@gFinishButton": {
+        "description": "The finish button label."
+    },
+    "sOnboarding1Title": "Explora el departamento",
+    "@sOnboarding1Title": {
+        "description": "Used in the 1st onboarding screen. The title of the page."
+    },
+    "sOnboarding1Copy": "Vallexplora te dice que hay pa’ hacer, y pa’ dónde hay que pegar",
+    "@sOnboarding1Copy": {
+        "description": "Used in the 1st onboarding screen. The copy text of the page."
+    },
+    "sOnboarding2Title": "Sumerjete en el Valle",
+    "@sOnboarding2Title": {
+        "description": "Used in the 2nd onboarding screen. The title of the page."
+    },
+    "sOnboarding2Copy": "El Valle a través de tu teléfono. Descubre al departamento desde una nueva perspectiva",
+    "@sOnboarding2Copy": {
+        "description": "Used in the 2nd onboarding screen. The copy text of the page."
+    },
+    "sOnboarding3Title": "Personalizado a tus gustos",
+    "@sOnboarding3Title": {
+        "description": "Used in the 3rd onboarding screen. The title of the page."
+    },
+    "sOnboarding3Copy": "Queremos que conozcas el Valle a tu manera. Déjate llevar por nuestras recomendaciones, ¡y disfruta el Valle!",
+    "@sOnboarding3Copy": {
+        "description": "Used in the 3rd onboarding screen. The copy text of the page."
+    }
+}

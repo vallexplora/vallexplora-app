@@ -10,10 +10,10 @@ class Repository {
   /// Authentication
   Stream<User?> get onAuthStateChange => _authResources.onAuthStateChange;
 
-  Future<String> loginWithEmailAndPassword(String email, String password) =>
+  Future<int> loginWithEmailAndPassword(String email, String password) =>
       _authResources.loginWithEmailAndPassword(email, password);
 
-  Future<String> signUpWithEmailAndPassword(
+  Future<int> signUpWithEmailAndPassword(
           String email, String password, String displayName) =>
       _authResources.signUpWithEmailAndPassword(email, password, displayName);
   Future<void> signOut() => _authResources.signOut;
@@ -22,7 +22,7 @@ class Repository {
 
   User getCurrentUser() => _authResources.getCurrentUser;
 
-  Future<String> signInWithGoogle() => _authResources.singInWIthGoogle();
+  Future<int> signInWithGoogle() => _authResources.singInWIthGoogle();
 
   Future<String> resetPassword(email) =>
       _authResources.sendPasswordResetEmail(email);
@@ -88,6 +88,10 @@ class Repository {
 
   Query<Object?> eventsListQuery() {
     return _dbResources.eventsListQuery();
+  }
+
+  Future<void> addUserMetaData(List<String> interests, String origin, String pictureURL) async {
+    return _dbResources.addUserMetaData(await getUserUID(), interests, origin, pictureURL);
   }
 
   // User markers

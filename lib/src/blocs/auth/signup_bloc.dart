@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:rxdart/rxdart.dart';
 import 'package:vallexplora/src/blocs/bloc.dart';
-import 'package:vallexplora/src/constants/text_strings.dart';
-import 'package:vallexplora/src/utils/validator.dart';
 
 import '../../resources/repository.dart';
 
@@ -17,7 +15,7 @@ class SignUpBloc implements Bloc {
   final _passwordVisible = BehaviorSubject<bool>();
   final _verifyPasswordVisible = BehaviorSubject<bool>();
 
-  Stream<String> get email => _email.stream.transform(_validateEmail);
+  Stream<String> get email => _email.stream;
   Stream<String> get displayName => _displayName.stream;
   Stream<String> get password => _password.stream;
   Stream<String> get verifyPassword => _verifyPassword.stream;
@@ -34,17 +32,11 @@ class SignUpBloc implements Bloc {
       _verifyPasswordVisible.sink.add;
   Function(bool) get showLoginProgress => _isLoggedIn.sink.add;
 
-  final _validateEmail = StreamTransformer<String, String>.fromHandlers(
-    handleData: (email, sink) {
-      if (Validator.validateEmail(email)) {
-        sink.add(email);
-      } else {
-        sink.addError(StringResources.emailIsInvalidError);
-      }
-    },
-  );
+  Future<int> signInWithGoogle() async {
+    return await _repository.signInWithGoogle();
+  }
 
-  Future<String> registerUser() async {
+  Future<int> registerUser() async {
     // showLoginProgress(true);
     bool emailFine = _email.hasValue;
     bool passwordFine = _password.hasValue;
@@ -54,13 +46,13 @@ class SignUpBloc implements Bloc {
       return await _repository.signUpWithEmailAndPassword(
           _email.value, _password.value, _displayName.value);
     } else {
-      return "Datos incompletos";
+      return 3;
     }
 
     // showLoginProgress(false);
   }
 
-  Future<String> loginAfterRegister() async {
+  Future<int> loginAfterRegister() async {
     bool emailFine = _email.hasValue;
     bool passwordFine = _password.hasValue;
 
@@ -68,7 +60,7 @@ class SignUpBloc implements Bloc {
       return await _repository.loginWithEmailAndPassword(
           _email.value, _password.value);
     } else {
-      return "Ocurrió un error";
+      return 3;
     }
   }
 
