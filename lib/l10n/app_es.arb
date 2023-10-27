@@ -8,6 +8,34 @@
     "@gOr": {
         "description": "The corresponding text for the word 'or'."
     },
+    "gBye": "¡Chao!",
+    "@gBye": {
+        "description": "The toast message for the logout operation."
+    },
+    "gHome": "Inicio",
+    "@gHome": {
+        "description": "The label for the home navbar destination."
+    },
+    "gGuide": "Guía",
+    "@gGuide": {
+        "description": "The label for the guide navbar destination."
+    },
+    "gChallenges": "Desafíos",
+    "@gChallenges": {
+        "description": "The label for the challenges navbar destination."
+    },
+    "gLeaderboard": "Marcadores",
+    "@gLeaderboard": {
+        "description": "The label for the leaderboard navbar destination."
+    },
+    "gEvents": "Eventos",
+    "@gEvents": {
+        "description": "The label for the events tab destination."
+    },
+    "gRewards": "Recompensas",
+    "@gRewards": {
+        "description": "The label for the rewards tab destination."
+    },
     "sWelcomeTitle": "Te damos la bienvenida a Vallexplora",
     "@sWelcomeTitle": {
         "description": "Used in the welcome screen. A neutral welcome message."

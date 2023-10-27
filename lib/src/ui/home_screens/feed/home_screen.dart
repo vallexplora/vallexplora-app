@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:vallexplora/src/constants/colors.dart';
-import 'package:vallexplora/src/constants/text_strings.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/events_view.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/sales_view.dart';
-
-import '../../../blocs/home/home_screen_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:vallexplora/src/blocs/home/home_screen_bloc.dart';
+import 'package:vallexplora/src/utils/theme/color_schemes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,14 +29,14 @@ class _HomeScreenState extends State<HomeScreen>
 
   TabBar get _tabBar => TabBar(
         controller: _tabController,
-        tabs: const [
+        tabs: [
           Tab(
-            icon: Icon(Icons.event_outlined),
-            text: StringResources.eventsTabTitle,
+            icon: const Icon(Icons.event_outlined),
+            text: AppLocalizations.of(context)!.gEvents,
           ),
           Tab(
-            icon: Icon(Icons.local_activity_outlined),
-            text: StringResources.discountsTabTitle,
+            icon: const Icon(Icons.local_activity_outlined),
+            text: AppLocalizations.of(context)!.gRewards,
           ),
         ],
       );
@@ -47,14 +46,14 @@ class _HomeScreenState extends State<HomeScreen>
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Theme.of(context).colorScheme.surface,
         appBar: AppBar(
           automaticallyImplyLeading: false,
           toolbarHeight: 0,
           bottom: PreferredSize(
             preferredSize: _tabBar.preferredSize,
             child: Material(
-              color: primaryRef.value40,
-              shadowColor: Colors.transparent,
+              color: lightScheme.surfaceContainer,
               child: _tabBar,
             ),
           ),

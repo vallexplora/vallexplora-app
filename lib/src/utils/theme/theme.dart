@@ -6,6 +6,8 @@ import 'package:vallexplora/src/utils/theme/ref.dart';
 import 'package:vallexplora/src/utils/theme/text_theme.dart';
 import 'package:vallexplora/src/utils/theme/widget_themes/appbar.dart';
 import 'package:vallexplora/src/utils/theme/widget_themes/buttons.dart';
+import 'package:vallexplora/src/utils/theme/widget_themes/navigation_bar.dart';
+import 'package:vallexplora/src/utils/theme/widget_themes/tabbar.dart';
 import 'package:vallexplora/src/utils/theme/widget_themes/text_field.dart';
 
 import '../../constants/colors.dart';
@@ -41,6 +43,8 @@ class VAppTheme {
     elevatedButtonTheme: VElevatedButtonTheme.lightElevatedButtonTheme,
     appBarTheme: VAppBarTheme.lightAppBarTheme,
     inputDecorationTheme: VTextFieldTheme.lightInputDecorationTheme,
+    tabBarTheme: VTabBarTheme.lightTabBarTheme,
+    navigationBarTheme: VNavigationBarTheme.lightNavigationBarTheme,
   );
 
   static ThemeData darkTheme = ThemeData(

@@ -4,7 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vallexplora/src/blocs/auth/login_bloc.dart';
 import 'package:vallexplora/src/constants/errors.dart';
 import 'package:vallexplora/src/ui/home_container_screen.dart';
-import 'package:vallexplora/src/ui/home_screens/feed/home_screen.dart';
 import 'package:vallexplora/src/ui/login/forgot_password_screen.dart';
 import 'package:vallexplora/src/ui/register/register_part_2_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -161,7 +160,9 @@ class _LoginFormState extends State<LoginFormWidget> {
               onPressed: () {
                 _bloc.signInWithGoogle().then((logValue) async {
                   await Fluttertoast.showToast(
-                      msg: loginErrorCodes(context)[logValue]!,
+                      msg: logValue != -1
+                          ? AppLocalizations.of(context)!.sLoginWelcomeToast
+                          : loginErrorCodes(context)[logValue]!,
                       toastLength: Toast.LENGTH_SHORT,
                       gravity: ToastGravity.BOTTOM,
                       timeInSecForIosWeb: 1,
@@ -182,7 +183,8 @@ class _LoginFormState extends State<LoginFormWidget> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomeScreen()),
+                              builder: (context) =>
+                                  const HomeContainerScreen()),
                         );
                       }
                     }

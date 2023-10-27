@@ -5,7 +5,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vallexplora/src/constants/errors.dart';
 import '../../constants/asset_uris.dart';
 import '../home_container_screen.dart';
-import '../home_screens/feed/home_screen.dart';
 import '../login/login_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -241,7 +240,7 @@ class _SignUpFormState extends State<SignUpFormWidget> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomeScreen()),
+                              builder: (context) => const HomeContainerScreen()),
                         );
                       }
                     }
