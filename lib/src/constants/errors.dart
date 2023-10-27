@@ -8,4 +8,10 @@ Map<int, String> registerErrorCodes(context) => {
       3: "Data validation error",
     };
 
-Map<int, String> loginErrorCodes(context) => {};
+Map<int, String> loginErrorCodes(context) => {
+  0: AppLocalizations.of(context)!.sLoginWelcomeToast,
+  1: AppLocalizations.of(context)!.sLoginUserError,
+  2: AppLocalizations.of(context)!.sLoginAuthorizeError,
+  -1: "Unknown firebase exception",
+  3: "Data validation error",
+};

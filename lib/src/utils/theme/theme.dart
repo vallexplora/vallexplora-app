@@ -41,13 +41,6 @@ class VAppTheme {
     elevatedButtonTheme: VElevatedButtonTheme.lightElevatedButtonTheme,
     appBarTheme: VAppBarTheme.lightAppBarTheme,
     inputDecorationTheme: VTextFieldTheme.lightInputDecorationTheme,
-    // datePickerTheme: VDatePickerTheme.lightDatePickerTheme,
-    // timePickerTheme: VTimePickerTheme.lightTimePickerTheme,
-    // navigationBarTheme: VNavigationBarTheme.lightNavigationBarTheme,
-    // tabBarTheme: VTabBarTheme.lightTabBarTheme,
-    // floatingActionButtonTheme:
-    //     VFloatingActionButtonTheme.lightFloatingActionButtonTheme,
-    // switchTheme: VSwitchTheme.lightSwitchTheme,
   );
 
   static ThemeData darkTheme = ThemeData(

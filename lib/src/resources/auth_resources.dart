@@ -116,7 +116,7 @@ class AuthenticationResources {
     } catch (e) {
       return e.toString();
     }
-    return "Correo de restablecimiento enviado a $email";
+    return "$email";
   }
 
   Future<bool> updatePassword(

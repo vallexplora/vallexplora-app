@@ -7,10 +7,8 @@ import 'package:vallexplora/src/ui/home_container_screen.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/home_screen.dart';
 import 'package:vallexplora/src/ui/login/forgot_password_screen.dart';
 import 'package:vallexplora/src/ui/register/register_part_2_screen.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../constants/asset_uris.dart';
-import '../../constants/sizes.dart';
-import '../../constants/text_strings.dart';
 import '../register/signup_screen.dart';
 
 class LoginFormWidget extends StatefulWidget {
@@ -35,84 +33,93 @@ class _LoginFormState extends State<LoginFormWidget> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        vertical: SizeResources.verticalFormPadding,
+        vertical: 16,
       ),
       child: Form(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextFormField(
-              autofillHints: const [
-                AutofillHints.email,
-              ],
-              keyboardType: TextInputType.emailAddress,
-              scrollPadding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom +
-                    SizeResources.buttonTextSize * 8,
-              ),
-              decoration: const InputDecoration(
-                label: Text(StringResources.loginFormEmail),
-                prefixIcon: Icon(Icons.alternate_email_rounded),
-              ),
-              onChanged: (value) {
-                _bloc.changeEmail(value);
-              },
-            ),
-            const SizedBox(
-              height: SizeResources.buttonHeight,
-            ),
-            StreamBuilder<bool>(
-              stream: _bloc.passwordVisible,
-              builder: (context, snapshot) {
-                return TextField(
-                  autofillHints: const [
-                    AutofillHints.password,
-                  ],
-                  obscureText: snapshot.data ?? true ? false : true,
-                  keyboardType: TextInputType.visiblePassword,
-                  scrollPadding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom +
-                        SizeResources.buttonTextSize * 8,
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextFormField(
+                    autofillHints: const [
+                      AutofillHints.email,
+                    ],
+                    keyboardType: TextInputType.emailAddress,
+                    scrollPadding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom +
+                          Theme.of(context).buttonTheme.height * 8,
+                    ),
+                    decoration: InputDecoration(
+                      label: Text(AppLocalizations.of(context)!.sLoginEmail),
+                      prefixIcon: const Icon(Icons.alternate_email_rounded),
+                    ),
+                    onChanged: (value) {
+                      _bloc.changeEmail(value);
+                    },
                   ),
-                  decoration: InputDecoration(
-                    label: const Text(StringResources.loginFormPassword),
-                    prefixIcon: const Icon(Icons.key_rounded),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        snapshot.data ?? true
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                      ),
-                      onPressed: () {
-                        _bloc.changePasswordVisible(!snapshot.data!);
-                      },
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  StreamBuilder<bool>(
+                    stream: _bloc.passwordVisible,
+                    builder: (context, snapshot) {
+                      return TextField(
+                        autofillHints: const [
+                          AutofillHints.password,
+                        ],
+                        obscureText: snapshot.data ?? true ? false : true,
+                        keyboardType: TextInputType.visiblePassword,
+                        scrollPadding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom +
+                              Theme.of(context).buttonTheme.height * 8,
+                        ),
+                        decoration: InputDecoration(
+                          label: Text(
+                              AppLocalizations.of(context)!.sLoginPassword),
+                          prefixIcon: const Icon(Icons.key_rounded),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              snapshot.data ?? true
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                            ),
+                            onPressed: () {
+                              _bloc.changePasswordVisible(!snapshot.data!);
+                            },
+                          ),
+                        ),
+                        onChanged: (value) {
+                          _bloc.changePassword(value);
+                        },
+                      );
+                    },
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ForgotPasswordScreen()),
+                      );
+                    },
+                    child: Text(
+                      AppLocalizations.of(context)!.sLoginForgotPassword,
                     ),
                   ),
-                  onChanged: (value) {
-                    _bloc.changePassword(value);
-                  },
-                );
-              },
-            ),
-            const SizedBox(
-              height: SizeResources.buttonHeight - 10,
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ForgotPasswordScreen()),
-                );
-              },
-              child: const Text(
-                StringResources.loginFormForgot,
+                ],
               ),
             ),
             const SizedBox(
-              height: SizeResources.buttonHeight,
+              height: 16,
             ),
-            ElevatedButton(
+            FilledButton(
               onPressed: () {
                 _bloc.logUserIn().then((logValue) async {
                   await Fluttertoast.showToast(
@@ -136,83 +143,77 @@ class _LoginFormState extends State<LoginFormWidget> {
                   });
                 });
               },
-              child: const Text(
-                StringResources.loginFormSubmit,
+              child: Text(
+                AppLocalizations.of(context)!.sLoginConfirm,
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(
-                  height: SizeResources.buttonHeight,
+            const SizedBox(
+              height: 16,
+            ),
+            Text(
+              AppLocalizations.of(context)!.gOr.toUpperCase(),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            OutlinedButton.icon(
+              onPressed: () {
+                _bloc.signInWithGoogle().then((logValue) async {
+                  await Fluttertoast.showToast(
+                      msg: loginErrorCodes(context)[logValue]!,
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                  FirebaseAuth.instance
+                      .authStateChanges()
+                      .listen((User? user) async {
+                    if (user != null) {
+                      if (logValue == 0) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const RegisterPart2Screen()),
+                        );
+                      } else if (logValue == 1) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomeScreen()),
+                        );
+                      }
+                    }
+                  });
+                });
+              },
+              icon: const Image(
+                image: AssetImage(AssetURIResources.googleLogo),
+                width: 20.0,
+              ),
+              label: Text(
+                AppLocalizations.of(context)!.sLoginGoogle,
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const UserRegisterScreen()),
+                );
+              },
+              child: Text(
+                AppLocalizations.of(context)!.sLoginRegisterInstead,
+                style: TextStyle(
+                  fontSize: Theme.of(context).textTheme.bodySmall!.fontSize,
                 ),
-                Text(
-                  StringResources.optionOr.toUpperCase(),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: SizeResources.buttonHeight,
-                ),
-                OutlinedButton.icon(
-                  onPressed: () {
-                    _bloc.signInWithGoogle().then((logValue) async {
-                      await Fluttertoast.showToast(
-                          msg: logValue != -1
-                              ? "¡Bienvenido a Vallexplora!"
-                              : "Error iniciando sesión",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          textColor: Colors.white,
-                          fontSize: 16.0);
-                      FirebaseAuth.instance
-                          .authStateChanges()
-                          .listen((User? user) async {
-                        if (user != null) {
-                          if (logValue == 0) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const RegisterPart2Screen()),
-                            );
-                          } else if (logValue == 1) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()),
-                            );
-                          }
-                        }
-                      });
-                    });
-                  },
-                  icon: const Image(
-                    image: AssetImage(AssetURIResources.googleLogo),
-                    width: 20.0,
-                  ),
-                  label: const Text(
-                    StringResources.signInWithGoogle,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: SizeResources.buttonTextSize,
-                    ),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const UserRegisterScreen()),
-                    );
-                  },
-                  child: const Text(
-                    StringResources.loginSignUpInstead,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
+              ),
             ),
           ],
         ),

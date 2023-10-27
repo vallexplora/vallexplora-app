@@ -88,6 +88,74 @@
     "@sRegisterSuccess": {
         "description": "Used in the register screen. The toast message for initial account registration."
     },
+    "sLoginAppBarTitle": "Inicia sesión",
+    "@sLoginAppBarTitle": {
+        "description": "Used in the login screen. The title on the app bar."
+    },
+    "sLoginTitle": "Nos alegra verte de nuevo",
+    "@sLoginTitle": {
+        "description": "Used in the login screen. The title of the form."
+    },
+    "sLoginEmail": "Tu correo",
+    "@sLoginEmail": {
+        "description": "Used in the login screen. The prompt for the email field."
+    },
+    "sLoginPassword": "Tu contraseña",
+    "@sLoginPassword": {
+        "description": "Used in the login screen. The prompt for the password field"
+    },
+    "sLoginForgotPassword": "¿La olvidaste?",
+    "@sLoginForgotPassword": {
+        "description": "Used in the login screen. The prompt for the forgot password button."
+    },
+    "sLoginWelcomeToast": "¡Bienvenido a Vallexplora!",
+    "@sLoginWelcomeToast": {
+        "description": "Used in the login screen. The toast for a successful login."
+    },
+    "sLoginUserError": "Credenciales incorrectas.",
+    "@sLoginUserError": {
+        "description": "Used in the login screen. The toast for wrong credentials."
+    },
+    "sLoginAuthorizeError": "Usuario no autorizado.",
+    "@sLoginAuthorizeError": {
+        "description": "Used in the login screen. The toast for wrong authorization."
+    },
+    "sLoginConfirm": "Iniciar sesión",
+    "@sLoginConfirm": {
+        "description": "Used in the login screen. The label for the login button."
+    },
+    "sLoginGoogle": "Inicia sesión con Google",
+    "@sLoginGoogle": {
+        "description": "Used in the login screen. The label for the login with google button."
+    },
+    "sLoginRegisterInstead": "¿No tienes una cuenta tovavía? Registrate aquí",
+    "@sLoginRegisterInstead": {
+        "description": "Used in the login screen. The label for the register instead button."
+    },
+    "sForgotTitle": "Restablecer contraseña",
+    "@sForgotTitle": {
+        "description": "Used in the forgot password screen. The title of the screen and form."
+    },
+    "sForgotSteps": "Ingresa tu correo abajo. Si ya tienes una cuenta, te enviaremos un correo con las instrucciones para restaurar tu contraseña.",
+    "@sForgotSteps": {
+        "description": "Used in the forgot password screen. The copy of the form describing the reset password instructions."
+    },
+    "sForgotEmail": "Tu correo",
+    "@sForgotEmail": {
+        "description": "Used in the forgot password screen. The prompt of the form."
+    },
+    "sForgotBackToLogin": "Volver a inicio de sesión",
+    "@sForgotBackToLogin": {
+        "description": "Used in the forgot password screen. The label of the return to login button."
+    },
+    "sForgotSend": "Enviar",
+    "@sForgotSend": {
+        "description": "Used in the forgot password screen. The label of the send button."
+    },
+    "sForgotToast": "Correo enviado a ",
+    "@sForgotToast": {
+        "description": "Used in the forgot password screen. The toast message after sending the reset email."
+    },
     "sRegister2Title": "Nos alegra tenerte a bordo",
     "@sRegister2Title": {
         "description": "Used in the onboarding register screen. The title of the first onboarding screen."

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/ui/login/login_form_widget.dart';
-
-import '../../constants/sizes.dart';
-import '../../constants/text_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../welcome_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -12,9 +10,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Inicia sesión",
-        ),
+        title: Text(AppLocalizations.of(context)!.sLoginAppBarTitle),
         leading: BackButton(
           onPressed: () {
             Navigator.push(
@@ -34,14 +30,16 @@ class LoginScreen extends StatelessWidget {
             decelerationRate: ScrollDecelerationRate.fast,
           ),
           child: Container(
-            padding: const EdgeInsets.all(SizeResources.defaultSpacing),
+            padding: const EdgeInsets.all(16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text(
-                  StringResources.loginTitle,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  AppLocalizations.of(context)!.sLoginTitle,
+                  style: Theme.of(context).textTheme.titleMedium!.merge(
+                      TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface)),
                   textAlign: TextAlign.center,
                 ),
                 const LoginFormWidget(),

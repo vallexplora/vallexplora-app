@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vallexplora/src/blocs/auth/login_bloc.dart';
-
-import '../../constants/sizes.dart';
-import '../../constants/text_strings.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -24,7 +22,7 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
             statusBarBrightness: Brightness.light),
         child: Scaffold(
             appBar: AppBar(
-              title: const Text(StringResources.forgottenPasswordTitle),
+              title: Text(AppLocalizations.of(context)!.sForgotTitle),
               leading: BackButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -32,26 +30,26 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
               ),
             ),
             body: Container(
-              padding: const EdgeInsets.all(SizeResources.defaultSpacing),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    StringResources.forgottenPasswordTitle,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    AppLocalizations.of(context)!.sForgotTitle,
+                    style: Theme.of(context).textTheme.titleMedium,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
-                    height: SizeResources.buttonHeight,
+                    height: 16,
                   ),
                   Text(
-                    StringResources.forgottenPasswordSteps,
+                    AppLocalizations.of(context)!.sForgotSteps,
                     style: Theme.of(context).textTheme.bodyLarge,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(
-                    height: SizeResources.buttonHeight,
+                    height: 16,
                   ),
                   TextFormField(
                     autofillHints: const [
@@ -59,41 +57,42 @@ class _ForgotPasswordScreen extends State<ForgotPasswordScreen> {
                     ],
                     scrollPadding: EdgeInsets.only(
                       bottom: MediaQuery.of(context).viewInsets.bottom +
-                          SizeResources.buttonTextSize * 8,
+                          Theme.of(context).buttonTheme.height * 8,
                     ),
-                    decoration: const InputDecoration(
-                      label: Text(StringResources.loginFormEmail),
-                      prefixIcon: Icon(Icons.alternate_email_rounded),
+                    decoration: InputDecoration(
+                      label: Text(AppLocalizations.of(context)!.sForgotEmail),
+                      prefixIcon: const Icon(Icons.alternate_email_rounded),
                     ),
                     onChanged: (value) => {_bloc.changeEmail(value)},
                   ),
                   const SizedBox(
-                    height: SizeResources.buttonHeight,
+                    height: 16,
                   ),
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text(
-                      StringResources.forgottenPasswordLogin,
+                    child: Text(
+                      AppLocalizations.of(context)!.sForgotBackToLogin,
                     ),
                   ),
                   const SizedBox(
-                    height: SizeResources.buttonHeight,
+                    height: 16,
                   ),
-                  ElevatedButton(
+                  FilledButton(
                     onPressed: () =>
                         _bloc.resetPassword().then((logValue) async {
                       await Fluttertoast.showToast(
-                          msg: logValue,
+                          msg:
+                              "${AppLocalizations.of(context)!.sForgotToast} $logValue",
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.BOTTOM,
                           timeInSecForIosWeb: 1,
                           textColor: Colors.white,
                           fontSize: 16.0);
                     }),
-                    child: const Text(
-                      StringResources.forgottenPasswordSubmitRestore,
+                    child: Text(
+                      AppLocalizations.of(context)!.sForgotSend,
                     ),
                   )
                 ],
