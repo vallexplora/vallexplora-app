@@ -12,6 +12,7 @@ class EventModel {
   String imagePath;
   Map<String, dynamic>? location;
   List<Map<String, dynamic>>? points;
+  bool hasAugmentedReality;
 
   EventModel({
     required this.id,
@@ -25,6 +26,7 @@ class EventModel {
     required this.imagePath,
     this.location,
     this.points,
+    required this.hasAugmentedReality,
   });
 
   static Future<EventModel> fromDocument(DocumentSnapshot document) async {
@@ -40,6 +42,7 @@ class EventModel {
       imagePath: document["eventJson"]['imagePath'],
       location: document["eventJson"]['location'],
       points: document["eventJson"]['points'],
+      hasAugmentedReality: document["eventJson"]["hasAugmentedReality"],
     );
   }
 
@@ -60,6 +63,7 @@ class EventModel {
       points: doc.data().toString().contains("points")
           ? doc.get("eventJson.points")
           : null,
+      hasAugmentedReality: doc.get("eventJson.hasAugmentedReality"),
     );
   }
 }

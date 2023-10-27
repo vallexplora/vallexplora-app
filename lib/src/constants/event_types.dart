@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EventTypeInformation {
   final IconData icon;
@@ -9,15 +10,21 @@ class EventTypeInformation {
     required this.text,
   });
 
-  static Map<int, dynamic> numberInfoMap = {
-    1: EventTypeInformation(
-        icon: Icons.sports_soccer_outlined, text: 'Deportes y Espectáculo'),
-    2: EventTypeInformation(
-        icon: Icons.soup_kitchen_outlined, text: 'Gastronomía'),
-    3: EventTypeInformation(
-        icon: Icons.church_outlined, text: 'Historia y Arquitectura'),
-    4: EventTypeInformation(
-        icon: Icons.palette_outlined, text: 'Arte y Cultura'),
-    5: EventTypeInformation(icon: Icons.eco_outlined, text: 'Ecoturismo'),
-  };
+  static Map<int, dynamic> numberInfoMap(context) => {
+        1: EventTypeInformation(
+            icon: Icons.sports_soccer_outlined,
+            text: AppLocalizations.of(context)!.gSportsCategory),
+        2: EventTypeInformation(
+            icon: Icons.soup_kitchen_outlined,
+            text: AppLocalizations.of(context)!.gGastroCategory),
+        3: EventTypeInformation(
+            icon: Icons.church_outlined,
+            text: AppLocalizations.of(context)!.gHistoryCategory),
+        4: EventTypeInformation(
+            icon: Icons.palette_outlined,
+            text: AppLocalizations.of(context)!.gArtCategory),
+        5: EventTypeInformation(
+            icon: Icons.eco_outlined,
+            text: AppLocalizations.of(context)!.gEcoCategory),
+      };
 }

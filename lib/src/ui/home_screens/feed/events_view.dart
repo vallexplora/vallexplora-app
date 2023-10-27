@@ -37,6 +37,7 @@ class _EventsViewTabState extends State<EventsViewTab> {
                 List<EventModel> events = snapshot.data ?? [];
                 if (events.isNotEmpty) {
                   return ListView.builder(
+                    padding: const EdgeInsets.all(16),
                     itemCount: events.length,
                     itemBuilder: (context, index) {
                       var event = events[index];
@@ -51,6 +52,7 @@ class _EventsViewTabState extends State<EventsViewTab> {
                         imagePath: event.imagePath,
                         location: event.location,
                         points: event.points,
+                        hasAR: event.hasAugmentedReality,
                       );
                     },
                   );
