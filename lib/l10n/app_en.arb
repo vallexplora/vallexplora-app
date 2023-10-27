@@ -35,6 +35,7 @@
     "gArtCategory": "Art and Culture",
     "gHistoryCategory": "History and Architecture",
     "gGastroCategory": "Gastronomy",
+    "gSkipButton": "Skip",
     "gBackButton": "Back",
     "gConfirmButton": "Confirm",
     "gContinueButton": "Continue",

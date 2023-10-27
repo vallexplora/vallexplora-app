@@ -140,6 +140,10 @@
     "@gGastroCategory": {
         "description": "The gastronomy category label."
     },
+    "gSkipButton": "Omitir",
+    "@gSkipButton": {
+        "description": "The skip button label."
+    },
     "gBackButton": "Volver",
     "@gBackButton": {
         "description": "The back button label."

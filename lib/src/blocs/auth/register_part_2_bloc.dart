@@ -65,8 +65,16 @@ class RegisterPart2Bloc extends Bloc {
   }
 
   void finishRegistration() {
-    _repository.addUserMetaData(_categoryFilters.value,
-        OriginPlaceLabel.idByName(_selectedOrigin.value), _selectedImage.value);
+    if (_repository.getCurrentUser().providerData[0].providerId ==
+        "google.com") {
+      _repository.addUserMetaData(_categoryFilters.value,
+          OriginPlaceLabel.idByName(_selectedOrigin.value), null);
+    } else {
+      _repository.addUserMetaData(
+          _categoryFilters.value,
+          OriginPlaceLabel.idByName(_selectedOrigin.value),
+          _selectedImage.value);
+    }
   }
 
   Future pickImageFromGallery() async {

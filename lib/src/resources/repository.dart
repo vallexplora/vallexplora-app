@@ -90,7 +90,7 @@ class Repository {
     return _dbResources.eventsListQuery();
   }
 
-  Future<void> addUserMetaData(List<String> interests, String origin, String pictureURL) async {
+  Future<void> addUserMetaData(List<String> interests, String origin, String? pictureURL) async {
     return _dbResources.addUserMetaData(await getUserUID(), interests, origin, pictureURL);
   }
 

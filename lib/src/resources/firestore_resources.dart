@@ -71,18 +71,26 @@ class FirestoreResources {
   }
 
   Future<void> addUserMetaData(String id, List<String> interests, String origin,
-      String pictureURL) async {
+      String? pictureURL) async {
     var ending = "";
-    if (pictureURL.isNotEmpty) {
+    if (pictureURL != null && pictureURL.isNotEmpty) {
       ending = pictureURL.split(".").last;
       Reference imageReference = _storage.ref("users/profile/$id.$ending");
       await imageReference.putFile(
           File(pictureURL), SettableMetadata(contentType: "image/$ending"));
     }
-    _firestore.collection("users").doc(id).set({
-      "interests": interests,
-      "origin": origin,
-      "pictureURL": pictureURL.isNotEmpty ? "users/profile/$id.$ending" : ""
-    }, SetOptions(merge: true));
+    if (pictureURL != null) {
+      _firestore.collection("users").doc(id).set({
+        "interests": interests,
+        "origin": origin,
+        "pictureURL": pictureURL.isNotEmpty ? "users/profile/$id.$ending" : "",
+      }, SetOptions(merge: true));
+    } else {
+      _firestore.collection("users").doc(id).set({
+        "interests": interests,
+        "origin": origin,
+        "pictureURL": "",
+      }, SetOptions(merge: true));
+    }
   }
 }
