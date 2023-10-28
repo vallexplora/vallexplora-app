@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../utils/theme/extended.dart';
+
 class EventTypeInformation {
   final IconData icon;
   final String text;
@@ -28,3 +30,16 @@ class EventTypeInformation {
             text: AppLocalizations.of(context)!.gEcoCategory),
       };
 }
+
+Map<int, ExtendedColor> eventTypeColors(context) => {
+      1: (Theme.of(context).extensions.entries.last.value as ExtendedColors)
+          .categorySport,
+      2: (Theme.of(context).extensions.entries.last.value as ExtendedColors)
+          .categoryFood,
+      3: (Theme.of(context).extensions.entries.last.value as ExtendedColors)
+          .categoryArch,
+      4: (Theme.of(context).extensions.entries.last.value as ExtendedColors)
+          .categoryArt,
+      5: (Theme.of(context).extensions.entries.last.value as ExtendedColors)
+          .categoryEco,
+    };

@@ -28,7 +28,7 @@
     "@gLeaderboard": {
         "description": "The label for the leaderboard navbar destination."
     },
-    "gEvents": "Eventos",
+    "gEvents": "{count, plural, =1 {Evento} other{Eventos}}",
     "@gEvents": {
         "description": "The label for the events tab destination."
     },
@@ -283,5 +283,34 @@
     "sOnboarding3Copy": "Queremos que conozcas el Valle a tu manera. Déjate llevar por nuestras recomendaciones, ¡y disfruta el Valle!",
     "@sOnboarding3Copy": {
         "description": "Used in the 3rd onboarding screen. The copy text of the page."
+    },
+    "sEventDetailARTooltip": "Si te encuentras en el lugar del evento, ¡puedes acceder a contenido adicional en realidad aumentada!",
+    "@sEventDetailARTooltip": {
+        "description": "Used in the event detail screen. The ar icon tooltip."
+    },
+    "sEventDetailTypeTooltip": "Este es un evento de {type, select, sports{Deportes y Espectáculo} gastro{Gastronomía} history{Historia y Arquitectura} art{Arte y Cultura} eco{Ecoturismo} other{una categoría desconocida}}",
+    "@sEventDetailTypeTooltip": {
+        "description": "Used in the event detail screen. The type icon icon tooltip.",
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "sEventDetailAbout": "Acerca del evento: ",
+    "@sEventDetailAbout": {
+        "description": "Used in the event detail screen. The text span before the event description."
+    },
+    "sEventDetailARButtonLabel": "Ver en AR",
+    "@sEventDetailARButtonLabel": {
+        "description": "Used in the event detail screen. The view in ar button label."
+    },
+    "sEventDetailARUnavailable": "AR no disponible",
+    "@sEventDetailARUnavailable": {
+        "description": "Used in the event detail screen. The view in ar button label when AR view is unavailable."
+    },
+    "sEventDetailMapButtonLabel": "Mostrar en el mapa",
+    "@sEventDetailMapButtonLabel": {
+        "description": "Used in the event detail screen. The view on map button label."
     }
 }

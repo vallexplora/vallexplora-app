@@ -10,8 +10,7 @@ class EventModel {
   Timestamp endDate;
   String city;
   String imagePath;
-  Map<String, dynamic>? location;
-  List<Map<String, dynamic>>? points;
+  List<Map<String, dynamic>>? location;
   bool hasAugmentedReality;
 
   EventModel({
@@ -25,7 +24,6 @@ class EventModel {
     required this.city,
     required this.imagePath,
     this.location,
-    this.points,
     required this.hasAugmentedReality,
   });
 
@@ -40,8 +38,7 @@ class EventModel {
       endDate: document["eventJson"]['endDate'],
       city: document["eventJson"]['city'],
       imagePath: document["eventJson"]['imagePath'],
-      location: document["eventJson"]['location'],
-      points: document["eventJson"]['points'],
+      location: (document["eventJson"]['location'] as List<dynamic>).cast<Map<String, dynamic>>(),
       hasAugmentedReality: document["eventJson"]["hasAugmentedReality"],
     );
   }
@@ -58,10 +55,7 @@ class EventModel {
       city: doc.get("eventJson.city"),
       imagePath: doc.get("eventJson.imagePath"),
       location: doc.data().toString().contains("location")
-          ? doc.get("eventJson.location")
-          : null,
-      points: doc.data().toString().contains("points")
-          ? doc.get("eventJson.points")
+          ? (doc.get("eventJson.location") as List<dynamic>).cast<Map<String, dynamic>>()
           : null,
       hasAugmentedReality: doc.get("eventJson.hasAugmentedReality"),
     );

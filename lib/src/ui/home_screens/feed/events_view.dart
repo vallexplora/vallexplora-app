@@ -51,7 +51,6 @@ class _EventsViewTabState extends State<EventsViewTab> {
                         eventType: event.eventType,
                         imagePath: event.imagePath,
                         location: event.location,
-                        points: event.points,
                         hasAR: event.hasAugmentedReality,
                       );
                     },

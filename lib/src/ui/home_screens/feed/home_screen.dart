@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen>
         tabs: [
           Tab(
             icon: const Icon(Icons.event_outlined),
-            text: AppLocalizations.of(context)!.gEvents,
+            text: AppLocalizations.of(context)!.gEvents(2),
           ),
           Tab(
             icon: const Icon(Icons.local_activity_outlined),

@@ -1,5 +1,10 @@
 {
   "de": [
-    "sForgotEmail"
+    "sForgotEmail",
+    "sEventDetailAbout"
+  ],
+
+  "en": [
+    "sEventDetailAbout"
   ]
 }
