@@ -71,7 +71,7 @@
     "sOnboarding3Title": "Customized to your interests",
     "sOnboarding3Copy": "We want you to get to know the Valle your own way. Let our recommendations guide you, and enjoy El Valle!",
     "sEventDetailARTooltip": "If you're at this event's location, you can access it's AR view!",
-    "sEventDetailTypeTooltip": "This is {type, select, sports{a Sports and Shows} gastro{a Gastronomy} history{a History and Architecture} art{an Art and Culture} eco{an Ecotourism} other{an unknown category}} event",
+    "sEventDetailTypeTooltip": "This is {type, select, 1{a Sports and Shows} 2{a Gastronomy} 3{a History and Architecture} 4{an Art and Culture} 5{an Ecotourism} other{an unknown category}} event",
     "sEventDetailARButtonLabel": "View in AR",
     "sEventDetailARUnavailable": "AR unavailable",
     "sEventDetailMapButtonLabel": "Show on map"

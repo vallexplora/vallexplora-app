@@ -71,7 +71,7 @@
     "sOnboarding3Title": "Ganz nach deinem Belieben",
     "sOnboarding3Copy": "Wir möchten, dass du das Valle auf deine Art kennenlernst. Lass dich von unseren Empfehlungen mitreißen und genieße das Valle!",
     "sEventDetailARTooltip": "Wenn du dich am Ereignisort befindest, kannst du auf die AR-Ansicht zugreifen!",
-    "sEventDetailTypeTooltip": "Dies is ein Ereignis {type, select, sports{für Sport und Unterhaltung} gastro{der Gastronomie} history{der Geschichte un Architektur} art{der Kunst und Kultur} eco{der Ökotourismus} other{der Kategorie \"unbekannt\"}}",
+    "sEventDetailTypeTooltip": "Dies is ein Ereignis {type, select, 1{für Sport und Unterhaltung} 2{der Gastronomie} 3{der Geschichte un Architektur} 4{der Kunst und Kultur} 5{der Ökotourismus} other{der Kategorie \"unbekannt\"}}",
     "sEventDetailARButtonLabel": "In AR anzeigen",
     "sEventDetailARUnavailable": "AR nicht verfügbar",
     "sEventDetailMapButtonLabel": "In Karte sehen"

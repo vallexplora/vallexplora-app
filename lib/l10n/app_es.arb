@@ -288,7 +288,7 @@
     "@sEventDetailARTooltip": {
         "description": "Used in the event detail screen. The ar icon tooltip."
     },
-    "sEventDetailTypeTooltip": "Este es un evento de {type, select, sports{Deportes y Espectáculo} gastro{Gastronomía} history{Historia y Arquitectura} art{Arte y Cultura} eco{Ecoturismo} other{una categoría desconocida}}",
+    "sEventDetailTypeTooltip": "Este es un evento de {type, select, 1{Deportes y Espectáculo} 2{Gastronomía} 3{Historia y Arquitectura} 4{Arte y Cultura} 5{Ecoturismo} other{una categoría desconocida}}",
     "@sEventDetailTypeTooltip": {
         "description": "Used in the event detail screen. The type icon icon tooltip.",
         "placeholders": {

@@ -24,10 +24,6 @@ class StringResources {
   static const String profileDeleteAccountButton =
       "Borrar cuenta permanentemente";
 
-  /* Home Screen */
-  static const String eventsTabTitle = "Eventos";
-  static const String discountsTabTitle = "Promociones";
-
   /* Guide screen */
   static const String guideSearchPlaceholder = "Busca y filtra...";
   static const String guideSearchCategories = "Categorías";

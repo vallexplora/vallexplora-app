@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/constants/event_types.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:vallexplora/src/constants/screens.dart';
+import 'package:vallexplora/src/ui/home_container_screen.dart';
+import 'package:vallexplora/src/ui/home_screens/guide/ar_view.dart';
 
 class EventDetailsScreen extends StatefulWidget {
   final String name;
@@ -90,6 +93,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
               ),
             ),
             child: IconButton(
+              tooltip: AppLocalizations.of(context)!
+                  .sEventDetailTypeTooltip(eventType.toString()),
               onPressed: () {},
               icon: Icon(
                 EventTypeInformation.numberInfoMap(context)[eventType].icon,
@@ -168,7 +173,15 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                   children: [
                     FilledButton.icon(
                       icon: const Icon(Icons.view_in_ar),
-                      onPressed: hasAR ? () {} : null,
+                      onPressed: hasAR
+                          ? () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const ARView(),
+                                ),
+                              );
+                            }
+                          : null,
                       label: Text(hasAR
                           ? AppLocalizations.of(context)!
                               .sEventDetailARButtonLabel
@@ -180,7 +193,15 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                     ),
                     OutlinedButton.icon(
                       icon: const Icon(Icons.map_outlined),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => HomeContainerScreen(
+                              initialScreen: ScreenIDs.guide.number,
+                            ),
+                          ),
+                        );
+                      },
                       label: Text(AppLocalizations.of(context)!
                           .sEventDetailMapButtonLabel),
                     ),

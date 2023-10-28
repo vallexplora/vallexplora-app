@@ -10,7 +10,9 @@ import 'home_screens/guide/guide_screen.dart';
 import 'home_screens/markers_screen.dart';
 
 class HomeContainerScreen extends StatefulWidget {
-  const HomeContainerScreen({super.key});
+  final int? initialScreen;
+
+  const HomeContainerScreen({super.key, this.initialScreen});
 
   @override
   State<HomeContainerScreen> createState() => _HomeContainerScreenState();
@@ -18,6 +20,8 @@ class HomeContainerScreen extends StatefulWidget {
 
 class _HomeContainerScreenState extends State<HomeContainerScreen> {
   final _bloc = HomeContainerBloc();
+  late int? initialScreen;
+
   final _screens = const [
     HomeScreen(),
     GuideScreen(),
@@ -27,7 +31,11 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
   @override
   void initState() {
     super.initState();
+    initialScreen = widget.initialScreen;
     _bloc.requestPermissions();
+    if (initialScreen != null) {
+      _bloc.changeIndex(initialScreen!);
+    }
   }
 
   @override
