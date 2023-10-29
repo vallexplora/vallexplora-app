@@ -296,6 +296,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_unity_widget:
+    dependency: "direct main"
+    description:
+      name: flutter_unity_widget
+      sha256: "92991e8c80bbcc1217f2ae016a9ff8f3ef2c7b1be97be9ad8160248d41016875"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2020.3.25"
   flutter_web_plugins:
     dependency: transitive
     description: flutter

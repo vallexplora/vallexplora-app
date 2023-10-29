@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 
 class ARView extends StatefulWidget {
   const ARView({super.key});
@@ -8,15 +9,28 @@ class ARView extends StatefulWidget {
 }
 
 class _ARViewState extends State<ARView> {
+  UnityWidgetController? _unityWidgetController;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text(
-          "Aquí pondríamos nuestra vista de AR...\n SI TUVIERAMOS UNA",
-          textAlign: TextAlign.center,
-        ),
+    return Scaffold(
+      body: Stack(
+        children: <Widget>[
+          UnityWidget(
+            onUnityCreated: onUnityCreated,
+            fullscreen: false,
+          ),
+        ],
       ),
     );
+  }
+
+  void onUnityCreated(controller) {
+    _unityWidgetController = (controller as UnityWidgetController);
   }
 }

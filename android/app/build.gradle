@@ -44,7 +44,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.vallexplora"
-        minSdkVersion 20
+        minSdkVersion 24
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -63,7 +63,10 @@ flutter {
     source '../..'
 }
 
+
 dependencies {
+    implementation project(':unityLibrary')
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
 }
