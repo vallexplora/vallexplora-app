@@ -24,6 +24,8 @@ class _ARViewState extends State<ARView> {
           UnityWidget(
             onUnityCreated: onUnityCreated,
             fullscreen: false,
+            unloadOnDispose: true,
+            runImmediately: true,
           ),
         ],
       ),
