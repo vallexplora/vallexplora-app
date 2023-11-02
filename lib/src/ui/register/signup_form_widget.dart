@@ -187,8 +187,7 @@ class _SignUpFormState extends State<SignUpFormWidget> {
                           fontSize: 16.0);
                     }).then(
                       (value) => {
-                        Navigator.push(
-                          context,
+                        Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) =>
                                   const HomeContainerScreen()),
@@ -230,17 +229,16 @@ class _SignUpFormState extends State<SignUpFormWidget> {
                       .listen((User? user) async {
                     if (user != null) {
                       if (logValue == 0) {
-                        Navigator.push(
-                          context,
+                        Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) =>
                                   const RegisterPart2Screen()),
                         );
                       } else if (logValue == 1) {
-                        Navigator.push(
-                          context,
+                        Navigator.of(context).push(
                           MaterialPageRoute(
-                              builder: (context) => const HomeContainerScreen()),
+                              builder: (context) =>
+                                  const HomeContainerScreen()),
                         );
                       }
                     }
@@ -260,8 +258,7 @@ class _SignUpFormState extends State<SignUpFormWidget> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
+                Navigator.of(context).push(
                   MaterialPageRoute(builder: (context) => const LoginScreen()),
                 );
               },

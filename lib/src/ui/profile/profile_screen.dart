@@ -5,6 +5,7 @@ import 'package:vallexplora/src/constants/sizes.dart';
 import 'package:vallexplora/src/ui/profile/heading_section.dart';
 import 'package:vallexplora/src/ui/profile/notifications_danger_zone.dart';
 import 'package:vallexplora/src/ui/profile/personal_information.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/user_model.dart';
 

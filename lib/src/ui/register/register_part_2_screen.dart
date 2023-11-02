@@ -402,8 +402,7 @@ class _RegisterPart2ScreenState extends State<RegisterPart2Screen> {
                   child: FilledButton(
                     onPressed: () {
                       _bloc.finishRegistration();
-                      Navigator.push(
-                        context,
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                             builder: (context) => const OnboardingScreen()),
                       );

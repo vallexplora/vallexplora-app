@@ -13,8 +13,7 @@ class LoginScreen extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.sLoginAppBarTitle),
         leading: BackButton(
           onPressed: () {
-            Navigator.push(
-              context,
+            Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const WelcomeScreen()),
             );
           },

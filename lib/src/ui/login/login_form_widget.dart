@@ -102,8 +102,7 @@ class _LoginFormState extends State<LoginFormWidget> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                             builder: (context) => const ForgotPasswordScreen()),
                       );
@@ -131,8 +130,7 @@ class _LoginFormState extends State<LoginFormWidget> {
                   FirebaseAuth.instance.authStateChanges().listen((User? user) {
                     if (user != null) {
                       if (logValue == 0) {
-                        Navigator.push(
-                          context,
+                        Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) =>
                                   const HomeContainerScreen()),
@@ -173,15 +171,13 @@ class _LoginFormState extends State<LoginFormWidget> {
                       .listen((User? user) async {
                     if (user != null) {
                       if (logValue == 0) {
-                        Navigator.push(
-                          context,
+                        Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) =>
                                   const RegisterPart2Screen()),
                         );
                       } else if (logValue == 1) {
-                        Navigator.push(
-                          context,
+                        Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) =>
                                   const HomeContainerScreen()),
@@ -204,8 +200,7 @@ class _LoginFormState extends State<LoginFormWidget> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
+                Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (context) => const UserRegisterScreen()),
                 );

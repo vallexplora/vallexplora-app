@@ -13,8 +13,7 @@ class UserRegisterScreen extends StatelessWidget {
         title: Text(AppLocalizations.of(context)!.sRegisterAppBarTitle),
         leading: BackButton(
           onPressed: () {
-            Navigator.push(
-              context,
+            Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const WelcomeScreen()),
             );
           },

@@ -4,6 +4,7 @@ import 'package:vallexplora/src/blocs/home/guide_bloc.dart';
 import 'package:vallexplora/src/constants/sizes.dart';
 import 'package:vallexplora/src/ui/home_screens/guide/ar_view.dart';
 import 'package:vallexplora/src/ui/home_screens/guide/search.dart';
+import 'package:vallexplora/src/utils/theme/color_schemes.dart';
 
 class GuideScreen extends StatefulWidget {
   const GuideScreen({super.key});
@@ -29,6 +30,8 @@ class _GuideScreenState extends State<GuideScreen> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
+            backgroundColor: lightScheme.surfaceContainerHigh,
+            foregroundColor: Theme.of(context).colorScheme.primary,
             heroTag: "find_center",
             mini: true,
             onPressed: () => _bloc.animateToCenter(),
@@ -37,6 +40,8 @@ class _GuideScreenState extends State<GuideScreen> {
             ),
           ),
           FloatingActionButton(
+            backgroundColor: lightScheme.surfaceContainerHigh,
+            foregroundColor: Theme.of(context).colorScheme.primary,
             heroTag: "find_user",
             mini: true,
             onPressed: () => _bloc.animateToUser(),
@@ -75,8 +80,7 @@ class _GuideScreenState extends State<GuideScreen> {
                       FloatingActionButton(
                         heroTag: "ar_view",
                         onPressed: () {
-                          Navigator.push(
-                            context,
+                          Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => const ARView(),
                             ),
@@ -104,8 +108,8 @@ class _GuideScreenState extends State<GuideScreen> {
       ),
       body: Stack(
         children: [
-          StreamBuilder<Map<MarkerId, Marker>>(
-              stream: _bloc.eventMarkers,
+          StreamBuilder<Map<PolygonId, Polygon>>(
+              stream: _bloc.polygonAreas,
               builder: (context, snapshot) {
                 return GoogleMap(
                   compassEnabled: true,
@@ -126,7 +130,7 @@ class _GuideScreenState extends State<GuideScreen> {
                   ),
                   buildingsEnabled: true,
                   indoorViewEnabled: true,
-                  markers: (snapshot.data ?? {}).values.toSet(),
+                  polygons: (snapshot.data ?? {}).values.toSet(),
                 );
               }),
         ],

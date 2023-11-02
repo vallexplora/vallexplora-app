@@ -70,8 +70,7 @@ class WelcomeScreen extends StatelessWidget {
                   children: [
                     FilledButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
+                        Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) => const UserRegisterScreen()),
                         );
@@ -82,8 +81,7 @@ class WelcomeScreen extends StatelessWidget {
                     const SizedBox(height: 16),
                     OutlinedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
+                        Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) => const LoginScreen()),
                         );

@@ -1,49 +1,52 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:logger/logger.dart';
 import 'package:maps_toolkit/maps_toolkit.dart' as mtkt;
 import 'package:rxdart/rxdart.dart';
 import 'package:vallexplora/src/blocs/bloc.dart';
 import 'package:vallexplora/src/resources/repository.dart';
-import 'package:geoflutterfire2/geoflutterfire2.dart';
+import 'package:vallexplora/src/ui/home_screens/feed/event_details_screen.dart';
+import 'package:vallexplora/src/utils/theme/color_schemes.dart';
 
 class GuideBloc implements Bloc {
   final _repository = Repository();
 
   final _showARButton = BehaviorSubject<bool>();
   final _eventMarkers = BehaviorSubject.seeded(<MarkerId, Marker>{});
+  final _polygonAreas = BehaviorSubject.seeded(<PolygonId, Polygon>{});
   final _pos = BehaviorSubject<LocationData>.seeded(
       LocationData.fromMap({"latitude": 3.8, "longitude": -76.6}));
 
   Stream<bool> get showARButton => _showARButton.stream;
-  late Stream<List<DocumentSnapshot>> geoStream;
   Stream<Map<MarkerId, Marker>> get eventMarkers => _eventMarkers.stream;
+  Stream<Map<PolygonId, Polygon>> get polygonAreas => _polygonAreas.stream;
+
+  Stream<QuerySnapshot> eventsList() => _repository.eventsList();
 
   Function(bool) get changeShowARButton => _showARButton.sink.add;
   Function(Map<MarkerId, Marker>) get changeEventMarkers =>
       _eventMarkers.sink.add;
+  Function(Map<PolygonId, Polygon>) get changePolygonAreas =>
+      _polygonAreas.sink.add;
 
+  late BuildContext _context;
   final Location _location = Location();
   late GoogleMapController _mapController;
-  final GeoFlutterFire _geo = GeoFlutterFire();
   final center = const LatLng(3.8009, -76.6413);
   Map<MarkerId, Marker> events = <MarkerId, Marker>{};
+  Map<PolygonId, Polygon> polygons = <PolygonId, Polygon>{};
   LocationData _lastPos =
       LocationData.fromMap({"latitude": 3.8, "longitude": -76.6});
   final radius = 20.0; // km
+  Logger l = Logger(level: Level.info);
 
-  void _fetchPolygonsAndAreas(double rad) {
-    geoStream = _pos.switchMap((pos) {
-      var collectionReference = _repository.eventsListQuery();
-      GeoFirePoint centerGeo =
-          _geo.point(latitude: pos.latitude!, longitude: pos.longitude!);
-      return _geo
-          .collection(collectionRef: collectionReference)
-          .within(center: centerGeo, radius: rad, field: 'eventJson.location');
-    });
+  void setContext(BuildContext context) {
+    _context = context;
   }
 
   Future<void> onMapCreated(GoogleMapController controller) async {
@@ -51,19 +54,59 @@ class GuideBloc implements Bloc {
     _mapController = controller;
     _getJsonFile("assets/json/map_style.json")
         .then((value) => _setMapStyle(value, _mapController));
-    _fetchPolygonsAndAreas(radius);
+    eventsList().listen((event) {
+      polygons.clear();
+      for (var docSnap in event.docs) {
+        List<dynamic> locationField = docSnap["eventJson"]["location"];
+        String id = docSnap.id;
+        String name = docSnap["eventJson"]["name"];
+        String description = docSnap["eventJson"]["description"];
+        final List<LatLng> polyPoints = [];
+
+        for (var point in locationField) {
+          final geoPoint = point["geoPoint"] as GeoPoint;
+          LatLng geoPointLL = LatLng(geoPoint.latitude, geoPoint.longitude);
+          polyPoints.add(geoPointLL);
+        }
+
+        Polygon newPolygon = Polygon(
+          polygonId: PolygonId(id),
+          points: polyPoints,
+          fillColor: lightScheme.primary.withAlpha(64),
+          strokeColor: lightScheme.primary,
+          strokeWidth: 2,
+          consumeTapEvents: true,
+          onTap: () => {
+            Navigator.of(_context).push(
+              MaterialPageRoute(
+                builder: (context) => EventDetailsScreen(
+                  name: name,
+                  description: description,
+                  entryFee: docSnap["eventJson"]["entryFee"],
+                  startDate: docSnap["eventJson"]["startDate"],
+                  city: docSnap["eventJson"]["city"],
+                  eventType: docSnap["eventJson"]["eventType"],
+                  endDate: docSnap["eventJson"]["endDate"],
+                  imagePath: docSnap["eventJson"]["imagePath"],
+                  hasAR: docSnap["eventJson"]["hasAR"],
+                ),
+              ),
+            ),
+          },
+        );
+
+        polygons[newPolygon.polygonId] = newPolygon;
+      }
+      changePolygonAreas(polygons);
+    });
     _location.onLocationChanged.listen((location) {
       _pos.add(location);
       _lastPos = location;
-      _fetchPolygonsAndAreas(radius);
     });
-    geoStream.listen((List<DocumentSnapshot> documentList) {
-      _updateMarkers(documentList);
-    });
-    eventMarkers.listen((events) {
+    polygonAreas.listen((events) {
       _showARButton.add(false);
-      for (Marker event in events.values) {
-        if (isAtEvent(160, event)) {
+      for (Polygon event in events.values) {
+        if (isWithinPolygon(event)) {
           _showARButton.add(true);
           break;
         }
@@ -75,30 +118,13 @@ class GuideBloc implements Bloc {
     mapController.setMapStyle(mapStyle);
   }
 
-  void _updateMarkers(List<DocumentSnapshot> documentList) {
-    events.clear();
-    for (var document in documentList) {
-      GeoPoint point = document["eventJson"]["location"]["geopoint"];
-      double lat = point.latitude;
-      double lng = point.longitude;
-      String name = document["eventJson"]["name"];
-      // String description = document["eventJson"]["description"];
-
-      final marker = Marker(
-        markerId: MarkerId(name),
-        position: LatLng(lat, lng),
-      );
-
-      events[marker.markerId] = marker;
-    }
-    changeEventMarkers(events);
-  }
-
-  bool isAtEvent(double radius, Marker marker) {
-    if (mtkt.SphericalUtil.computeDistanceBetween(
-            mtkt.LatLng(marker.position.latitude, marker.position.longitude),
-            mtkt.LatLng(_lastPos.latitude!, _lastPos.longitude!)) <
-        radius) {
+  bool isWithinPolygon(Polygon polygon) {
+    if (mtkt.PolygonUtil.containsLocation(
+        mtkt.LatLng(_lastPos.latitude!, _lastPos.longitude!),
+        polygon.points
+            .map((e) => mtkt.LatLng(e.latitude, e.longitude))
+            .toList(),
+        false)) {
       _showARButton.add(true);
       return true;
     }
@@ -144,7 +170,6 @@ class GuideBloc implements Bloc {
   Future<void> dispose() async {
     await _location.onLocationChanged.drain();
     _mapController.dispose();
-    await geoStream.drain();
     await _eventMarkers.drain();
     _eventMarkers.close();
     await _pos.drain();

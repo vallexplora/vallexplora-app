@@ -129,8 +129,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                           onPressed: () {
                             if ((snapshot.data ?? 0) == 2) {
-                              Navigator.push(
-                                context,
+                              Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         const HomeContainerScreen()),

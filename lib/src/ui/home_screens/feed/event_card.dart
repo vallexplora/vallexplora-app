@@ -66,8 +66,7 @@ class _EventCardState extends State<EventCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
+      onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
           builder: (context) => EventDetailsScreen(
             name: name,
