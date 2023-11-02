@@ -20,4 +20,16 @@ class VTextFieldTheme {
     prefixIconColor: lightScheme.primary,
     suffixIconColor: lightScheme.primary,
   );
+
+  static InputDecorationTheme lightInputFilledDecorationTheme =
+      InputDecorationTheme(
+    border: OutlineInputBorder(
+      borderRadius: const BorderRadius.all(Radius.circular(8)),
+      borderSide: BorderSide(
+        color: lightScheme.outline,
+      ),
+    ),
+    prefixIconColor: lightScheme.primary,
+    suffixIconColor: lightScheme.primary,
+  );
 }

@@ -312,5 +312,21 @@
     "sEventDetailMapButtonLabel": "Mostrar en el mapa",
     "@sEventDetailMapButtonLabel": {
         "description": "Used in the event detail screen. The view on map button label."
+    },
+    "sProfileUsername": "Editando nombre de usuario: ",
+    "@sProfileUsername": {
+        "description": "Used in the profile screen. The username edit textfield hint."
+    },
+    "sProfileVisited": "He visitado",
+    "@sProfileVisited": {
+        "description": "Used in the profile screen. The hint label for the ammount of towns visited."
+    },
+    "sProfileTowns": "Municipios",
+    "@sProfileTowns": {
+        "description": "Used in the profile screen. The accompanying label for the ammount of towns visited."
+    },
+    "sProfileOrigin": "Soy de",
+    "@sProfileOrigin": {
+        "description": "Used in the profile screen. The hint label for the place of origin."
     }
 }

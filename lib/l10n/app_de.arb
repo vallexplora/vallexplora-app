@@ -74,5 +74,9 @@
     "sEventDetailTypeTooltip": "Dies is ein Ereignis {type, select, 1{für Sport und Unterhaltung} 2{der Gastronomie} 3{der Geschichte un Architektur} 4{der Kunst und Kultur} 5{der Ökotourismus} other{der Kategorie \"unbekannt\"}}",
     "sEventDetailARButtonLabel": "In AR anzeigen",
     "sEventDetailARUnavailable": "AR nicht verfügbar",
-    "sEventDetailMapButtonLabel": "In Karte sehen"
+    "sEventDetailMapButtonLabel": "In Karte sehen",
+    "sProfileUsername": "Benutzername bearbeiten: ",
+    "sProfileVisited": "Ich war schon in",
+    "sProfileTowns": "Städte",
+    "sProfileOrigin": "Ich komme aus"
 }

@@ -74,5 +74,9 @@
     "sEventDetailTypeTooltip": "This is {type, select, 1{a Sports and Shows} 2{a Gastronomy} 3{a History and Architecture} 4{an Art and Culture} 5{an Ecotourism} other{an unknown category}} event",
     "sEventDetailARButtonLabel": "View in AR",
     "sEventDetailARUnavailable": "AR unavailable",
-    "sEventDetailMapButtonLabel": "Show on map"
+    "sEventDetailMapButtonLabel": "Show on map",
+    "sProfileUsername": "Editing username: ",
+    "sProfileVisited": "I've been to",
+    "sProfileTowns": "Towns",
+    "sProfileOrigin": "I'm from"
 }

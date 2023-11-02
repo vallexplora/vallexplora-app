@@ -1,24 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:vallexplora/src/constants/text_strings.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../constants/asset_uris.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
 class HeadingSection extends StatefulWidget {
   final String username;
+  final ValueSetter<String> changeUsername;
+  final VoidCallback uploadUsername;
   final Future<String> profilePictureURL;
   final String googlePictureURL;
   final int municipalitiesVisited;
   final String origin;
+  final bool isGoogleAccount;
+  final Stream<bool> editingUsername;
+  final ValueSetter<bool> changeEditingUsername;
 
   const HeadingSection({
     super.key,
     required this.username,
+    required this.changeUsername,
+    required this.uploadUsername,
     required this.profilePictureURL,
     required this.googlePictureURL,
     required this.municipalitiesVisited,
     required this.origin,
+    required this.isGoogleAccount,
+    required this.editingUsername,
+    required this.changeEditingUsername,
   });
 
   @override
@@ -27,19 +36,30 @@ class HeadingSection extends StatefulWidget {
 
 class _HeadingSectionState extends State<HeadingSection> {
   late String username;
+  late ValueSetter<String> changeUsername;
+  late VoidCallback uploadUsername;
   late Future<String> profilePictureURL;
   late String googlePictureURL;
   late int municipalitiesVisited;
   late String origin;
+  late bool isGoogleAccount;
+  late Stream<bool> editingUsername;
+  late ValueSetter<bool> changeEditingUsername;
+  final _textController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     username = widget.username;
+    changeUsername = widget.changeUsername;
+    uploadUsername = widget.uploadUsername;
     profilePictureURL = widget.profilePictureURL;
     googlePictureURL = widget.googlePictureURL;
     municipalitiesVisited = widget.municipalitiesVisited;
     origin = widget.origin;
+    isGoogleAccount = widget.isGoogleAccount;
+    editingUsername = widget.editingUsername;
+    changeEditingUsername = widget.changeEditingUsername;
   }
 
   @override
@@ -80,26 +100,59 @@ class _HeadingSectionState extends State<HeadingSection> {
                   );
                 }),
             const SizedBox(height: SizeResources.smallHeight),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  username,
-                  style: Theme.of(context)
-                      .textTheme
-                      .titleLarge!
-                      .merge(TextStyle(color: neutralRef.value60)),
-                ),
-                const SizedBox(
-                  width: SizeResources.smallHeight,
-                ),
-                Icon(
-                  Icons.edit_outlined,
-                  color: primaryRef.value50,
-                ),
-              ],
-            ),
+            StreamBuilder<bool>(
+                stream: editingUsername,
+                builder: (context, snapshot) {
+                  return TextFormField(
+                    controller: _textController,
+                    autofillHints: const [
+                      AutofillHints.username,
+                    ],
+                    scrollPadding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom +
+                          Theme.of(context).buttonTheme.height * 8,
+                    ),
+                    decoration: InputDecoration(
+                      label: (snapshot.hasData &&
+                              snapshot.data != null &&
+                              snapshot.data!)
+                          ? Text(
+                              "${AppLocalizations.of(context)!.sProfileUsername}$username")
+                          : Center(
+                              child: Text(username),
+                            ),
+                      suffixIcon: (snapshot.hasData &&
+                              snapshot.data != null &&
+                              snapshot.data!)
+                          ? IconButton(
+                              icon: const Icon(Icons.save_outlined),
+                              onPressed: () {
+                                if (_textController.text.isNotEmpty) {
+                                  changeEditingUsername(false);
+                                  uploadUsername();
+                                  username = _textController.text;
+                                  _textController.clear();
+                                  setState(() {});
+                                }
+                              },
+                            )
+                          : const Icon(Icons.edit_outlined),
+                      enabledBorder: const UnderlineInputBorder(),
+                      focusedBorder: const UnderlineInputBorder(),
+                    ),
+                    onChanged: (value) {
+                      changeUsername(value);
+                    },
+                    onTap: () {
+                      changeEditingUsername(true);
+                    },
+                    onTapOutside: (event) {
+                      changeEditingUsername(false);
+                      changeUsername("");
+                      _textController.clear();
+                    },
+                  );
+                }),
           ],
         ),
         const SizedBox(
@@ -109,97 +162,67 @@ class _HeadingSectionState extends State<HeadingSection> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              height: SizeResources.smallCardContainerHeight,
-              width: SizeResources.smallCardContainerHeight,
-              decoration: ShapeDecoration(
-                color: primaryRef.value50,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    SizeResources.defaultBorderRadius,
-                  ),
-                  side: BorderSide(
-                    color: primaryRef.value50,
-                  ),
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    StringResources.profileVisitedMunicipalities,
-                    style: Theme.of(context).textTheme.bodySmall!.merge(
-                          const TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                  ),
-                  const SizedBox(
-                    height: SizeResources.smallHeight,
-                  ),
-                  Text(
-                    municipalitiesVisited.toString(),
-                    style: Theme.of(context).textTheme.displayMedium!.merge(
-                          TextStyle(
-                            color: primaryRef.value92,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                  ),
-                ],
-              ),
-            ),
+            _cardBuilder(
+                title: AppLocalizations.of(context)!.sProfileVisited,
+                sub:
+                    "$municipalitiesVisited ${AppLocalizations.of(context)!.sProfileTowns}"),
             const SizedBox(
               width: 16,
             ),
-            Container(
-              height: SizeResources.smallCardContainerHeight,
-              width: SizeResources.smallCardContainerHeight,
-              decoration: ShapeDecoration(
-                color: primaryRef.value50,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(
-                    SizeResources.defaultBorderRadius,
-                  ),
-                  side: BorderSide(
-                    color: primaryRef.value50,
-                  ),
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    StringResources.profileOriginPlace,
-                    style: Theme.of(context).textTheme.bodySmall!.merge(
-                          const TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                  ),
-                  const SizedBox(
-                    height: SizeResources.smallHeight,
-                  ),
-                  Text(
-                    origin,
-                    style: Theme.of(context).textTheme.displayMedium!.merge(
-                          TextStyle(
-                            color: primaryRef.value92,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                  ),
-                ],
-              ),
-            ),
+            _cardBuilder(
+                title: AppLocalizations.of(context)!.sProfileOrigin,
+                sub: origin),
           ],
         ),
         const Divider(
-          height: SizeResources.defaultDividerHeight,
+          height: 32,
         ),
       ],
+    );
+  }
+
+  Widget _cardBuilder({required String title, required String sub}) {
+    return Expanded(
+      child: Container(
+        height: 96,
+        decoration: ShapeDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide(
+              color: Theme.of(context).colorScheme.inversePrimary,
+            ),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleMedium!.merge(
+                      TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                    ),
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Text(
+                sub,
+                style: Theme.of(context).textTheme.bodyMedium!.merge(
+                      TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

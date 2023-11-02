@@ -46,7 +46,7 @@ class FirestoreResources {
       _firestore
           .collection("users")
           .doc(id)
-          .set({"isplayName": username}, SetOptions(merge: true));
+          .set({"displayName": username}, SetOptions(merge: true));
 
   Future<void> updateEmail({required String id, required String email}) async =>
       _firestore

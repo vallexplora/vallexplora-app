@@ -5,7 +5,6 @@ import 'package:vallexplora/src/constants/sizes.dart';
 import 'package:vallexplora/src/ui/profile/heading_section.dart';
 import 'package:vallexplora/src/ui/profile/notifications_danger_zone.dart';
 import 'package:vallexplora/src/ui/profile/personal_information.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/user_model.dart';
 
@@ -22,8 +21,6 @@ class _ProfileScreen extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _bloc.changeNotificationsGeo(false);
-    _bloc.changeNotificationsGlobal(false);
   }
 
   @override
@@ -63,7 +60,7 @@ class _ProfileScreen extends State<ProfileScreen> {
               _bloc.changeNotificationsGlobal(
                   userSnapshot.data!.globalNotifications);
               return DraggableScrollableSheet(
-                initialChildSize: 0.7,
+                initialChildSize: 0.85,
                 minChildSize: 0.5,
                 builder: (_, controller) => Container(
                   decoration: const BoxDecoration(
@@ -81,9 +78,8 @@ class _ProfileScreen extends State<ProfileScreen> {
                       FocusManager.instance.primaryFocus?.unfocus();
                     },
                     child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 16,
-                        right: 16,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
                       ),
                       child: ListView(
                         physics: const BouncingScrollPhysics(
@@ -115,6 +111,8 @@ class _ProfileScreen extends State<ProfileScreen> {
                             children: [
                               HeadingSection(
                                 username: userSnapshot.data!.displayName,
+                                changeUsername: _bloc.changeUsername,
+                                uploadUsername: _bloc.uploadUsername,
                                 profilePictureURL:
                                     _bloc.getProfilePictureDownloadURL(
                                         userSnapshot.data!.pictureURL),
@@ -122,6 +120,10 @@ class _ProfileScreen extends State<ProfileScreen> {
                                 municipalitiesVisited:
                                     userSnapshot.data!.municipalitiesVisited,
                                 origin: userSnapshot.data!.origin,
+                                isGoogleAccount: _bloc.isGoogleAccount(),
+                                editingUsername: _bloc.editingUsername,
+                                changeEditingUsername:
+                                    _bloc.changeEditingUsername,
                               ),
                               PersonalInformation(
                                 username: userSnapshot.data!.displayName,

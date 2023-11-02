@@ -9,10 +9,8 @@ import 'package:vallexplora/src/resources/repository.dart';
 
 import '../bloc.dart';
 
-
 class ProfileBloc implements Bloc {
   final _repository = Repository();
-
 
   final _email = BehaviorSubject<String>();
   final _username = BehaviorSubject<String>();
@@ -22,12 +20,13 @@ class ProfileBloc implements Bloc {
   final _pictureURL = BehaviorSubject<String>();
   final _originPlace = BehaviorSubject<String>();
   final _municipalitiesVisited = BehaviorSubject<int>();
-  final _notificationsGlobal = BehaviorSubject<bool>();
-  final _notificationsGeo = BehaviorSubject<bool>();
+  final _notificationsGlobal = BehaviorSubject<bool>.seeded(false);
+  final _notificationsGeo = BehaviorSubject<bool>.seeded(false);
   final _deleteAccountStep = BehaviorSubject<int>();
-  final _passwordVissible = BehaviorSubject<bool>();
-  final _confirmPasswordVissible = BehaviorSubject<bool>();
-  final _newPasswordVisible = BehaviorSubject<bool>();
+  final _passwordVissible = BehaviorSubject<bool>.seeded(false);
+  final _confirmPasswordVissible = BehaviorSubject<bool>.seeded(false);
+  final _newPasswordVisible = BehaviorSubject<bool>.seeded(false);
+  final _editingUsername = BehaviorSubject<bool>.seeded(false);
 
   Stream<String> get email => _email.stream;
   Stream<String> get username => _username.stream;
@@ -43,6 +42,7 @@ class ProfileBloc implements Bloc {
   Stream<bool> get passwordVisible => _passwordVissible.stream;
   Stream<bool> get confirmPasswordVisible => _confirmPasswordVissible.stream;
   Stream<bool> get newPasswordVisible => _newPasswordVisible.stream;
+  Stream<bool> get editingUsername => _editingUsername.stream;
 
   Function(String) get changeEmail => _email.sink.add;
   Function(String) get changeUsername => _username.sink.add;
@@ -58,6 +58,7 @@ class ProfileBloc implements Bloc {
   Function(bool) get changeConfirmPasswordVisible =>
       _confirmPasswordVissible.sink.add;
   Function(bool) get changeNewPasswordVisible => _newPasswordVisible.sink.add;
+  Function(bool) get changeEditingUsername => _editingUsername.sink.add;
 
   User get _user => _repository.getCurrentUser();
 
@@ -74,7 +75,7 @@ class ProfileBloc implements Bloc {
 
   String getDownloadedPicURL() {
     if (isGoogleAccount()) {
-      return _user.photoURL!;
+      return _user.photoURL!.replaceAll(RegExp(r"\=s96\-c$"), "=s512-c");
     }
     return "";
   }
@@ -94,6 +95,14 @@ class ProfileBloc implements Bloc {
   void updateNotificationsGeo(bool value) => _repository
       .updateNotificationsGeo(value)
       .then((_) => changeNotificationsGeo(value));
+
+  Future<String> getProfilePictureDownloadURL(String pictureURL) {
+    return FirebaseStorage.instance
+        .ref()
+        .child(pictureURL)
+        .getDownloadURL()
+        .onError((error, stackTrace) => "");
+  }
 
   @override
   void dispose() async {
@@ -125,13 +134,7 @@ class ProfileBloc implements Bloc {
     _confirmPasswordVissible.close();
     await _newPasswordVisible.drain();
     _newPasswordVisible.close();
-  }
-
-  Future<String> getProfilePictureDownloadURL(String pictureURL) {
-    return FirebaseStorage.instance
-        .ref()
-        .child(pictureURL)
-        .getDownloadURL()
-        .onError((error, stackTrace) => "");
+    await _editingUsername.drain();
+    _editingUsername.close();
   }
 }
