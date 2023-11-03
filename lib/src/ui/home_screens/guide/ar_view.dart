@@ -34,5 +34,16 @@ class _ARViewState extends State<ARView> {
 
   void onUnityCreated(controller) {
     _unityWidgetController = (controller as UnityWidgetController);
+    _unityWidgetController!.isLoaded()!.then((loaded) {
+      if (!loaded!) {
+        _unityWidgetController!.create();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _unityWidgetController!.dispose();
   }
 }
