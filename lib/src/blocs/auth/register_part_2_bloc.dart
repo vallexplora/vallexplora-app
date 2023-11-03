@@ -13,15 +13,15 @@ class RegisterPart2Bloc extends Bloc {
       <DropdownMenuItem<String>>[];
 
   final _selectedOrigin = BehaviorSubject<String>();
-  final _categoryFilters = BehaviorSubject<List<String>>();
+  final _categoryFilters = BehaviorSubject<List<int>>();
   final _selectedImage = BehaviorSubject<String>();
 
   Stream<String> get selectedOrigin => _selectedOrigin.stream;
-  Stream<List<String>> get categoryFilters => _categoryFilters.stream;
+  Stream<List<int>> get categoryFilters => _categoryFilters.stream;
   Stream<String> get selectedImage => _selectedImage.stream;
 
   Function(String) get changeSelectedOrigin => _selectedOrigin.sink.add;
-  Function(List<String>) get changeCategoryFilters => _categoryFilters.sink.add;
+  Function(List<int>) get changeCategoryFilters => _categoryFilters.sink.add;
   Function(String) get changeSelectedImage => _selectedImage.sink.add;
 
   void initialize() {
@@ -33,7 +33,7 @@ class RegisterPart2Bloc extends Bloc {
     }
   }
 
-  modifyCategoryFilters(String category) {
+  modifyCategoryFilters(int category) {
     categoryFilters.listen((event) {
       if (event.contains(category)) {
         event.remove(category);

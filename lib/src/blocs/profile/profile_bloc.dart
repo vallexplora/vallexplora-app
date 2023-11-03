@@ -27,6 +27,7 @@ class ProfileBloc implements Bloc {
   final _confirmPasswordVissible = BehaviorSubject<bool>.seeded(false);
   final _newPasswordVisible = BehaviorSubject<bool>.seeded(false);
   final _editingUsername = BehaviorSubject<bool>.seeded(false);
+  final _categories = BehaviorSubject<List<int>>();
 
   Stream<String> get email => _email.stream;
   Stream<String> get username => _username.stream;
@@ -43,6 +44,7 @@ class ProfileBloc implements Bloc {
   Stream<bool> get confirmPasswordVisible => _confirmPasswordVissible.stream;
   Stream<bool> get newPasswordVisible => _newPasswordVisible.stream;
   Stream<bool> get editingUsername => _editingUsername.stream;
+  Stream<List<int>> get categories => _categories.stream;
 
   Function(String) get changeEmail => _email.sink.add;
   Function(String) get changeUsername => _username.sink.add;
@@ -51,6 +53,7 @@ class ProfileBloc implements Bloc {
   Function(String) get changeConfirmPassword => _confirmPassword.sink.add;
   Function(String) get changePictureURL => _pictureURL.sink.add;
   Function(String) get changeOriginPlace => _originPlace.sink.add;
+  Function(int) get changeMunicipalities => _municipalitiesVisited.sink.add;
   Function(bool) get changeNotificationsGlobal => _notificationsGlobal.sink.add;
   Function(bool) get changeNotificationsGeo => _notificationsGeo.sink.add;
   Function(int) get changeDeleteAccountStep => _deleteAccountStep.sink.add;
@@ -59,18 +62,29 @@ class ProfileBloc implements Bloc {
       _confirmPasswordVissible.sink.add;
   Function(bool) get changeNewPasswordVisible => _newPasswordVisible.sink.add;
   Function(bool) get changeEditingUsername => _editingUsername.sink.add;
+  Function(List<int>) get changeCategories => _categories.sink.add;
 
   User get _user => _repository.getCurrentUser();
 
   Future<Stream<UserModel>> getUserInfo() async {
-    Stream<DocumentSnapshot<Map<String, dynamic>>> rawUserInfo =
-        await _repository.getUserInfo(_repository.getUserUID());
+    Future<Stream<DocumentSnapshot<Map<String, dynamic>>>> rawUserInfo =
+        _repository.getUserInfo(_repository.getUserUID());
 
-    return rawUserInfo.map(UserModel.fromDocument);
+    return (await rawUserInfo).map(UserModel.fromDocument);
   }
 
   bool isGoogleAccount() {
     return _user.providerData[0].providerId == "google.com";
+  }
+
+  modifyCategoryFilters(int category) {
+    categories.listen((event) {
+      if (event.contains(category)) {
+        event.remove(category);
+      } else if (event.length != 3) {
+        event.add(category);
+      }
+    });
   }
 
   String getDownloadedPicURL() {
@@ -102,6 +116,16 @@ class ProfileBloc implements Bloc {
         .child(pictureURL)
         .getDownloadURL()
         .onError((error, stackTrace) => "");
+  }
+
+  void uploadStreams() {
+    _repository.updateProfile(
+        _username.value,
+        _municipalitiesVisited.value,
+        _originPlace.value,
+        _categories.value,
+        _notificationsGeo.value,
+        _notificationsGlobal.value);
   }
 
   @override

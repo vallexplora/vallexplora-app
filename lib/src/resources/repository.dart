@@ -76,6 +76,10 @@ class Repository {
   Future<void> uploadUsername(String username) async =>
       _dbResources.updateUsername(id: await getUserUID(), username: username);
 
+      Future<void> updateProfile(String username, int visitedMunicipalities, String origin, List<int> interests, bool geoNotifications, bool globalNotifications) async {
+        _dbResources.updateProfile(id: await getUserUID(), username: username, origin: origin, interests: interests.cast<dynamic>(), geoNotifications: geoNotifications, globalNotifications: globalNotifications);
+      }
+
   Future<void> updateNotificationsGlobal(bool value) async {
     _dbResources.updateGlobalNotifications(
         id: await _authResources.getUserUID(), value: value);
@@ -90,7 +94,7 @@ class Repository {
     return _dbResources.eventsListQuery();
   }
 
-  Future<void> addUserMetaData(List<String> interests, String origin, String? pictureURL) async {
+  Future<void> addUserMetaData(List<int> interests, String origin, String? pictureURL) async {
     return _dbResources.addUserMetaData(await getUserUID(), interests, origin, pictureURL);
   }
 

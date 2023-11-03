@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:vallexplora/src/ui/register/onboarding_screen.dart';
 import 'package:vallexplora/src/utils/theme/color_schemes.dart';
-
+import "package:vallexplora/src/constants/event_types.dart";
 import 'package:vallexplora/src/blocs/auth/register_part_2_bloc.dart';
 import 'package:vallexplora/src/utils/theme/extended.dart';
 
@@ -220,7 +220,7 @@ class _RegisterPart2ScreenState extends State<RegisterPart2Screen> {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 const SizedBox(height: 16),
-                StreamBuilder<List<String>>(
+                StreamBuilder<List<int>>(
                   stream: _bloc.categoryFilters,
                   builder: (context, categorySnapshot) {
                     if (categorySnapshot.connectionState ==
@@ -246,12 +246,11 @@ class _RegisterPart2ScreenState extends State<RegisterPart2Screen> {
                             label: Text(
                                 AppLocalizations.of(context)!.gSportsCategory),
                             selected: categorySnapshot.data!.contains(
-                                AppLocalizations.of(context)!.gSportsCategory),
+                                EventTypeInformation.infoNumberMap(context)[AppLocalizations.of(context)!.gSportsCategory]),
                             onSelected: (value) {
                               setState(() {});
                               _bloc.modifyCategoryFilters(
-                                  AppLocalizations.of(context)!
-                                      .gSportsCategory);
+                                  EventTypeInformation.infoNumberMap(context)[AppLocalizations.of(context)!.gSportsCategory]);
                             },
                             selectedColor: (Theme.of(context)
                                     .extensions
@@ -278,11 +277,11 @@ class _RegisterPart2ScreenState extends State<RegisterPart2Screen> {
                             label: Text(
                                 AppLocalizations.of(context)!.gEcoCategory),
                             selected: categorySnapshot.data!.contains(
-                                AppLocalizations.of(context)!.gEcoCategory),
+                                EventTypeInformation.infoNumberMap(context)[AppLocalizations.of(context)!.gEcoCategory]),
                             onSelected: (value) {
                               setState(() {});
                               _bloc.modifyCategoryFilters(
-                                  AppLocalizations.of(context)!.gEcoCategory);
+                                  EventTypeInformation.infoNumberMap(context)[AppLocalizations.of(context)!.gEcoCategory]);
                             },
                             selectedColor: (Theme.of(context)
                                     .extensions
@@ -309,11 +308,11 @@ class _RegisterPart2ScreenState extends State<RegisterPart2Screen> {
                             label: Text(
                                 AppLocalizations.of(context)!.gArtCategory),
                             selected: categorySnapshot.data!.contains(
-                                AppLocalizations.of(context)!.gArtCategory),
+                                EventTypeInformation.infoNumberMap(context)[AppLocalizations.of(context)!.gArtCategory]),
                             onSelected: (value) {
                               setState(() {});
                               _bloc.modifyCategoryFilters(
-                                  AppLocalizations.of(context)!.gArtCategory);
+                                  EventTypeInformation.infoNumberMap(context)[AppLocalizations.of(context)!.gArtCategory]);
                             },
                             selectedColor: (Theme.of(context)
                                     .extensions
@@ -340,12 +339,11 @@ class _RegisterPart2ScreenState extends State<RegisterPart2Screen> {
                             label: Text(
                                 AppLocalizations.of(context)!.gGastroCategory),
                             selected: categorySnapshot.data!.contains(
-                                AppLocalizations.of(context)!.gGastroCategory),
+                                EventTypeInformation.infoNumberMap(context)[AppLocalizations.of(context)!.gGastroCategory]),
                             onSelected: (value) {
                               setState(() {});
                               _bloc.modifyCategoryFilters(
-                                  AppLocalizations.of(context)!
-                                      .gGastroCategory);
+                                  EventTypeInformation.infoNumberMap(context)[AppLocalizations.of(context)!.gGastroCategory]);
                             },
                             selectedColor: (Theme.of(context)
                                     .extensions
@@ -372,12 +370,11 @@ class _RegisterPart2ScreenState extends State<RegisterPart2Screen> {
                             label: Text(
                                 AppLocalizations.of(context)!.gHistoryCategory),
                             selected: categorySnapshot.data!.contains(
-                                AppLocalizations.of(context)!.gHistoryCategory),
+                                EventTypeInformation.infoNumberMap(context)[AppLocalizations.of(context)!.gHistoryCategory]),
                             onSelected: (value) {
                               setState(() {});
                               _bloc.modifyCategoryFilters(
-                                  AppLocalizations.of(context)!
-                                      .gHistoryCategory);
+                                  EventTypeInformation.infoNumberMap(context)[AppLocalizations.of(context)!.gHistoryCategory]);
                             },
                             selectedColor: (Theme.of(context)
                                     .extensions

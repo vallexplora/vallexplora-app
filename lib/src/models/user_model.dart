@@ -9,6 +9,7 @@ class UserModel {
   int municipalitiesVisited;
   bool globalNotifications;
   bool geoNotifications;
+  List<dynamic> interests;
 
   UserModel({
     required this.displayName,
@@ -19,6 +20,7 @@ class UserModel {
     required this.municipalitiesVisited,
     required this.globalNotifications,
     required this.geoNotifications,
+    required this.interests,
   });
 
   static UserModel fromDocument(
@@ -32,6 +34,7 @@ class UserModel {
       globalNotifications: document['globalNotifications'],
       geoNotifications: document['geoNotifications'],
       pictureURL: document['pictureURL'],
+      interests: document['interests'],
     );
   }
 }

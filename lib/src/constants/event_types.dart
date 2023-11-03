@@ -29,6 +29,14 @@ class EventTypeInformation {
             icon: Icons.eco_outlined,
             text: AppLocalizations.of(context)!.gEcoCategory),
       };
+
+      static Map<String, dynamic> infoNumberMap(context) => {
+        AppLocalizations.of(context)!.gSportsCategory: 1,
+        AppLocalizations.of(context)!.gGastroCategory: 2,
+        AppLocalizations.of(context)!.gHistoryCategory: 3,
+        AppLocalizations.of(context)!.gArtCategory: 4,
+        AppLocalizations.of(context)!.gEcoCategory: 5,
+      };
 }
 
 Map<int, ExtendedColor> eventTypeColors(context) => {

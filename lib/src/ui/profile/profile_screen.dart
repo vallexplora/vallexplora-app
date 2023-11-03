@@ -24,6 +24,12 @@ class _ProfileScreen extends State<ProfileScreen> {
   }
 
   @override
+  void dispose() {
+    _bloc.uploadStreams();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Widget makeDismissable({required Widget child}) => GestureDetector(
           behavior: HitTestBehavior.opaque,
@@ -53,12 +59,19 @@ class _ProfileScreen extends State<ProfileScreen> {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
-              } else if (snapshot.hasError || !snapshot.hasData) {
-                return Text("Error: ${snapshot.error}");
+              } else if (userSnapshot.hasError ||
+                  !userSnapshot.hasData ||
+                  userSnapshot.data == null) {
+                return Center(child: Text("Error: ${userSnapshot.error}"));
               }
               _bloc.changeNotificationsGeo(userSnapshot.data!.geoNotifications);
               _bloc.changeNotificationsGlobal(
                   userSnapshot.data!.globalNotifications);
+              _bloc.changeCategories(userSnapshot.data!.interests.cast());
+              _bloc.changeUsername(userSnapshot.data!.displayName);
+              _bloc.changeMunicipalities(
+                  userSnapshot.data!.municipalitiesVisited);
+              _bloc.changeOriginPlace(userSnapshot.data!.origin);
               return DraggableScrollableSheet(
                 initialChildSize: 0.85,
                 minChildSize: 0.5,
@@ -79,7 +92,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
+                        horizontal: 16,
                       ),
                       child: ListView(
                         physics: const BouncingScrollPhysics(
@@ -112,13 +125,13 @@ class _ProfileScreen extends State<ProfileScreen> {
                               HeadingSection(
                                 username: userSnapshot.data!.displayName,
                                 changeUsername: _bloc.changeUsername,
-                                uploadUsername: _bloc.uploadUsername,
                                 profilePictureURL:
                                     _bloc.getProfilePictureDownloadURL(
                                         userSnapshot.data!.pictureURL),
                                 googlePictureURL: _bloc.getDownloadedPicURL(),
                                 municipalitiesVisited:
-                                    userSnapshot.data!.municipalitiesVisited,
+                                    userSnapshot.data?.municipalitiesVisited ??
+                                        0,
                                 origin: userSnapshot.data!.origin,
                                 isGoogleAccount: _bloc.isGoogleAccount(),
                                 editingUsername: _bloc.editingUsername,
@@ -126,36 +139,17 @@ class _ProfileScreen extends State<ProfileScreen> {
                                     _bloc.changeEditingUsername,
                               ),
                               PersonalInformation(
-                                username: userSnapshot.data!.displayName,
-                                email: userSnapshot.data!.email,
-                                changeUsername: _bloc.changeUsername,
-                                uploadUsername: _bloc.uploadUsername,
-                                newPasswordVisible: _bloc.newPasswordVisible,
-                                changeNewPasswordVisible:
-                                    _bloc.changeNewPasswordVisible,
-                                confirmPasswordVisible:
-                                    _bloc.confirmPasswordVisible,
-                                changeConfirmPasswordVisible:
-                                    _bloc.changeConfirmPasswordVisible,
-                                passwordVisible: _bloc.passwordVisible,
-                                changePasswordVisible:
-                                    _bloc.changePasswordVisible,
-                                changeNewPassword: _bloc.changeNewPassword,
-                                changeConfirmPassword:
-                                    _bloc.changeConfirmPassword,
-                                changePassword: _bloc.changePassword,
-                                uploadPassword: _bloc.uploadPassword,
-                                changeEmail: _bloc.changeEmail,
-                                uploadEmail: _bloc.uploadEmail,
-                                isGoogleAccount: _bloc.isGoogleAccount(),
+                                categories: _bloc.categories,
+                                modifyCategoryFilters:
+                                    _bloc.modifyCategoryFilters,
                               ),
-                              NotificationsDangerZone(
+                              TogglesAndDangerZone(
                                 notificationsGlobal: _bloc.notificationsGlobal,
                                 changeNotificationsGlobal:
-                                    _bloc.updateNotificationsGlobal,
+                                    _bloc.changeNotificationsGlobal,
                                 notificationsGeo: _bloc.notificationsGeo,
                                 changeNotificationsGeo:
-                                    _bloc.updateNotificationsGeo,
+                                    _bloc.changeNotificationsGeo,
                                 deleteAccountStep: _bloc.deleteAccountStep,
                                 changeDeleteAccountStep:
                                     _bloc.changeDeleteAccountStep,

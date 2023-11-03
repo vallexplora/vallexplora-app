@@ -7,7 +7,6 @@ import '../../constants/sizes.dart';
 class HeadingSection extends StatefulWidget {
   final String username;
   final ValueSetter<String> changeUsername;
-  final VoidCallback uploadUsername;
   final Future<String> profilePictureURL;
   final String googlePictureURL;
   final int municipalitiesVisited;
@@ -20,7 +19,6 @@ class HeadingSection extends StatefulWidget {
     super.key,
     required this.username,
     required this.changeUsername,
-    required this.uploadUsername,
     required this.profilePictureURL,
     required this.googlePictureURL,
     required this.municipalitiesVisited,
@@ -37,7 +35,6 @@ class HeadingSection extends StatefulWidget {
 class _HeadingSectionState extends State<HeadingSection> {
   late String username;
   late ValueSetter<String> changeUsername;
-  late VoidCallback uploadUsername;
   late Future<String> profilePictureURL;
   late String googlePictureURL;
   late int municipalitiesVisited;
@@ -52,7 +49,6 @@ class _HeadingSectionState extends State<HeadingSection> {
     super.initState();
     username = widget.username;
     changeUsername = widget.changeUsername;
-    uploadUsername = widget.uploadUsername;
     profilePictureURL = widget.profilePictureURL;
     googlePictureURL = widget.googlePictureURL;
     municipalitiesVisited = widget.municipalitiesVisited;
@@ -129,7 +125,6 @@ class _HeadingSectionState extends State<HeadingSection> {
                               onPressed: () {
                                 if (_textController.text.isNotEmpty) {
                                   changeEditingUsername(false);
-                                  uploadUsername();
                                   username = _textController.text;
                                   _textController.clear();
                                   setState(() {});
@@ -148,7 +143,7 @@ class _HeadingSectionState extends State<HeadingSection> {
                     },
                     onTapOutside: (event) {
                       changeEditingUsername(false);
-                      changeUsername("");
+                      changeUsername(username);
                       _textController.clear();
                     },
                   );

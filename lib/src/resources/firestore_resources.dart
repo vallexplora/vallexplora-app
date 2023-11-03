@@ -54,6 +54,23 @@ class FirestoreResources {
           .doc(id)
           .set({"email": email}, SetOptions(merge: true));
 
+  void updateProfile({
+    required String id,
+    required String username,
+    required String origin,
+    required List<dynamic> interests,
+    required bool globalNotifications,
+    required bool geoNotifications,
+  }) {
+    _firestore.collection("users").doc(id).set({
+      "globalNotifications": globalNotifications,
+      "geoNotifications": geoNotifications,
+      "displayName": username,
+      "origin": origin,
+      "interests": interests
+    }, SetOptions(merge: true));
+  }
+
   void updateGlobalNotifications({required String id, required bool value}) =>
       _firestore
           .collection("users")
@@ -70,8 +87,8 @@ class FirestoreResources {
     return _firestore.collection("events");
   }
 
-  Future<void> addUserMetaData(String id, List<String> interests, String origin,
-      String? pictureURL) async {
+  Future<void> addUserMetaData(
+      String id, List<int> interests, String origin, String? pictureURL) async {
     var ending = "";
     if (pictureURL != null && pictureURL.isNotEmpty) {
       ending = pictureURL.split(".").last;

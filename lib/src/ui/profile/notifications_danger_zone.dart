@@ -4,7 +4,7 @@ import 'package:vallexplora/src/constants/text_strings.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
-class NotificationsDangerZone extends StatefulWidget {
+class TogglesAndDangerZone extends StatefulWidget {
   final Stream<bool> notificationsGlobal;
   final ValueSetter<bool> changeNotificationsGlobal;
   final Stream<bool> notificationsGeo;
@@ -12,7 +12,7 @@ class NotificationsDangerZone extends StatefulWidget {
   final Stream<int> deleteAccountStep;
   final ValueSetter<int> changeDeleteAccountStep;
 
-  const NotificationsDangerZone({
+  const TogglesAndDangerZone({
     super.key,
     required this.notificationsGlobal,
     required this.changeNotificationsGlobal,
@@ -23,10 +23,10 @@ class NotificationsDangerZone extends StatefulWidget {
   });
 
   @override
-  State<StatefulWidget> createState() => _NotificationsDangerZoneState();
+  State<StatefulWidget> createState() => _TogglesAndDangerZoneState();
 }
 
-class _NotificationsDangerZoneState extends State<NotificationsDangerZone> {
+class _TogglesAndDangerZoneState extends State<TogglesAndDangerZone> {
   late Stream<bool> notificationsGlobal;
   late ValueSetter<bool> changeNotificationsGlobal;
   late Stream<bool> notificationsGeo;
