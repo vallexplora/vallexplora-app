@@ -42,7 +42,7 @@
     },
     "sWelcomeCopy": "La app que te lleva a descubrir el Valle del Cauca a través de la realidad aumentada",
     "@sWelcomeCopy": {
-        "description": "Used in the welcome screen. A complementary copy text to the welcoming message." 
+        "description": "Used in the welcome screen. A complementary copy text to the welcoming message."
     },
     "sWelcomeLogin": "¿Ya tienes una?",
     "@sWelcomeLogin": {
@@ -328,5 +328,31 @@
     "sProfileOrigin": "Soy de",
     "@sProfileOrigin": {
         "description": "Used in the profile screen. The hint label for the place of origin."
+    },
+    "sChallengesCurrentSeason": "Temporada Actual",
+    "@sChallengesCurrentSeason": {
+        "description": "Used in the challenges screen. The title for the current season challenges."
+    },
+    "sChallengesCurrentSeasonDate": "Finaliza el {date}",
+    "@sChallengesCurrentSeasonDate": {
+        "description": "Used in the challenges screen. The date of expiry of the current season.",
+        "placeholders": {
+            "date": {
+                "type": "String",
+                "example": "01/01/2000"
+            }
+        }
+    },
+    "sChallengesCurrentSeasonEmpty": "No hay desafíos en la temporada actual por el momento :(",
+    "@sChallengesCurrentSeasonEmpty": {
+        "description": "Used in the challenges screen. The hint for when there are no challenges in the current season."
+    },
+    "sChallengesPreviousSeason": "Temporadas Anteriores",
+    "@sChallengesPreviousSeason": {
+        "description": "Used in the challenges screen. The title for the challenges of previous seasons."
+    },
+    "sChallengesPreviousSeasonEmpty": "No hay desafíos por el momento :(",
+    "@sChallengesPreviousSeasonEmpty": {
+        "description": "Used in the challenges screen. The hint for when there are no challenges at all."
     }
 }

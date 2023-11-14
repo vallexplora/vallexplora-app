@@ -78,5 +78,11 @@
     "sProfileUsername": "Editing username: ",
     "sProfileVisited": "I've been to",
     "sProfileTowns": "Towns",
-    "sProfileOrigin": "I'm from"
+    "sProfileOrigin": "I'm from",
+    "sChallengesCurrentSeason": "Current season",
+    "sChallengesCurrentSeasonDate": "Ends on {date}",
+    "sChallengesCurrentSeasonEmpty": "No challenges in the current season for now :(",
+    "sChallengesPreviousSeason": "Previous seasons",
+    "sChallengesPreviousSeasonEmpty": "No challenges for now :("
+    
 }

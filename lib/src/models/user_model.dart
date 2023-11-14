@@ -10,6 +10,9 @@ class UserModel {
   bool globalNotifications;
   bool geoNotifications;
   List<dynamic> interests;
+  List<dynamic> points;
+  List<dynamic> completedChallenges;
+  int pointsTotal;
 
   UserModel({
     required this.displayName,
@@ -21,6 +24,9 @@ class UserModel {
     required this.globalNotifications,
     required this.geoNotifications,
     required this.interests,
+    required this.points,
+    required this.completedChallenges,
+    required this.pointsTotal,
   });
 
   static UserModel fromDocument(
@@ -35,6 +41,12 @@ class UserModel {
       geoNotifications: document['geoNotifications'],
       pictureURL: document['pictureURL'],
       interests: document['interests'],
+      points: document['points'],
+      pointsTotal: document['pointsTotal'],
+      completedChallenges:
+          document.data().toString().contains('completedChallenges')
+              ? document['completedChallenges']
+              : [],
     );
   }
 }

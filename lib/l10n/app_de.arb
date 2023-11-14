@@ -78,5 +78,10 @@
     "sProfileUsername": "Benutzername bearbeiten: ",
     "sProfileVisited": "Ich war schon in",
     "sProfileTowns": "Städte",
-    "sProfileOrigin": "Ich komme aus"
+    "sProfileOrigin": "Ich komme aus",
+    "sChallengesCurrentSeason": "Aktuelle Saison",
+    "sChallengesCurrentSeasonDate": "Endet am {date}",
+    "sChallengesCurrentSeasonEmpty": "Keine Aufgaben in der aktuellen Saison für jetzt :(",
+    "sChallengesPreviousSeason": "Vorherige Saisons",
+    "sChallengesPreviousSeasonEmpty": "Keine Aufgaben für jetzt :("
 }

@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:vallexplora/src/constants/colors.dart';
-
-import '../../../constants/sizes.dart';
+import 'package:vallexplora/src/models/challenge_model.dart';
 
 class ChallengeCard extends StatefulWidget {
   final String name;
@@ -11,6 +9,7 @@ class ChallengeCard extends StatefulWidget {
   final Timestamp startDate;
   final Timestamp expiration;
   final String place;
+  final int type;
 
   const ChallengeCard({
     super.key,
@@ -20,6 +19,7 @@ class ChallengeCard extends StatefulWidget {
     required this.startDate,
     required this.expiration,
     required this.place,
+    required this.type,
   });
 
   @override
@@ -33,6 +33,7 @@ class _ChallengeCardState extends State<ChallengeCard> {
   late DateTime startDate;
   late DateTime expirationDate;
   late String place;
+  late int type;
 
   @override
   void initState() {
@@ -43,92 +44,114 @@ class _ChallengeCardState extends State<ChallengeCard> {
     startDate = widget.startDate.toDate();
     expirationDate = widget.expiration.toDate();
     place = widget.place;
+    type = widget.type;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 320,
-      margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      margin: const EdgeInsets.only(bottom: 16),
+      height: 112,
       decoration: ShapeDecoration(
-        color: neutralRef.value94,
+        color: type == ChallengeStates.attained.value
+            ? Theme.of(context).colorScheme.tertiaryContainer
+            : Theme.of(context).colorScheme.surface,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
           side: BorderSide(
-            color: neutralRef.value70,
+            color: type == ChallengeStates.attained.value
+                ? Theme.of(context).colorScheme.onTertiaryContainer
+                : Theme.of(context).colorScheme.outline,
           ),
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            height: 128,
-            padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-            decoration: ShapeDecoration(
-              color: primaryRef.value92,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 16,
+              bottom: 16,
+              top: 16,
             ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  "$points puntos",
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: ShapeDecoration(
+                    color: challengeTypeColors(context)[type],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(128),
+                    ),
+                  ),
+                  child: Icon(
+                    challengeIcons[type],
+                    color: challengeIconColors(context)[type],
+                  ),
                 ),
-                Text(
-                  place,
+                const SizedBox(
+                  width: 16,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      textAlign: TextAlign.justify,
+                      style: Theme.of(context).textTheme.titleMedium!.merge(
+                            TextStyle(
+                                color: type == ChallengeStates.attained.value
+                                    ? Theme.of(context)
+                                        .colorScheme
+                                        .onTertiaryContainer
+                                    : Theme.of(context).colorScheme.onSurface),
+                          ),
+                    ),
+                    Container(
+                      constraints: const BoxConstraints(maxWidth: 160),
+                      child: Text(
+                        description,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.justify,
+                        style: Theme.of(context).textTheme.bodyMedium!.merge(
+                              TextStyle(
+                                color: Theme.of(context).colorScheme.onSurface,
+                              ),
+                            ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-          const SizedBox(
-            height: SizeResources.buttonHeight,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 24,
+          SizedBox(
+            width: 96,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    points.toString(),
+                    style: Theme.of(context).textTheme.titleMedium,
+                    textAlign: TextAlign.center,
                   ),
-                ),
-                const SizedBox(
-                  height: 2,
-                ),
-                Text(
-                  "${startDate.day}/${startDate.month}/${startDate.year}",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 22,
+                  const SizedBox(
+                    height: 4,
                   ),
-                ),
-                Text(
-                  "Expira en ${expirationDate.difference(startDate).inDays} días",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
+                  Text(
+                    "${type == -1 ? "Venció hace" : "Vence en"} ${DateTime.now().difference(expirationDate).inDays.abs()} días",
+                    style: Theme.of(context).textTheme.labelSmall,
+                    textAlign: TextAlign.center,
                   ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  description,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:vallexplora/src/blocs/bloc.dart';
+import 'package:vallexplora/src/models/user_model.dart';
 import 'package:vallexplora/src/resources/repository.dart';
 
 import '../../models/challenge_model.dart';
@@ -29,7 +32,15 @@ class ChallengesBloc implements Bloc {
   Function(Timestamp) get changeExpiration => _expiration.sink.add;
   Function(String) get changePlace => _place.sink.add;
 
-  Stream<QuerySnapshot> challengesList() => _repository.challengesList();
+  Stream<QuerySnapshot> challengesList(String season) =>
+      _repository.challengesList(season);
+
+  Future<Stream<UserModel>> getUserInfo() async {
+    Future<Stream<DocumentSnapshot<Map<String, dynamic>>>> rawUserInfo =
+        _repository.getUserInfo(_repository.getUserUID());
+
+    return (await rawUserInfo).map(UserModel.fromDocument);
+  }
 
   Future<List<ChallengeModel>> convertToFuture(
       List<DocumentSnapshot> docs) async {
@@ -41,6 +52,25 @@ class ChallengesBloc implements Bloc {
     }
 
     return challenges;
+  }
+
+  int checkIfDoneOrExpired(
+      ChallengeModel challenge, List<String> completedChallenges) {
+    if (completedChallenges.contains(challenge.id)) {
+      return ChallengeStates.attained.value; // Got the points
+    } else if (challenge.expiration.toDate().compareTo(DateTime.now()) < 0) {
+      return ChallengeStates.failed.value; // Though luck
+    } else {
+      return ChallengeStates.open.value; // Still got time
+    }
+  }
+
+  String currentweekend(BuildContext context) {
+    DateTime weekEnd = getWeekEnd();
+
+    String locale = Localizations.localeOf(context).languageCode;
+
+    return DateFormat.yMd(locale).format(weekEnd);
   }
 
   @override

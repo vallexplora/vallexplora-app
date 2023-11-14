@@ -41,7 +41,7 @@ class Repository {
 
   /// Challenges
 
-  Stream<QuerySnapshot> challengesList() => _dbResources.challengesList();
+  Stream<QuerySnapshot> challengesList(String season) => _dbResources.challengesList(season);
 
   /// Profile
 

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:vallexplora/src/models/challenge_model.dart';
 
 class FirestoreResources {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -30,10 +31,32 @@ class FirestoreResources {
 
   // Challenges
 
-  Stream<QuerySnapshot> challengesList() => _firestore
-      .collection("challenges")
-      .orderBy('points', descending: true)
-      .snapshots();
+  Stream<QuerySnapshot> challengesList(String season) {
+    switch (season) {
+      case "current":
+        return _firestore
+            .collection("challenges")
+            .where("expiration", isGreaterThanOrEqualTo: getWeekEnd())
+            .orderBy("expiration", descending: true)
+            .orderBy('points', descending: true)
+            .snapshots();
+      case "previous":
+        return _firestore
+            .collection("challenges")
+            .where("startDate", isLessThanOrEqualTo: getWeekStart())
+            .orderBy("startDate", descending: true)
+            .orderBy('points', descending: true)
+            .snapshots();
+      default:
+        // Filter challenges based on the specified season using expiration date
+        return _firestore
+            .collection("challenges")
+            .where("expiration", isLessThanOrEqualTo: DateTime.parse(season))
+            .orderBy("expiration", descending: true)
+            .orderBy('points', descending: true)
+            .snapshots();
+    }
+  }
 
   // Profile
 
