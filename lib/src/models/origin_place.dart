@@ -1,6 +1,6 @@
 enum OriginPlaceLabel {
-  world("world", "El Mundo"),
-  colombia("colombia", "Colombia"),
+  world("world", "Afuera de Colombia"),
+  colombia("colombia", "Afuera del Valle"),
   aguila("aguila", "El Águila"),
   alcala("alcala", "Alcalá"),
   andalucia("andalucia", "Andalucía"),
@@ -48,5 +48,6 @@ enum OriginPlaceLabel {
   final String id;
   final String name;
 
-  static String idByName(String name) => OriginPlaceLabel.values.firstWhere((element) => element.name == name).id;
+  static String idByName(String name) =>
+      OriginPlaceLabel.values.firstWhere((element) => element.name == name).id;
 }

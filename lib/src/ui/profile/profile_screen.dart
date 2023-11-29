@@ -62,7 +62,11 @@ class _ProfileScreen extends State<ProfileScreen> {
               } else if (userSnapshot.hasError ||
                   !userSnapshot.hasData ||
                   userSnapshot.data == null) {
-                return Center(child: Text("Error: ${userSnapshot.error}"));
+                return Center(
+                    child: Text(
+                  "Error: ${userSnapshot.error}",
+                  textAlign: TextAlign.center,
+                ));
               }
               _bloc.changeNotificationsGeo(userSnapshot.data!.geoNotifications);
               _bloc.changeNotificationsGlobal(

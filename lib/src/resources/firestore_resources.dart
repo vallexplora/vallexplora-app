@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:vallexplora/src/models/challenge_model.dart';
+
+import '../models/season_model.dart';
 
 class FirestoreResources {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -12,7 +14,7 @@ class FirestoreResources {
 
   Stream<QuerySnapshot> eventsList() => _firestore
       .collection("events")
-      .orderBy("eventJson.startDate", descending: false)
+      .orderBy("start", descending: false)
       .snapshots();
 
   // Sales
@@ -31,31 +33,60 @@ class FirestoreResources {
 
   // Challenges
 
-  Stream<QuerySnapshot> challengesList(String season) {
-    switch (season) {
-      case "current":
-        return _firestore
-            .collection("challenges")
-            .where("expiration", isGreaterThanOrEqualTo: getWeekEnd())
-            .orderBy("expiration", descending: true)
-            .orderBy('points', descending: true)
-            .snapshots();
-      case "previous":
-        return _firestore
-            .collection("challenges")
-            .where("startDate", isLessThanOrEqualTo: getWeekStart())
-            .orderBy("startDate", descending: true)
-            .orderBy('points', descending: true)
-            .snapshots();
-      default:
-        // Filter challenges based on the specified season using expiration date
-        return _firestore
-            .collection("challenges")
-            .where("expiration", isLessThanOrEqualTo: DateTime.parse(season))
-            .orderBy("expiration", descending: true)
-            .orderBy('points', descending: true)
-            .snapshots();
+  Future<List<Stream<QuerySnapshot<Map<String, dynamic>>>>>
+      challengesList() async {
+    final seasons = await _firestore
+        .collection('seasons')
+        .orderBy('end', descending: true)
+        .limit(1)
+        .get();
+    final seasonChallenges =
+        Season.fromQueryDocument(seasons.docs.first).challenges;
+
+    List<QuerySnapshot<Map<String, dynamic>>> currentSeasonChallenges = [];
+
+    for (String challengeId in seasonChallenges) {
+      QuerySnapshot<Map<String, dynamic>> challengeSnapshot = await _firestore
+          .collection('challenges')
+          .where(FieldPath.documentId, isEqualTo: challengeId)
+          .get();
+
+      currentSeasonChallenges.add(challengeSnapshot);
     }
+
+    List<QuerySnapshot<Map<String, dynamic>>> allOtherChallenges = [];
+
+    for (String challengeId in seasonChallenges) {
+      QuerySnapshot<Map<String, dynamic>> challengeSnapshot = await _firestore
+          .collection('challenges')
+          .where(FieldPath.documentId, isNotEqualTo: challengeId)
+          .get();
+
+      allOtherChallenges.add(challengeSnapshot);
+    }
+
+    return [
+      Stream.fromIterable(currentSeasonChallenges),
+      Stream.fromIterable(allOtherChallenges)
+    ];
+  }
+
+  Future<Timestamp> getCurrentExpirationDate() async {
+    final snaps = await _firestore
+        .collection("seasons")
+        .orderBy("end", descending: true)
+        .limit(1)
+        .get();
+    return snaps.docs.first.data()["end"];
+  }
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getLatestSeason() async {
+    QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
+        .collection('seasons')
+        .orderBy('end', descending: true)
+        .limit(1)
+        .get();
+    return snapshot.docs.first;
   }
 
   // Profile
@@ -124,13 +155,51 @@ class FirestoreResources {
         "interests": interests,
         "origin": origin,
         "pictureURL": pictureURL.isNotEmpty ? "users/profile/$id.$ending" : "",
+        "completedChallenges": [],
+        "points": [
+          {"claimedOn": Timestamp.now(), "ammount": 0}
+        ],
+        "pointsTotal": 0,
+        "globalNotifications": false,
+        "geoNotifications": false,
+        "municipalitiesVisited": 1,
       }, SetOptions(merge: true));
     } else {
       _firestore.collection("users").doc(id).set({
         "interests": interests,
         "origin": origin,
         "pictureURL": "",
+        "completedChallenges": [],
+        "points": [
+          {"claimedOn": Timestamp.now(), "ammount": 0}
+        ],
+        "pointsTotal": 0,
+        "globalNotifications": false,
+        "geoNotifications": false,
+        "municipalitiesVisited": 1,
       }, SetOptions(merge: true));
     }
+  }
+
+  Future<void> markChallengeAsDone(
+      Future<String> uid, String challengeId, int points) async {
+    // final seasons = await _firestore
+    //     .collection('seasons')
+    //     .orderBy('end', descending: true)
+    //     .limit(1)
+    //     .get();
+    // final String seasonId = Season.fromQueryDocument(seasons.docs.first).id;
+    // final Map<String, dynamic> pointsField =
+    //     UserModel.fromDocument(await (await getUserInfo(uid)).first)
+    //         .points
+    //         .firstWhere((a) {
+    //   return (a as Map<String, dynamic>)["seasonId"] == seasonId;
+    // });
+    // Logger l = Logger();
+    // l.i(pointsField);
+    // pointsField["amount"] = (pointsField["amount"] as int) + points;
+    _firestore.collection("users").doc(await uid).update({
+      "completedChallenges": FieldValue.arrayUnion([challengeId]),
+    });
   }
 }

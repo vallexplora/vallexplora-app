@@ -41,7 +41,11 @@ class Repository {
 
   /// Challenges
 
-  Stream<QuerySnapshot> challengesList(String season) => _dbResources.challengesList(season);
+  Future<Timestamp> getCurrentExpirationDate() =>
+      _dbResources.getCurrentExpirationDate();
+
+  Future<List<Stream<QuerySnapshot<Map<String, dynamic>>>>> challengesList() =>
+      _dbResources.challengesList();
 
   /// Profile
 
@@ -76,9 +80,21 @@ class Repository {
   Future<void> uploadUsername(String username) async =>
       _dbResources.updateUsername(id: await getUserUID(), username: username);
 
-      Future<void> updateProfile(String username, int visitedMunicipalities, String origin, List<int> interests, bool geoNotifications, bool globalNotifications) async {
-        _dbResources.updateProfile(id: await getUserUID(), username: username, origin: origin, interests: interests.cast<dynamic>(), geoNotifications: geoNotifications, globalNotifications: globalNotifications);
-      }
+  Future<void> updateProfile(
+      String username,
+      int visitedMunicipalities,
+      String origin,
+      List<int> interests,
+      bool geoNotifications,
+      bool globalNotifications) async {
+    _dbResources.updateProfile(
+        id: await getUserUID(),
+        username: username,
+        origin: origin,
+        interests: interests.cast<dynamic>(),
+        geoNotifications: geoNotifications,
+        globalNotifications: globalNotifications);
+  }
 
   Future<void> updateNotificationsGlobal(bool value) async {
     _dbResources.updateGlobalNotifications(
@@ -94,8 +110,14 @@ class Repository {
     return _dbResources.eventsListQuery();
   }
 
-  Future<void> addUserMetaData(List<int> interests, String origin, String? pictureURL) async {
-    return _dbResources.addUserMetaData(await getUserUID(), interests, origin, pictureURL);
+  Future<void> addUserMetaData(
+      List<int> interests, String origin, String? pictureURL) async {
+    return _dbResources.addUserMetaData(
+        await getUserUID(), interests, origin, pictureURL);
+  }
+
+  Future<void> markChallengeAsDone(String id, int points) async {
+    _dbResources.markChallengeAsDone(getUserUID(), id, points);
   }
 
   // User markers

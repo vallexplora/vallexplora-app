@@ -120,12 +120,13 @@ class ProfileBloc implements Bloc {
 
   void uploadStreams() {
     _repository.updateProfile(
-        _username.value,
-        _municipalitiesVisited.value,
-        _originPlace.value,
-        _categories.value,
-        _notificationsGeo.value,
-        _notificationsGlobal.value);
+      _username.value,
+      _municipalitiesVisited.value,
+      _originPlace.value,
+      _categories.value,
+      _notificationsGeo.value,
+      _notificationsGlobal.value,
+    );
   }
 
   @override

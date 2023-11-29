@@ -190,7 +190,7 @@ class _SignUpFormState extends State<SignUpFormWidget> {
                         Navigator.of(context).push(
                           MaterialPageRoute(
                               builder: (context) =>
-                                  const HomeContainerScreen()),
+                                  const RegisterPart2Screen()),
                         ),
                       },
                     );

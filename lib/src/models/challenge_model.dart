@@ -7,18 +7,14 @@ class ChallengeModel {
   String name;
   String description;
   int points;
-  Timestamp startDate;
-  Timestamp expiration;
-  String place;
+  String cityName;
 
   ChallengeModel({
     required this.id,
     required this.name,
     required this.description,
     required this.points,
-    required this.startDate,
-    required this.expiration,
-    required this.place,
+    required this.cityName,
   });
 
   static Future<ChallengeModel> fromDocument(DocumentSnapshot document) async {
@@ -27,9 +23,7 @@ class ChallengeModel {
       name: document['name'],
       description: document['description'],
       points: document['points'],
-      startDate: document['startDate'],
-      expiration: document['expiration'],
-      place: document['city'],
+      cityName: document['city'],
     );
   }
 }

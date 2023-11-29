@@ -90,7 +90,9 @@ class _RegisterPart2ScreenState extends State<RegisterPart2Screen> {
                                   size: 24,
                                   color: Theme.of(context).primaryColor,
                                 ),
-                                onPressed: () {},
+                                onPressed: () {
+                                  _bloc.pickImageFromGallery();
+                                },
                               ),
                             );
                           } else {

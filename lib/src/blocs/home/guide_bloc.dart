@@ -57,10 +57,10 @@ class GuideBloc implements Bloc {
     eventsList().listen((event) {
       polygons.clear();
       for (var docSnap in event.docs) {
-        List<dynamic> locationField = docSnap["eventJson"]["location"];
+        List<dynamic> locationField = docSnap["location"];
         String id = docSnap.id;
-        String name = docSnap["eventJson"]["name"];
-        String description = docSnap["eventJson"]["description"];
+        String name = docSnap["name"];
+        String description = docSnap["description"];
         final List<LatLng> polyPoints = [];
 
         for (var point in locationField) {
@@ -82,13 +82,13 @@ class GuideBloc implements Bloc {
                 builder: (context) => EventDetailsScreen(
                   name: name,
                   description: description,
-                  entryFee: docSnap["eventJson"]["entryFee"],
-                  startDate: DateTime.parse(docSnap["eventJson"]["startDate"]),
-                  city: docSnap["eventJson"]["city"],
-                  eventType: docSnap["eventJson"]["eventType"],
-                  endDate: DateTime.parse(docSnap["eventJson"]["endDate"]),
-                  imagePath: docSnap["eventJson"]["imagePath"],
-                  hasAR: docSnap["eventJson"]["hasAugmentedReality"],
+                  entryFee: docSnap["entryFee"],
+                  startDate: (docSnap["start"] as Timestamp).toDate(),
+                  city: docSnap["city"],
+                  eventType: docSnap["eventType"],
+                  endDate: (docSnap["end"] as Timestamp).toDate(),
+                  imagePath: docSnap["imagePath"],
+                  hasAR: docSnap["hasAugmentedReality"],
                 ),
               ),
             ),

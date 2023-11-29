@@ -40,8 +40,7 @@ class AuthenticationResources {
     }
   }
 
-  Future<int> loginWithEmailAndPassword(
-      String email, String password) async {
+  Future<int> loginWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential credentials = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
