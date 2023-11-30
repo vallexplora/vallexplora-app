@@ -14,6 +14,7 @@ class HeadingSection extends StatefulWidget {
   final bool isGoogleAccount;
   final Stream<bool> editingUsername;
   final ValueSetter<bool> changeEditingUsername;
+  final int pointsTotal;
 
   const HeadingSection({
     super.key,
@@ -26,6 +27,7 @@ class HeadingSection extends StatefulWidget {
     required this.isGoogleAccount,
     required this.editingUsername,
     required this.changeEditingUsername,
+    required this.pointsTotal,
   });
 
   @override
@@ -42,6 +44,7 @@ class _HeadingSectionState extends State<HeadingSection> {
   late bool isGoogleAccount;
   late Stream<bool> editingUsername;
   late ValueSetter<bool> changeEditingUsername;
+  late int pointsTotal;
   final _textController = TextEditingController();
 
   @override
@@ -56,6 +59,7 @@ class _HeadingSectionState extends State<HeadingSection> {
     isGoogleAccount = widget.isGoogleAccount;
     editingUsername = widget.editingUsername;
     changeEditingUsername = widget.changeEditingUsername;
+    pointsTotal = widget.pointsTotal;
   }
 
   @override
@@ -67,35 +71,60 @@ class _HeadingSectionState extends State<HeadingSection> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             FutureBuilder<String>(
-                future: profilePictureURL,
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError || !snapshot.hasData) {
-                    return CircleAvatar(
-                      backgroundColor: neutralRef.value92,
-                      radius: SizeResources.avatarRadiusOuter,
-                      child: CircleAvatar(
-                        radius: SizeResources.avatarRadiusInner,
-                        backgroundColor: neutralRef.value96,
-                        backgroundImage: const AssetImage(
-                          AssetURIResources.googleLogo,
-                        ),
-                      ),
-                    );
-                  }
+              future: profilePictureURL,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError || !snapshot.hasData) {
                   return CircleAvatar(
                     backgroundColor: neutralRef.value92,
                     radius: SizeResources.avatarRadiusOuter,
                     child: CircleAvatar(
                       radius: SizeResources.avatarRadiusInner,
-                      backgroundImage: NetworkImage(snapshot.data!.isEmpty
-                          ? googlePictureURL
-                          : snapshot.data!),
+                      backgroundColor: neutralRef.value96,
+                      backgroundImage: const AssetImage(
+                        AssetURIResources.googleLogo,
+                      ),
                     ),
                   );
-                }),
-            const SizedBox(height: SizeResources.smallHeight),
+                }
+                return CircleAvatar(
+                  backgroundColor: neutralRef.value92,
+                  radius: SizeResources.avatarRadiusOuter,
+                  child: CircleAvatar(
+                    radius: SizeResources.avatarRadiusInner,
+                    backgroundImage: NetworkImage(snapshot.data!.isEmpty
+                        ? googlePictureURL
+                        : snapshot.data!),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Text(
+              "N puntos esta temporada",
+              style: Theme.of(context).textTheme.titleLarge!.merge(
+                    TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Text(
+              pointsTotal.toString(),
+              style: Theme.of(context).textTheme.titleSmall!.merge(
+                    TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
             StreamBuilder<bool>(
                 stream: editingUsername,
                 builder: (context, snapshot) {

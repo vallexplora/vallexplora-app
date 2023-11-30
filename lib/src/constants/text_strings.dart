@@ -1,24 +1,6 @@
 class StringResources {
   /* Profile */
-  static const String profileTitle = "Tu perfil";
-  static const String profileVisitedMunicipalities = "Municipios visitados";
-  static const String profileOriginPlace = "Soy de";
-  static const String profilePersonalInfo = "Información Personal";
-  static const String profileUsername = "Nombre de usuario";
-  static const String profileConfirmUsernameButton =
-      "Confirmar cambio de usuario";
-  static const String profilePassword = "Cambia tu contraseña";
-  static const String profileNewPassword = "Tu nueva contraseña";
-  static const String profileConfirmPassword = "Confírmala, por si las moscas";
-  static const String profileCurrentPassword = "Contraseña actual";
-  static const String profileConfirmPasswordButton =
-      "Confirmar cambio de contraseña";
-  static const String profileEmail = "Cambia tu correo";
-  static const String profileConfirmEmailButton = "Confirmar cambio de correo";
-  static const String profileNotifications = "Notificaciones";
-  static const String profileGlobalNotifications = "Notificaciones globales";
-  static const String profileGeoNotifications = "Notificaciones de zona";
-  static const String profileDeleteAccount = "Borrar tu cuenta";
+  
   static const String profileDeleteAccountDisclaimer =
       "Al borrar tu cuenta, se eliminarán todos sus datos, incluidos tus marcadores, puntos, premios y configuración. Esta acción no se puede deshacer.\n\n¿Estás seguro de que quieres eliminar tu cuenta de forma permanente?";
   static const String profileDeleteAccountButton =

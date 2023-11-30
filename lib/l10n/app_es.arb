@@ -260,6 +260,10 @@
     "@gFinishButton": {
         "description": "The finish button label."
     },
+    "gCancelButton": "Cancelar",
+    "@gCancelButton": {
+        "description": "The cancel button label."
+    },
     "sOnboarding1Title": "Explora el departamento",
     "@sOnboarding1Title": {
         "description": "Used in the 1st onboarding screen. The title of the page."
@@ -328,6 +332,50 @@
     "sProfileOrigin": "Soy de",
     "@sProfileOrigin": {
         "description": "Used in the profile screen. The hint label for the place of origin."
+    },
+    "sProfileCategories": "Categorías favoritas (máxmo 3)",
+    "@sProfileCategories": {
+        "description": "Used in the profile screen. The hint label for the interests list."
+    },
+    "sProfileNotificationsGlobal": "Notificaciones globales",
+    "@sProfileNotificationsGlobal": {
+        "description": "Used in the profile screen. The label for global notifications."
+    },
+    "sProfileNotificationsGeo": "Notificaciones de zona",
+    "@sProfileNotificationsGeo": {
+        "description": "Used in the profile screen. The label for georeferrenced notifications notifications."
+    },
+    "sProfileLogout": "Cerrar sesión",
+    "@sProfileLogout": {
+        "description": "Used in the profile screen. The label for the logout button."
+    },
+    "sProfileDeleteAccountButton": "Eliminar cuenta",
+    "@sProfileDeleteAccountButton": {
+        "description": "Used in the profile screen. The label for the delete account button."
+    },
+    "sProfileLanguage": "{locale, select, es {Español} en {Inglés (English)} de {Alemán (Deutsch)} other {-}}",
+    "@sProfileLanguage": {
+      "placeholders": {
+        "locale": {
+          "type": "String"
+        }
+      }
+    },
+    "sProfileLanguagePrompt": "Idioma",
+    "@sProfileLanguagePrompt": {
+        "description": "Used in the profile screen. The label for the language picker."
+    },
+    "sDeleteDialogTitle": "Estás a punto de eliminar tu cuenta",
+    "@sDeleteDialogTitle": {
+        "description": "Used in the profile delete dialog screen. The title for the delete account screen."
+    },
+    "sDeleteDialogBody": "Al eliminar tu cuenta, se perderán todos sus datos, incluidos tus puntos, recompensas y configuración local de la app. Esta acción no se puede deshacer.\n\n¿Estás seguro de que quieres eliminar tu cuenta de forma permanente?",
+    "@sDeleteDialogBody": {
+        "description": "Used in the profile delete dialog screen. The message for the delete account screen."
+    },
+    "sDeleteDialogPrompt": "Para confirmar la eliminación permanente de tu cuenta, escribe tu contraseña",
+    "@sDeleteDialogPrompt": {
+        "description": "Used in the profile delete dialog screen. The prompt for the delete account screen."
     },
     "sChallengesCurrentSeason": "Temporada Actual",
     "@sChallengesCurrentSeason": {

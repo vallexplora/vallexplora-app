@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vallexplora/src/constants/event_types.dart';
 import 'package:vallexplora/src/utils/theme/extended.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../constants/sizes.dart';
+import 'package:vallexplora/src/constants/sizes.dart';
 
 class PersonalInformation extends StatefulWidget {
   final Stream<List<int>> categories;
@@ -35,7 +35,7 @@ class _PersonalInformationState extends State<PersonalInformation> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          "Categorías favoritas (máximo 3)",
+          AppLocalizations.of(context)!.sProfileCategories,
           style: Theme.of(context).textTheme.bodyLarge,
         ),
         const SizedBox(

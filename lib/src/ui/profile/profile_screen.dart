@@ -141,6 +141,8 @@ class _ProfileScreen extends State<ProfileScreen> {
                                 editingUsername: _bloc.editingUsername,
                                 changeEditingUsername:
                                     _bloc.changeEditingUsername,
+                                pointsTotal:
+                                    userSnapshot.data?.pointsTotal ?? 0,
                               ),
                               PersonalInformation(
                                 categories: _bloc.categories,
@@ -157,6 +159,10 @@ class _ProfileScreen extends State<ProfileScreen> {
                                 deleteAccountStep: _bloc.deleteAccountStep,
                                 changeDeleteAccountStep:
                                     _bloc.changeDeleteAccountStep,
+                                changePassword: _bloc.changePassword,
+                                changePasswordVisible:
+                                    _bloc.changePasswordVisible,
+                                passwordVisible: _bloc.passwordVisible,
                               ),
                             ],
                           ),

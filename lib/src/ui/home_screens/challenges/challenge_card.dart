@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/models/challenge_model.dart';
 import 'package:vallexplora/src/ui/home_screens/challenges/challenge_detail_screen.dart';

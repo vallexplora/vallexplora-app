@@ -104,113 +104,115 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
           ),
         ],
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 236,
-            child: Image.network(
-              imagePath,
-              fit: BoxFit.cover,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 236,
+              child: Image.network(
+                imagePath,
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      city,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Text(
-                      '${startDate.day}/${startDate.month}/${startDate.year} - ${endDate.day}/${endDate.month}/${endDate.year}',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Container(
-                  constraints: const BoxConstraints(minHeight: 144),
-                  child: RichText(
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'Acerca del evento: ',
-                          style: Theme.of(context).textTheme.bodyLarge!.merge(
-                              const TextStyle(fontWeight: FontWeight.w600)),
-                        ),
-                        TextSpan(
-                          text: description,
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ],
-                    ),
-                    textAlign: TextAlign.justify,
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                    style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    FilledButton.icon(
-                      icon: const Icon(Icons.view_in_ar),
-                      onPressed: hasAR
-                          ? () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => const ARView(),
-                                ),
-                              );
-                            }
-                          : null,
-                      label: Text(hasAR
-                          ? AppLocalizations.of(context)!
-                              .sEventDetailARButtonLabel
-                          : AppLocalizations.of(context)!
-                              .sEventDetailARUnavailable),
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    OutlinedButton.icon(
-                      icon: const Icon(Icons.map_outlined),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => HomeContainerScreen(
-                              initialScreen: ScreenIDs.guide.number,
-                            ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        city,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      Text(
+                        '${startDate.day}/${startDate.month}/${startDate.year} - ${endDate.day}/${endDate.month}/${endDate.year}',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Container(
+                    constraints: const BoxConstraints(minHeight: 144),
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Acerca del evento: ',
+                            style: Theme.of(context).textTheme.bodyLarge!.merge(
+                                const TextStyle(fontWeight: FontWeight.w600)),
                           ),
-                        );
-                      },
-                      label: Text(AppLocalizations.of(context)!
-                          .sEventDetailMapButtonLabel),
+                          TextSpan(
+                            text: description,
+                            style: Theme.of(context).textTheme.bodyLarge,
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.justify,
                     ),
-                  ],
-                )
-              ],
-            ),
-          )
-        ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      FilledButton.icon(
+                        icon: const Icon(Icons.view_in_ar),
+                        onPressed: hasAR
+                            ? () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => const ARView(),
+                                  ),
+                                );
+                              }
+                            : null,
+                        label: Text(hasAR
+                            ? AppLocalizations.of(context)!
+                                .sEventDetailARButtonLabel
+                            : AppLocalizations.of(context)!
+                                .sEventDetailARUnavailable),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      OutlinedButton.icon(
+                        icon: const Icon(Icons.map_outlined),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => HomeContainerScreen(
+                                initialScreen: ScreenIDs.guide.number,
+                              ),
+                            ),
+                          );
+                        },
+                        label: Text(AppLocalizations.of(context)!
+                            .sEventDetailMapButtonLabel),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
