@@ -1,25 +1,28 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
-import '../../../constants/colors.dart';
-import '../../../constants/sizes.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:vallexplora/src/constants/colors.dart';
+import 'package:vallexplora/src/ui/home_screens/feed/sale_details_screen.dart';
 
 class SaleCard extends StatefulWidget {
   final String name;
   final String description;
-  final String companyID;
-  final Timestamp expirationDate;
-  final bool stackable;
-  final String place;
+  final String companyName;
+  final DateTime end;
+  final DateTime start;
+  final int requirement; // points or position
+  final bool requirementType;
+  final String city;
 
   const SaleCard({
     super.key,
     required this.name,
     required this.description,
-    required this.companyID,
-    required this.expirationDate,
-    required this.stackable,
-    required this.place,
+    required this.companyName,
+    required this.end,
+    required this.start,
+    required this.requirement,
+    required this.requirementType,
+    required this.city,
   });
 
   @override
@@ -29,102 +32,171 @@ class SaleCard extends StatefulWidget {
 class _SaleCardState extends State<SaleCard> {
   late String name;
   late String description;
-  late String companyID;
-  late DateTime startDate;
-  late bool stackable;
-  late String place;
+  late String companyName;
+  late DateTime end;
+  late DateTime start;
+  late int requirement;
+  late bool requirementType;
+  late String city;
 
   @override
   void initState() {
     super.initState();
     name = widget.name;
     description = widget.description;
-    companyID = widget.companyID;
-    startDate = widget.expirationDate.toDate();
-    stackable = widget.stackable;
-    place = widget.place;
+    companyName = widget.companyName;
+    end = widget.end;
+    start = widget.start;
+    requirement = widget.requirement;
+    requirementType = widget.requirementType;
+    city = widget.city;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 320,
-      margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      decoration: ShapeDecoration(
-        color: neutralRef.value96,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: BorderSide(
-            color: neutralRef.value80,
+    return GestureDetector(
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => SalesDetailsScreen(
+            name: name,
+            description: description,
+            companyName: companyName,
+            end: end,
+            start: start,
+            requirement: requirement,
+            requirementType: requirementType,
+            city: city,
           ),
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            height: 128,
-            padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-            decoration: ShapeDecoration(
-              color: primaryRef.value92,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+      child: Card(
+        elevation: 0,
+        surfaceTintColor: primaryRef.value95,
+        child: Container(
+          clipBehavior: Clip.hardEdge,
+          decoration: ShapeDecoration(
+            color: primaryRef.value95,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: BorderSide(
+                color: Theme.of(context).colorScheme.outlineVariant,
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "\$$stackable",
-                ),
-                Text(
-                  place,
-                ),
-              ],
-            ),
           ),
-          const SizedBox(
-            height: SizeResources.buttonHeight,
+          height: 448,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 12,
+                  horizontal: 16,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(11),
+                      decoration: ShapeDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(128),
+                        ),
+                      ),
+                      child: Icon(
+                        requirementType
+                            ? Icons.leaderboard_outlined
+                            : Icons.confirmation_num_outlined,
+                        color: Theme.of(context).colorScheme.onPrimary,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          city,
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                        Text(
+                          AppLocalizations.of(context)!.sRewardDetailType(
+                              requirementType.toString(), requirement),
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 236,
+                // child: Image.network(
+                //   imagePath,
+                //   fit: BoxFit.cover,
+                // ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 16,
+                  left: 16,
+                  right: 16,
+                  bottom: 24,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              name,
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                            Text(
+                              companyName,
+                              style:
+                                  Theme.of(context).textTheme.bodyMedium!.merge(
+                                        TextStyle(
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onSurfaceVariant,
+                                        ),
+                                      ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Text(
+                      description,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyMedium!.merge(
+                            TextStyle(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSurfaceVariant,
+                            ),
+                          ),
+                      maxLines: 2,
+                    )
+                  ],
+                ),
+              ),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 24,
-                  ),
-                ),
-                const SizedBox(
-                  height: 2,
-                ),
-                Text(
-                  "${startDate.day}/${startDate.month}/${startDate.year}",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 22,
-                  ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  description,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

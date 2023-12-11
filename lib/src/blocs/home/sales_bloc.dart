@@ -30,11 +30,11 @@ class SalesBloc implements Bloc {
 
   Stream<QuerySnapshot> salesList() => _repository.salesList();
 
-  Future<List<SaleModel>> convertToFuture(List<DocumentSnapshot> docs) async {
+  List<SaleModel> convertToList(List<DocumentSnapshot> docs) {
     List<SaleModel> sales = [];
 
     for (var doc in docs) {
-      SaleModel saleModel = await SaleModel.fromDocument(doc);
+      SaleModel saleModel = SaleModel.fromDocument(doc);
       sales.add(saleModel);
     }
 

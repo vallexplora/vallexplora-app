@@ -32,7 +32,7 @@
     "@gEvents": {
         "description": "The label for the events tab destination."
     },
-    "gRewards": "Recompensas",
+    "gRewards": "{count, plural, =1 {Recompensa} other{Recompensas}}",
     "@gRewards": {
         "description": "The label for the rewards tab destination."
     },
@@ -317,7 +317,7 @@
     "@sEventDetailAbout": {
         "description": "Used in the event detail screen. The text span before the event description."
     },
-    "sEventDetailARButtonLabel": "Ver en AR",
+    "sEventDetailARButtonLabel": "Ver en Realidad Aumentada",
     "@sEventDetailARButtonLabel": {
         "description": "Used in the event detail screen. The view in ar button label."
     },
@@ -328,6 +328,39 @@
     "sEventDetailMapButtonLabel": "Mostrar en el mapa",
     "@sEventDetailMapButtonLabel": {
         "description": "Used in the event detail screen. The view on map button label."
+    },
+    "sRewardDetailTypeTooltip": "Esta recompensa se redime por medio de {type, select, false{puntos} other{posición en el tablero}}",
+    "@sRewardDetailTypeTooltip": {
+        "description": "Used in the reward detail screen. The type icon tooltip.",
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "sRewardDetailType": "{type, select, false{{points} puntos} other{{points} posición en el tablero}}",
+    "@sRewardDetailType": {
+        "description": "Used in the reward detail screen. The type icon icon tooltip.",
+        "placeholders": {
+            "type": {
+                "type": "String"
+            },
+            "points": {
+                "type": "int"
+            }
+        }
+    },
+    "sRewardDetailAbout": "Acerca de la recompensa: ",
+    "@sRewardDetailAbout": {
+        "description": "Used in the reward detail screen. The text span before the event description."
+    },
+    "sRewardDetailClaim": "Reclamar recompensa",
+    "@sRewardDetailClaim": {
+        "description": "Used in the reward detail screen. The claim reward button label."
+    },
+    "sRewardDetailClaimed": "Recompensa reclamada",
+    "@sRewardDetailClaimed": {
+        "description": "Used in the reward detail screen. The disabled claim reward button label."
     },
     "sProfileUsername": "Editando nombre de usuario: ",
     "@sProfileUsername": {

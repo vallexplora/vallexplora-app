@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
           Tab(
             icon: const Icon(Icons.local_activity_outlined),
-            text: AppLocalizations.of(context)!.gRewards,
+            text: AppLocalizations.of(context)!.gRewards(2),
           ),
         ],
       );

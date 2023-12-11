@@ -20,8 +20,8 @@ class FirestoreResources {
   // Sales
 
   Stream<QuerySnapshot> salesList() => _firestore
-      .collection("discounts")
-      .orderBy("expirationDate", descending: false)
+      .collection("rewards")
+      .orderBy("end", descending: false)
       .snapshots();
 
   // Map

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:vallexplora/src/models/sale_model.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/sale_card.dart';
 
-import '../../../blocs/home/sales_bloc.dart';
+import 'package:vallexplora/src/blocs/home/sales_bloc.dart';
 
 class SalesViewTab extends StatefulWidget {
   const SalesViewTab({super.key});
@@ -22,41 +22,30 @@ class _SalesViewTabState extends State<SalesViewTab> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<DocumentSnapshot> docs = snapshot.data!.docs;
-          Future<List<SaleModel>> futureSales = _bloc.convertToFuture(docs);
-
-          return FutureBuilder<List<SaleModel>>(
-            future: futureSales,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                  child: CircularProgressIndicator(),
+          List<SaleModel> sales = _bloc.convertToList(docs);
+          if (sales.isNotEmpty) {
+            return ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: sales.length,
+              itemBuilder: (context, index) {
+                var sale = sales[index];
+                return SaleCard(
+                  name: sale.name,
+                  description: sale.description,
+                  companyName: sale.companyName,
+                  end: sale.end,
+                  start: sale.start,
+                  requirement: sale.requirement,
+                  requirementType: sale.requirementType,
+                  city: sale.city,
                 );
-              } else if (snapshot.hasError) {
-                return Text('Error: ${snapshot.error}');
-              } else {
-                List<SaleModel> sales = snapshot.data ?? [];
-                if (sales.isNotEmpty) {
-                  return ListView.builder(
-                    itemCount: sales.length,
-                    itemBuilder: (context, index) {
-                      var sale = sales[index];
-                      return SaleCard(
-                          name: sale.name,
-                          description: sale.description,
-                          companyID: sale.companyID,
-                          expirationDate: sale.expirationDate,
-                          stackable: sale.stackable,
-                          place: sale.city);
-                    },
-                  );
-                } else {
-                  return const Center(
-                    child: Text('No hay promociones por el momento :('),
-                  );
-                }
-              }
-            },
-          );
+              },
+            );
+          } else {
+            return const Center(
+              child: Text('No hay promociones por el momento :('),
+            );
+          }
         } else if (snapshot.hasError) {
           return Center(
             child: Text("Ocurrió un error: ${snapshot.error}"),
