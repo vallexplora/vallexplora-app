@@ -17,7 +17,7 @@ class ChallengeModel {
     required this.cityName,
   });
 
-  static Future<ChallengeModel> fromDocument(DocumentSnapshot document) async {
+  static ChallengeModel fromDocument(DocumentSnapshot document) {
     return ChallengeModel(
       id: document.id,
       name: document['name'],

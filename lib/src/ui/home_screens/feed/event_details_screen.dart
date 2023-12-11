@@ -152,7 +152,8 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                       text: TextSpan(
                         children: [
                           TextSpan(
-                            text: 'Acerca del evento: ',
+                            text:
+                                AppLocalizations.of(context)!.sEventDetailAbout,
                             style: Theme.of(context).textTheme.bodyLarge!.merge(
                                 const TextStyle(fontWeight: FontWeight.w600)),
                           ),

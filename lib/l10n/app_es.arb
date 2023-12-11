@@ -300,6 +300,18 @@
     "@sOnboarding3Copy": {
         "description": "Used in the 3rd onboarding screen. The copy text of the page."
     },
+    "sEventEntryFee": "{free, select, true{Entrada Libre} other{'$'{entryFee} COP}}",
+    "@sEventEntryFee": {
+        "description": "Used in the event cards. The entry fee text.",
+        "placeholders": {
+            "free": {
+                "type": "String"
+            },
+            "entryFee": {
+                "type": "int"
+            }
+        }
+    },
     "sEventDetailARTooltip": "Si te encuentras en el lugar del evento, ¡puedes acceder a contenido adicional en realidad aumentada!",
     "@sEventDetailARTooltip": {
         "description": "Used in the event detail screen. The ar icon tooltip."
@@ -368,11 +380,11 @@
     },
     "sProfileVisited": "He visitado",
     "@sProfileVisited": {
-        "description": "Used in the profile screen. The hint label for the ammount of towns visited."
+        "description": "Used in the profile screen. The hint label for the amount of towns visited."
     },
     "sProfileTowns": "Municipios",
     "@sProfileTowns": {
-        "description": "Used in the profile screen. The accompanying label for the ammount of towns visited."
+        "description": "Used in the profile screen. The accompanying label for the amount of towns visited."
     },
     "sProfileOrigin": "Soy de",
     "@sProfileOrigin": {
@@ -458,7 +470,7 @@
     },
     "sChallengesPoints": "{points} puntos",
     "@sChallengesPoints": {
-        "description": "Used in the challenges screen. The ammount of points of a given challenge.",
+        "description": "Used in the challenges screen. The amount of points of a given challenge.",
         "placeholders": {
             "points": {
                 "type": "int",
@@ -482,5 +494,29 @@
     "sChallengesPicNotice": "Este desafío requiere que subas una foto en el lugar",
     "@sChallengesPicNotice": {
         "description": "Used in the challenges screen. The notice given to the user that a picture for manual validation is required."
+    },
+    "sChallengesExpiration": "{value, select, missed{Hace {days} días} available{Quedan {days} días} other{¡Hecho!}}",
+    "@sChallengesExpiration": {
+        "description": "Used in the challenges screen. The label acompanying how many days are left or have gone by for and since expiry, or that which notifies the user of completion of the challenge.",
+        "placeholders": {
+            "value": {
+                "type": "String"
+            },
+            "days": {
+                "type": "int"
+            }
+        }
+    },
+    "sLeaderboardYour": "Tu puntaje",
+    "@sLeaderboardYour": {
+        "description": "Used in the leaderboard screen. The label for one's own score that season."
+    },
+    "sLeaderboardPodiumTitle": "Podio de la temporada",
+    "@sLeaderboardPodiumTitle": {
+        "description": "Used in the leaderboard screen. The title for the podium that season."
+    },
+    "gPointsAbbreviation": "pts.",
+    "@gPointsAbbreviation": {
+        "description": "The abbreviation for the word '''points'''. Used alongside point numerals to add clarity."
     }
 }

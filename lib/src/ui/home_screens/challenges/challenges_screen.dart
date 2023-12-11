@@ -60,14 +60,16 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                 builder: (context, streamsSnapshot) {
                   if (streamsSnapshot.hasData) {
                     return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         StreamBuilder<QuerySnapshot>(
                           stream: streamsSnapshot.data![0],
                           builder: (context, currentSnapshots) {
                             List<DocumentSnapshot> docs =
                                 currentSnapshots.data?.docs ?? [];
-                            Future<List<ChallengeModel>> futureChallenges =
-                                _bloc.convertToFuture(docs);
+                            List<ChallengeModel> challenges =
+                                _bloc.convertToList(docs);
                             if (currentSnapshots.hasData) {
                               return FutureBuilder(
                                   future: _bloc.getUserInfo(),
@@ -96,94 +98,70 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                               child: Text(
                                                   "Error: ${userSnapshot.error}"));
                                         }
-                                        return FutureBuilder(
-                                          future: futureChallenges,
-                                          builder: (context, snapshot) {
-                                            if (snapshot.connectionState ==
-                                                ConnectionState.waiting) {
-                                              return const Center(
-                                                  child:
-                                                      CircularProgressIndicator());
-                                            } else if (snapshot.hasError) {
-                                              return Text(
-                                                  'Error: ${snapshot.error}');
-                                            } else {
-                                              List<ChallengeModel> challenges =
-                                                  snapshot.data ?? [];
-                                              if (challenges.isNotEmpty) {
-                                                return FutureBuilder(
-                                                    future: _bloc
-                                                        .getCurrentExpirationDate(),
-                                                    builder: (context,
-                                                        futureSnapshot) {
-                                                      if (futureSnapshot
-                                                          .hasData) {
-                                                        return ListView.builder(
-                                                          primary: false,
-                                                          shrinkWrap: true,
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          itemCount:
-                                                              challenges.length,
-                                                          itemBuilder:
-                                                              (context, index) {
-                                                            var challenge =
-                                                                challenges[
-                                                                    index];
-                                                            final type = _bloc
-                                                                .checkIfDoneOrExpired(
-                                                                    challenge,
-                                                                    userSnapshot
-                                                                        .data!
-                                                                        .completedChallenges
-                                                                        .cast<
-                                                                            String>());
+                                        if (challenges.isNotEmpty) {
+                                          return FutureBuilder(
+                                              future: _bloc
+                                                  .getCurrentExpirationDate(),
+                                              builder:
+                                                  (context, futureSnapshot) {
+                                                if (futureSnapshot.hasData) {
+                                                  return ListView.builder(
+                                                    primary: false,
+                                                    shrinkWrap: true,
+                                                    physics:
+                                                        const NeverScrollableScrollPhysics(),
+                                                    itemCount:
+                                                        challenges.length,
+                                                    itemBuilder:
+                                                        (context, index) {
+                                                      var challenge =
+                                                          challenges[index];
+                                                      final type = _bloc
+                                                          .checkIfDoneOrExpired(
+                                                              challenge,
+                                                              userSnapshot.data!
+                                                                  .completedChallenges
+                                                                  .cast<
+                                                                      String>());
 
-                                                            return ChallengeCard(
-                                                              id: challenge.id,
-                                                              name: challenge
-                                                                  .name,
-                                                              description:
-                                                                  challenge
-                                                                      .description,
-                                                              points: challenge
-                                                                  .points,
-                                                              expiration:
-                                                                  futureSnapshot
-                                                                      .data!,
-                                                              place: challenge
-                                                                  .cityName,
-                                                              type: type,
-                                                              proofImage: _bloc
-                                                                  .proofImage,
-                                                              pickImageFromGallery:
-                                                                  _bloc
-                                                                      .pickImageFromGallery,
-                                                              changeProofImage:
-                                                                  _bloc
-                                                                      .changeProofImage,
-                                                              markAsDone: _bloc
-                                                                  .markAsDone,
-                                                            );
-                                                          },
-                                                        );
-                                                      } else {
-                                                        return const Center(
-                                                          child:
-                                                              CircularProgressIndicator(),
-                                                        );
-                                                      }
-                                                    });
-                                              } else {
-                                                return Center(
-                                                  child: Text(AppLocalizations
-                                                          .of(context)!
-                                                      .sChallengesCurrentSeasonEmpty),
-                                                );
-                                              }
-                                            }
-                                          },
-                                        );
+                                                      return ChallengeCard(
+                                                        id: challenge.id,
+                                                        name: challenge.name,
+                                                        description: challenge
+                                                            .description,
+                                                        points:
+                                                            challenge.points,
+                                                        expiration:
+                                                            futureSnapshot
+                                                                .data!,
+                                                        place:
+                                                            challenge.cityName,
+                                                        type: type,
+                                                        proofImage:
+                                                            _bloc.proofImage,
+                                                        pickImageFromGallery: _bloc
+                                                            .pickImageFromGallery,
+                                                        changeProofImage: _bloc
+                                                            .changeProofImage,
+                                                        markAsDone:
+                                                            _bloc.markAsDone,
+                                                      );
+                                                    },
+                                                  );
+                                                } else {
+                                                  return const Center(
+                                                    child:
+                                                        CircularProgressIndicator(),
+                                                  );
+                                                }
+                                              });
+                                        } else {
+                                          return Center(
+                                            child: Text(AppLocalizations.of(
+                                                    context)!
+                                                .sChallengesCurrentSeasonEmpty),
+                                          );
+                                        }
                                       },
                                     );
                                   });
@@ -205,9 +183,12 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                           AppLocalizations.of(context)!
                               .sChallengesPreviousSeason,
                           style: Theme.of(context).textTheme.titleLarge!.merge(
-                              TextStyle(
-                                  color:
-                                      Theme.of(context).colorScheme.onSurface)),
+                                TextStyle(
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onSurface),
+                              ),
+                          textAlign: TextAlign.start,
                         ),
                         const SizedBox(
                           height: 16,
@@ -217,8 +198,8 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                           builder: (context, currentSnapshots) {
                             List<DocumentSnapshot> docs =
                                 currentSnapshots.data?.docs ?? [];
-                            Future<List<ChallengeModel>> futureChallenges =
-                                _bloc.convertToFuture(docs);
+                            List<ChallengeModel> challenges =
+                                _bloc.convertToList(docs);
                             if (currentSnapshots.hasData) {
                               return FutureBuilder(
                                   future: _bloc.getUserInfo(),
@@ -247,96 +228,74 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                           return Center(
                                               child: Text(
                                                   "Error: ${userSnapshot.error}"));
-                                        }
-                                        return FutureBuilder(
-                                          future: futureChallenges,
-                                          builder: (context, snapshot) {
-                                            if (snapshot.connectionState ==
-                                                ConnectionState.waiting) {
-                                              return const Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              );
-                                            } else if (snapshot.hasError) {
-                                              return Text(
-                                                  'Error: ${snapshot.error}');
-                                            } else {
-                                              List<ChallengeModel> challenges =
-                                                  snapshot.data ?? [];
-                                              if (challenges.isNotEmpty) {
-                                                return FutureBuilder(
-                                                    future: _bloc
-                                                        .getCurrentExpirationDate(),
-                                                    builder: (context,
-                                                        futureSnapshot) {
-                                                      if (futureSnapshot
-                                                          .hasData) {
-                                                        return ListView.builder(
-                                                          primary: false,
-                                                          shrinkWrap: true,
-                                                          physics:
-                                                              const NeverScrollableScrollPhysics(),
-                                                          itemCount:
-                                                              challenges.length,
-                                                          itemBuilder:
-                                                              (context, index) {
-                                                            var challenge =
-                                                                challenges[
-                                                                    index];
-                                                            final type = _bloc
-                                                                .checkIfDoneOrExpired(
-                                                                    challenge,
-                                                                    userSnapshot
-                                                                        .data!
-                                                                        .completedChallenges
-                                                                        .cast<
-                                                                            String>());
+                                        } else {
+                                          if (challenges.isNotEmpty) {
+                                            return FutureBuilder(
+                                                future: _bloc
+                                                    .getCurrentExpirationDate(),
+                                                builder:
+                                                    (context, futureSnapshot) {
+                                                  if (futureSnapshot.hasData) {
+                                                    return ListView.builder(
+                                                      primary: false,
+                                                      shrinkWrap: true,
+                                                      physics:
+                                                          const NeverScrollableScrollPhysics(),
+                                                      itemCount:
+                                                          challenges.length,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        var challenge =
+                                                            challenges[index];
+                                                        final type = _bloc
+                                                            .checkIfDoneOrExpired(
+                                                                challenge,
+                                                                userSnapshot
+                                                                    .data!
+                                                                    .completedChallenges
+                                                                    .cast<
+                                                                        String>());
 
-                                                            return ChallengeCard(
-                                                              id: challenge.id,
-                                                              name: challenge
-                                                                  .name,
-                                                              description:
-                                                                  challenge
-                                                                      .description,
-                                                              points: challenge
-                                                                  .points,
-                                                              expiration:
-                                                                  futureSnapshot
-                                                                      .data!,
-                                                              place: challenge
-                                                                  .cityName,
-                                                              type: type,
-                                                              proofImage: _bloc
-                                                                  .proofImage,
-                                                              pickImageFromGallery:
-                                                                  _bloc
-                                                                      .pickImageFromGallery,
-                                                              changeProofImage:
-                                                                  _bloc
-                                                                      .changeProofImage,
-                                                              markAsDone: _bloc
-                                                                  .markAsDone,
-                                                            );
-                                                          },
+                                                        return ChallengeCard(
+                                                          id: challenge.id,
+                                                          name: challenge.name,
+                                                          description: challenge
+                                                              .description,
+                                                          points:
+                                                              challenge.points,
+                                                          expiration:
+                                                              futureSnapshot
+                                                                  .data!,
+                                                          place: challenge
+                                                              .cityName,
+                                                          type: type,
+                                                          proofImage:
+                                                              _bloc.proofImage,
+                                                          pickImageFromGallery:
+                                                              _bloc
+                                                                  .pickImageFromGallery,
+                                                          changeProofImage: _bloc
+                                                              .changeProofImage,
+                                                          markAsDone:
+                                                              _bloc.markAsDone,
                                                         );
-                                                      } else {
-                                                        return const Center(
-                                                          child:
-                                                              CircularProgressIndicator(),
-                                                        );
-                                                      }
-                                                    });
-                                              } else {
-                                                return Center(
-                                                  child: Text(AppLocalizations
-                                                          .of(context)!
-                                                      .sChallengesPreviousSeasonEmpty),
-                                                );
-                                              }
-                                            }
-                                          },
-                                        );
+                                                      },
+                                                    );
+                                                  } else {
+                                                    return const Center(
+                                                      child:
+                                                          CircularProgressIndicator(),
+                                                    );
+                                                  }
+                                                });
+                                          } else {
+                                            return Center(
+                                              child: Text(AppLocalizations.of(
+                                                      context)!
+                                                  .sChallengesPreviousSeasonEmpty),
+                                            );
+                                          }
+                                        }
                                       },
                                     );
                                   });

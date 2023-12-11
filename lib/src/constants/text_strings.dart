@@ -1,11 +1,4 @@
 class StringResources {
-  /* Profile */
-  
-  static const String profileDeleteAccountDisclaimer =
-      "Al borrar tu cuenta, se eliminarán todos sus datos, incluidos tus marcadores, puntos, premios y configuración. Esta acción no se puede deshacer.\n\n¿Estás seguro de que quieres eliminar tu cuenta de forma permanente?";
-  static const String profileDeleteAccountButton =
-      "Borrar cuenta permanentemente";
-
   /* Guide screen */
   static const String guideSearchPlaceholder = "Busca y filtra...";
   static const String guideSearchCategories = "Categorías";

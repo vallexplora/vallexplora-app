@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/constants/event_types.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/event_details_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EventCard extends StatefulWidget {
   final String name;
@@ -173,9 +174,8 @@ class _EventCardState extends State<EventCard> {
                               style: Theme.of(context).textTheme.bodyLarge,
                             ),
                             Text(
-                              entryFee == 0
-                                  ? "Entrada Libre"
-                                  : "\$$entryFee COP",
+                              AppLocalizations.of(context)!.sEventEntryFee(
+                                  (entryFee == 0).toString(), entryFee),
                               style:
                                   Theme.of(context).textTheme.bodyMedium!.merge(
                                         TextStyle(

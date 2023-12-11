@@ -75,6 +75,7 @@
     "sOnboarding2Copy": "The Valle through your phone. Discover it from a new perspective",
     "sOnboarding3Title": "Customized to your interests",
     "sOnboarding3Copy": "We want you to get to know the Valle your own way. Let our recommendations guide you, and enjoy El Valle!",
+    "sEventEntryFee": "{free, select, true{Free Entry} other{'$'{entryFee} COP}}",
     "sEventDetailARTooltip": "If you're at this event's location, you can access it's AR view!",
     "sEventDetailTypeTooltip": "This is {type, select, 1{a Sports and Shows} 2{a Gastronomy} 3{a History and Architecture} 4{an Art and Culture} 5{an Ecotourism} other{an unknown category}} event",
     "sEventDetailAbout": "About the event: ",
@@ -109,5 +110,9 @@
     "sChallengesPreviousSeasonEmpty": "No challenges for now :(",
     "sChallengesPoints": "{points} points",
     "sChallengesExpiry": "{type, select, done{Expired on {date}} other{Due {date}}}",
-    "sChallengesPicNotice": "This challenge requires you to upload a photo on location"
+    "sChallengesPicNotice": "This challenge requires you to upload a photo on location",
+    "sChallengesExpiration": "{value, select, missed{{days} days ago} available{{days} left} other{Done!}}",
+    "sLeaderboardYour": "Your score",
+    "sLeaderboardPodiumTitle": "Seasonal podium",
+    "gPointsAbbreviation": "pts."
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/models/challenge_model.dart';
 import 'package:vallexplora/src/ui/home_screens/challenges/challenge_detail_screen.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChallengeCard extends StatefulWidget {
   final String id;
@@ -172,7 +173,7 @@ class _ChallengeCardState extends State<ChallengeCard> {
               ),
             ),
             SizedBox(
-              width: 88,
+              width: 116,
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
@@ -180,7 +181,7 @@ class _ChallengeCardState extends State<ChallengeCard> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      points.toString(),
+                      "${points.toString()} ${AppLocalizations.of(context)!.gPointsAbbreviation}",
                       style: Theme.of(context).textTheme.titleMedium,
                       textAlign: TextAlign.center,
                     ),
@@ -188,7 +189,7 @@ class _ChallengeCardState extends State<ChallengeCard> {
                       height: 4,
                     ),
                     Text(
-                      "${type == -1 ? "Venció hace" : "Vence en"} ${DateTime.now().difference(expiration).inDays.abs()} días",
+                      AppLocalizations.of(context)!.sChallengesExpiration(type == -1 ? "missed" : type == 0 ? "available" : "other", points),
                       style: Theme.of(context).textTheme.labelSmall,
                       textAlign: TextAlign.center,
                     ),

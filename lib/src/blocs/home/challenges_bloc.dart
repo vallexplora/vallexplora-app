@@ -58,12 +58,11 @@ class ChallengesBloc implements Bloc {
     return (await rawUserInfo).map(UserModel.fromDocument);
   }
 
-  Future<List<ChallengeModel>> convertToFuture(
-      List<DocumentSnapshot> docs) async {
+  List<ChallengeModel> convertToList(List<DocumentSnapshot> docs) {
     List<ChallengeModel> challenges = [];
 
     for (var doc in docs) {
-      ChallengeModel challengeModel = await ChallengeModel.fromDocument(doc);
+      ChallengeModel challengeModel = ChallengeModel.fromDocument(doc);
       challenges.add(challengeModel);
     }
 
@@ -82,7 +81,6 @@ class ChallengesBloc implements Bloc {
     }
   }
 
-  
   void markAsDone(String id, int points) {
     _repository.markChallengeAsDone(id, points);
   }
@@ -116,5 +114,5 @@ class ChallengesBloc implements Bloc {
     _expiration.close();
     await _place.drain();
     _place.close();
-  }  
+  }
 }

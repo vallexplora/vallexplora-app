@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import '../../constants/asset_uris.dart';
-import '../../constants/colors.dart';
-import '../../constants/sizes.dart';
+import 'package:vallexplora/src/constants/colors.dart';
+import 'package:vallexplora/src/constants/asset_uris.dart';
 
 class HeadingSection extends StatefulWidget {
   final String username;
@@ -15,6 +14,7 @@ class HeadingSection extends StatefulWidget {
   final Stream<bool> editingUsername;
   final ValueSetter<bool> changeEditingUsername;
   final int pointsTotal;
+  final int seasonPoints;
 
   const HeadingSection({
     super.key,
@@ -28,6 +28,7 @@ class HeadingSection extends StatefulWidget {
     required this.editingUsername,
     required this.changeEditingUsername,
     required this.pointsTotal,
+    required this.seasonPoints,
   });
 
   @override
@@ -45,6 +46,7 @@ class _HeadingSectionState extends State<HeadingSection> {
   late Stream<bool> editingUsername;
   late ValueSetter<bool> changeEditingUsername;
   late int pointsTotal;
+  late int seasonPoints;
   final _textController = TextEditingController();
 
   @override
@@ -60,6 +62,7 @@ class _HeadingSectionState extends State<HeadingSection> {
     editingUsername = widget.editingUsername;
     changeEditingUsername = widget.changeEditingUsername;
     pointsTotal = widget.pointsTotal;
+    seasonPoints = widget.seasonPoints;
   }
 
   @override
@@ -78,9 +81,9 @@ class _HeadingSectionState extends State<HeadingSection> {
                 } else if (snapshot.hasError || !snapshot.hasData) {
                   return CircleAvatar(
                     backgroundColor: neutralRef.value92,
-                    radius: SizeResources.avatarRadiusOuter,
+                    radius: 70,
                     child: CircleAvatar(
-                      radius: SizeResources.avatarRadiusInner,
+                      radius: 64,
                       backgroundColor: neutralRef.value96,
                       backgroundImage: const AssetImage(
                         AssetURIResources.googleLogo,
@@ -90,9 +93,9 @@ class _HeadingSectionState extends State<HeadingSection> {
                 }
                 return CircleAvatar(
                   backgroundColor: neutralRef.value92,
-                  radius: SizeResources.avatarRadiusOuter,
+                  radius: 70,
                   child: CircleAvatar(
-                    radius: SizeResources.avatarRadiusInner,
+                    radius: 64,
                     backgroundImage: NetworkImage(snapshot.data!.isEmpty
                         ? googlePictureURL
                         : snapshot.data!),
@@ -104,7 +107,7 @@ class _HeadingSectionState extends State<HeadingSection> {
               height: 16,
             ),
             Text(
-              "$pointsTotal ${AppLocalizations.of(context)!.sProfileCurrentPoints}",
+              "$seasonPoints ${AppLocalizations.of(context)!.sProfileCurrentPoints}",
               style: Theme.of(context).textTheme.titleLarge!.merge(
                     TextStyle(
                       color: Theme.of(context).colorScheme.primary,

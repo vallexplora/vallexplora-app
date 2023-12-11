@@ -6,7 +6,7 @@ import 'package:vallexplora/src/utils/theme/color_schemes.dart';
 import '../blocs/home/home_container_bloc.dart';
 import 'home_screens/challenges/challenges_screen.dart';
 import 'home_screens/guide/guide_screen.dart';
-import 'home_screens/markers_screen.dart';
+import 'home_screens/leaderboard/leaderboard_screen.dart';
 
 class HomeContainerScreen extends StatefulWidget {
   final int? initialScreen;
@@ -25,7 +25,7 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
     HomeScreen(),
     GuideScreen(),
     ChallengesScreen(),
-    MarkersScreen(),
+    LeaderboardScreen(),
   ];
   @override
   void initState() {
@@ -45,6 +45,7 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
           return Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
+              title: Text(titles(context)[snapshot.data ?? 0]),
               backgroundColor: lightScheme.surfaceContainer,
               actions: [
                 IconButton(
@@ -96,4 +97,11 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
           );
         });
   }
+
+  titles(BuildContext context) => [
+        AppLocalizations.of(context)!.gHome,
+        AppLocalizations.of(context)!.gGuide,
+        AppLocalizations.of(context)!.gChallenges,
+        AppLocalizations.of(context)!.gLeaderboard,
+      ];
 }

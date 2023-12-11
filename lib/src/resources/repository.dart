@@ -120,5 +120,7 @@ class Repository {
     _dbResources.markChallengeAsDone(getUserUID(), id, points);
   }
 
-  // User markers
+  // Leaderboards
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getPodium() => _dbResources.getPodium();
 }

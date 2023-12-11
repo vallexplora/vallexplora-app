@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:vallexplora/src/constants/event_types.dart';
 import 'package:vallexplora/src/utils/theme/extended.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:vallexplora/src/constants/sizes.dart';
 
 class PersonalInformation extends StatefulWidget {
   final Stream<List<int>> categories;
@@ -199,11 +198,11 @@ class _PersonalInformationState extends State<PersonalInformation> {
           },
         ),
         const SizedBox(
-          height: SizeResources.defaultHeight,
+          height: 16,
         ),
         // Here
         const Divider(
-          height: SizeResources.defaultDividerHeight,
+          height: 80,
         ),
       ],
     );

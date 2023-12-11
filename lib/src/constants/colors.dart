@@ -465,8 +465,8 @@ ExtendedColor goldEx = ExtendedColor(
 ExtendedSys bronzeExLight = const ExtendedSys(
   color: Color(0xFFA23F00),
   onColor: Color(0xFFFFFFFF),
-  colorContainer: Color(0xFF),
-  onColorContainer: Color(0xFFFFDBCC),
+  colorContainer: Color(0xFFFFDBCC),
+  onColorContainer: Color(0xFF351000),
 );
 
 ExtendedSys bronzeExDark = const ExtendedSys(

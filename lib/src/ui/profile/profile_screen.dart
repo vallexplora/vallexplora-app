@@ -82,12 +82,11 @@ class _ProfileScreen extends State<ProfileScreen> {
                 builder: (_, controller) => Container(
                   decoration: const BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                        top:
-                            Radius.circular(SizeResources.defaultBorderRadius)),
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(16)),
                   ),
                   padding: const EdgeInsets.all(
-                    SizeResources.defaultPadding,
+                    16,
                   ),
                   child: Listener(
                     behavior: HitTestBehavior.opaque,
@@ -143,6 +142,9 @@ class _ProfileScreen extends State<ProfileScreen> {
                                     _bloc.changeEditingUsername,
                                 pointsTotal:
                                     userSnapshot.data?.pointsTotal ?? 0,
+                                seasonPoints:
+                                    userSnapshot.data?.points.last["amount"] ??
+                                        0,
                               ),
                               PersonalInformation(
                                 categories: _bloc.categories,

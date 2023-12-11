@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:logger/logger.dart';
 import 'package:maps_toolkit/maps_toolkit.dart' as mtkt;
 import 'package:rxdart/rxdart.dart';
 import 'package:vallexplora/src/blocs/bloc.dart';
@@ -43,8 +42,6 @@ class GuideBloc implements Bloc {
   LocationData _lastPos =
       LocationData.fromMap({"latitude": 3.8, "longitude": -76.6});
   final radius = 20.0; // km
-  Logger l = Logger(level: Level.info);
-
   void setContext(BuildContext context) {
     _context = context;
   }

@@ -158,7 +158,7 @@ class FirestoreResources {
         "pictureURL": pictureURL.isNotEmpty ? "users/profile/$id.$ending" : "",
         "completedChallenges": [],
         "points": [
-          {"claimedOn": Timestamp.now(), "ammount": 0}
+          {"claimedOn": Timestamp.now(), "amount": 0}
         ],
         "pointsTotal": 0,
         "globalNotifications": false,
@@ -172,7 +172,7 @@ class FirestoreResources {
         "pictureURL": "",
         "completedChallenges": [],
         "points": [
-          {"claimedOn": Timestamp.now(), "ammount": 0}
+          {"claimedOn": Timestamp.now(), "amount": 0}
         ],
         "pointsTotal": 0,
         "globalNotifications": false,
@@ -202,5 +202,15 @@ class FirestoreResources {
     _firestore.collection("users").doc(await uid).update({
       "completedChallenges": FieldValue.arrayUnion([challengeId]),
     });
+  }
+
+  Stream<QuerySnapshot<Map<String, dynamic>>> getPodium() {
+    return _firestore
+        .collection("users")
+        .where("roles", arrayContains: 'tourist')
+        .orderBy('roles')
+        // .orderBy("points.claimedOn", descending: true) // TODO: figure out how to actually do this thing
+        // .orderBy("points.amount", descending: true)
+        .snapshots();
   }
 }
