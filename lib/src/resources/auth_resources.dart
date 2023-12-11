@@ -11,7 +11,10 @@ class AuthenticationResources {
 
   Future<String> getUserUID() async {
     final User? user = _firebaseAuth.currentUser;
-    return user!.uid;
+    if (user != null) {
+      return user.uid;
+    }
+    return Future.value("");
   }
 
   Future<int> signUpWithEmailAndPassword(

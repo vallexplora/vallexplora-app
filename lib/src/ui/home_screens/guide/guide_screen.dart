@@ -3,7 +3,6 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:vallexplora/src/blocs/home/guide_bloc.dart';
 import 'package:vallexplora/src/constants/sizes.dart';
 import 'package:vallexplora/src/ui/home_screens/guide/ar_view.dart';
-import 'package:vallexplora/src/ui/home_screens/guide/search.dart';
 import 'package:vallexplora/src/utils/theme/color_schemes.dart';
 
 class GuideScreen extends StatefulWidget {
@@ -55,23 +54,23 @@ class _GuideScreenState extends State<GuideScreen> {
               Icons.my_location_rounded,
             ),
           ),
-          const SizedBox(
-            height: SizeResources.smallHeight,
-          ),
-          FloatingActionButton(
-            onPressed: () {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                backgroundColor: Colors.transparent,
-                clipBehavior: Clip.none,
-                builder: (context) => const Search(),
-              );
-            },
-            child: const Icon(
-              Icons.search,
-            ),
-          ),
+          // const SizedBox(
+          //   height: SizeResources.smallHeight,
+          // ),
+          // FloatingActionButton(
+          //   onPressed: () {
+          //     showModalBottomSheet(
+          //       context: context,
+          //       isScrollControlled: true,
+          //       backgroundColor: Colors.transparent,
+          //       clipBehavior: Clip.none,
+          //       builder: (context) => const Search(),
+          //     );
+          //   },
+          //   child: const Icon(
+          //     Icons.search,
+          //   ),
+          // ),
           StreamBuilder<bool>(
             stream: _bloc.showARButton,
             builder: (builder, snapshot) {

@@ -27,6 +27,17 @@ class _ARViewState extends State<ARView> {
             unloadOnDispose: true,
             runImmediately: true,
           ),
+          Positioned(
+            bottom: 32,
+            right: 16,
+            left: 16,
+            child: FilledButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text("Volver a la aplicación"),
+            ),
+          ),
         ],
       ),
     );
@@ -37,6 +48,10 @@ class _ARViewState extends State<ARView> {
     _unityWidgetController!.isLoaded()!.then((loaded) {
       if (!loaded!) {
         _unityWidgetController!.create();
+
+        const String text = "This text is being sent from Flutter to Unity";
+        _unityWidgetController!
+            .postMessage("TextController", "ChangeTextAction", text);
       }
     });
   }

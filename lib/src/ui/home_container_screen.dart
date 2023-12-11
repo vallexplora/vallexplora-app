@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/home_screen.dart';
 import 'package:vallexplora/src/ui/profile/profile_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -45,22 +44,8 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
         builder: (context, snapshot) {
           return Scaffold(
             appBar: AppBar(
+              automaticallyImplyLeading: false,
               backgroundColor: lightScheme.surfaceContainer,
-              leading: IconButton(
-                icon: const Icon(Icons.logout_rounded),
-                onPressed: () {
-                  _bloc.logout().then((value) {
-                    Navigator.popUntil(context, (route) => route.isFirst);
-                    return Fluttertoast.showToast(
-                        msg: AppLocalizations.of(context)!.gBye,
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.BOTTOM,
-                        timeInSecForIosWeb: 1,
-                        textColor: Colors.white,
-                        fontSize: 16.0);
-                  });
-                },
-              ),
               actions: [
                 IconButton(
                   icon: const Icon(Icons.account_circle_rounded),
@@ -94,8 +79,8 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
                   label: AppLocalizations.of(context)!.gChallenges,
                 ),
                 NavigationDestination(
-                  icon: const Icon(Icons.location_on_outlined),
-                  selectedIcon: const Icon(Icons.location_on),
+                  icon: const Icon(Icons.emoji_events_outlined),
+                  selectedIcon: const Icon(Icons.emoji_events),
                   label: AppLocalizations.of(context)!.gLeaderboard,
                 ),
               ],

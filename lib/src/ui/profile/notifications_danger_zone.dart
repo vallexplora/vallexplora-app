@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vallexplora/l10n/l10n.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vallexplora/src/app.dart';
 import 'package:vallexplora/src/constants/colors.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -14,6 +14,7 @@ class TogglesAndDangerZone extends StatefulWidget {
   final ValueSetter<bool> changePasswordVisible;
   final ValueSetter<String> changePassword;
   final Stream<bool> passwordVisible;
+  final Function logout;
 
   const TogglesAndDangerZone({
     super.key,
@@ -26,6 +27,7 @@ class TogglesAndDangerZone extends StatefulWidget {
     required this.changePassword,
     required this.changePasswordVisible,
     required this.passwordVisible,
+    required this.logout,
   });
 
   @override
@@ -42,6 +44,7 @@ class _TogglesAndDangerZoneState extends State<TogglesAndDangerZone> {
   late ValueSetter<bool> changePasswordVisible;
   late ValueSetter<String> changePassword;
   late Stream<bool> passwordVisible;
+  late Function logout;
 
   @override
   void initState() {
@@ -55,6 +58,7 @@ class _TogglesAndDangerZoneState extends State<TogglesAndDangerZone> {
     changePasswordVisible = widget.changePasswordVisible;
     changePassword = widget.changePassword;
     passwordVisible = widget.passwordVisible;
+    logout = widget.logout;
   }
 
   @override
@@ -62,6 +66,24 @@ class _TogglesAndDangerZoneState extends State<TogglesAndDangerZone> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        DropdownButtonFormField<Locale>(
+          value: Localizations.localeOf(context),
+          onChanged: (locale) {
+            if (locale != null) {
+              App.setLocale(context, locale);
+            }
+          },
+          items: AppLocalizations.supportedLocales.map((locale) {
+            return DropdownMenuItem(
+              value: locale,
+              child: Text(AppLocalizations.of(context)!
+                  .sProfileLanguage(locale.languageCode)),
+            );
+          }).toList(),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
         StreamBuilder<bool>(
             stream: notificationsGlobal,
             builder: (context, snapshot) {
@@ -137,32 +159,28 @@ class _TogglesAndDangerZoneState extends State<TogglesAndDangerZone> {
                 );
               }
             }),
-        const SizedBox(
-          height: 16,
-        ),
-        DropdownButtonFormField<Locale>(
-          value: Localizations.localeOf(context),
-          onChanged: (locale) {
-            if (locale != null) {
-              App.setLocale(context, locale);
-            }
-          },
-          items: AppLocalizations.supportedLocales.map((locale) {
-            return DropdownMenuItem(
-              value: locale,
-              child: Text(AppLocalizations.of(context)!
-                  .sProfileLanguage(locale.languageCode)),
-            );
-          }).toList(),
-        ),
         const SizedBox(height: 24),
         const Divider(
           height: 32,
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            logout().then((value) {
+              Navigator.popUntil(context, (route) => route.isFirst);
+              return Fluttertoast.showToast(
+                  msg: AppLocalizations.of(context)!.gBye,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  textColor: Colors.white,
+                  fontSize: 16.0);
+            });
+          },
           child: Text(
             AppLocalizations.of(context)!.sProfileLogout,
+            style: Theme.of(context).textTheme.labelLarge!.merge(
+                  TextStyle(color: Theme.of(context).colorScheme.error),
+                ),
           ),
         ),
         const SizedBox(
@@ -181,7 +199,9 @@ class _TogglesAndDangerZoneState extends State<TogglesAndDangerZone> {
           child: Text(
             AppLocalizations.of(context)!.sProfileDeleteAccountButton,
           ),
-          onPressed: () {},
+          onPressed: () {
+            openDialog();
+          },
         ),
       ],
     );
@@ -191,71 +211,122 @@ class _TogglesAndDangerZoneState extends State<TogglesAndDangerZone> {
         context: context,
         builder: ((context) {
           return AlertDialog(
-            title: Text(AppLocalizations.of(context)!.sDeleteDialogTitle),
-            content: Column(
-              children: [
-                Text(
-                  AppLocalizations.of(context)!.sDeleteDialogBody,
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Column(
+            icon: Icon(
+              Icons.report_problem_outlined,
+              color: Theme.of(context).colorScheme.error,
+            ),
+            title: Text(
+              AppLocalizations.of(context)!.sDeleteDialogTitle,
+              style: Theme.of(context).textTheme.headlineSmall!.merge(
+                    TextStyle(
+                      color: Theme.of(context).colorScheme.error,
+                    ),
+                  ),
+            ),
+            surfaceTintColor: errorRef.value98,
+            content: SizedBox(
+              height: 364,
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
                     Text(
-                      AppLocalizations.of(context)!.sDeleteDialogPrompt,
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    StreamBuilder<bool>(
-                      stream: passwordVisible,
-                      builder: (context, snapshot) {
-                        return TextField(
-                          autofillHints: const [
-                            AutofillHints.password,
-                          ],
-                          obscureText: snapshot.data ?? true ? false : true,
-                          keyboardType: TextInputType.visiblePassword,
-                          scrollPadding: EdgeInsets.only(
-                            bottom: MediaQuery.of(context).viewInsets.bottom +
-                                Theme.of(context).buttonTheme.height * 8,
-                          ),
-                          decoration: InputDecoration(
-                            label: Text(
-                                AppLocalizations.of(context)!.sLoginPassword),
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                snapshot.data ?? true
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
-                              ),
-                              onPressed: () {
-                                changePasswordVisible(!snapshot.data!);
-                              },
+                      AppLocalizations.of(context)!.sDeleteDialogBody,
+                      style: Theme.of(context).textTheme.bodyMedium!.merge(
+                            TextStyle(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onErrorContainer,
                             ),
                           ),
-                          onChanged: (value) {
-                            changePassword(value);
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          AppLocalizations.of(context)!.sDeleteDialogPrompt,
+                          style: Theme.of(context).textTheme.labelSmall!.merge(
+                                TextStyle(
+                                  color: Theme.of(context).colorScheme.error,
+                                ),
+                              ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        StreamBuilder<bool>(
+                          stream: passwordVisible,
+                          builder: (context, snapshot) {
+                            return TextField(
+                              autofillHints: const [
+                                AutofillHints.password,
+                              ],
+                              obscureText: snapshot.data ?? true ? false : true,
+                              keyboardType: TextInputType.visiblePassword,
+                              scrollPadding: EdgeInsets.only(
+                                bottom: MediaQuery.of(context)
+                                        .viewInsets
+                                        .bottom +
+                                    Theme.of(context).buttonTheme.height * 8,
+                              ),
+                              decoration: InputDecoration(
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                      width: 2,
+                                      color:
+                                          Theme.of(context).colorScheme.error),
+                                ),
+                                label: Text(AppLocalizations.of(context)!
+                                    .sLoginPassword),
+                                focusColor: Theme.of(context).colorScheme.error,
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    snapshot.data ?? true
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                    color: Theme.of(context).colorScheme.error,
+                                  ),
+                                  onPressed: () {
+                                    changePasswordVisible(!snapshot.data!);
+                                  },
+                                ),
+                              ),
+                              onChanged: (value) {
+                                changePassword(value);
+                              },
+                            );
                           },
-                        );
-                      },
+                        ),
+                      ],
                     ),
                   ],
                 ),
-              ],
+              ),
             ),
             actions: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pop(context);
+                },
                 child: Text(
                   AppLocalizations.of(context)!.gCancelButton,
+                  style: Theme.of(context).textTheme.labelLarge!.merge(
+                        TextStyle(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ),
                 ),
               ),
               TextButton(
                 onPressed: () {},
                 child: Text(
                   AppLocalizations.of(context)!.gConfirmButton,
+                  style: Theme.of(context).textTheme.labelLarge!.merge(
+                        TextStyle(
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      ),
                 ),
               ),
             ],

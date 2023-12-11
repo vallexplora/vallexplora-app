@@ -66,6 +66,10 @@ class ProfileBloc implements Bloc {
 
   User get _user => _repository.getCurrentUser();
 
+  Future<void> logout() async {
+    return await _repository.signOut();
+  }
+
   Future<Stream<UserModel>> getUserInfo() async {
     Future<Stream<DocumentSnapshot<Map<String, dynamic>>>> rawUserInfo =
         _repository.getUserInfo(_repository.getUserUID());

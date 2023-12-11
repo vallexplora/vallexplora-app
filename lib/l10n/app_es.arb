@@ -16,7 +16,7 @@
     "@gHome": {
         "description": "The label for the home navbar destination."
     },
-    "gGuide": "Guía",
+    "gGuide": "Mapa",
     "@gGuide": {
         "description": "The label for the guide navbar destination."
     },
@@ -264,6 +264,18 @@
     "@gCancelButton": {
         "description": "The cancel button label."
     },
+    "gDoneExclamationButton": "¡Hecho!",
+    "@gDoneExclamationButton": {
+        "description": "The done button label with exclamation marks."
+    },
+    "gCompleteButton": "¡Completar!",
+    "@gCompleteButton": {
+        "description": "The complete challenge button label with exclamation marks."
+    },
+    "gCloseButton": "Cerrar",
+    "@gCloseButton": {
+        "description": "The close button label."
+    },
     "sOnboarding1Title": "Explora el departamento",
     "@sOnboarding1Title": {
         "description": "Used in the 1st onboarding screen. The title of the page."
@@ -365,6 +377,14 @@
     "@sProfileLanguagePrompt": {
         "description": "Used in the profile screen. The label for the language picker."
     },
+    "sProfileCurrentPoints": "puntos esta temporada",
+    "@sProfileCurrentPoints": {
+        "description": "Used in the profile screen. The label for the seasonal points."
+    },
+    "sProfileTotalPoints": "puntos",
+    "@sProfileTotalPoints": {
+        "description": "Used in the profile screen. The label for the total points."
+    },
     "sDeleteDialogTitle": "Estás a punto de eliminar tu cuenta",
     "@sDeleteDialogTitle": {
         "description": "Used in the profile delete dialog screen. The title for the delete account screen."
@@ -402,5 +422,32 @@
     "sChallengesPreviousSeasonEmpty": "No hay desafíos por el momento :(",
     "@sChallengesPreviousSeasonEmpty": {
         "description": "Used in the challenges screen. The hint for when there are no challenges at all."
+    },
+    "sChallengesPoints": "{points} puntos",
+    "@sChallengesPoints": {
+        "description": "Used in the challenges screen. The ammount of points of a given challenge.",
+        "placeholders": {
+            "points": {
+                "type": "int",
+                "example": "0"
+            }
+        }
+    },
+    "sChallengesExpiry": "{type, select, done{Venció el {date}} other{Vence el {date}}}",
+    "@sChallengesExpiry": {
+        "description": "Used in the challenges screen. The date of expiry of a given challenge.",
+        "placeholders": {
+            "type": {
+                "type": "String"
+            },
+            "date": {
+                "type": "String",
+                "example": "01/01/2000"
+            }
+        }
+    },
+    "sChallengesPicNotice": "Este desafío requiere que subas una foto en el lugar",
+    "@sChallengesPicNotice": {
+        "description": "Used in the challenges screen. The notice given to the user that a picture for manual validation is required."
     }
 }

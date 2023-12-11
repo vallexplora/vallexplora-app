@@ -116,6 +116,7 @@ class FirestoreResources {
     required bool globalNotifications,
     required bool geoNotifications,
   }) {
+    if (id.isEmpty) return;
     _firestore.collection("users").doc(id).set({
       "globalNotifications": globalNotifications,
       "geoNotifications": geoNotifications,

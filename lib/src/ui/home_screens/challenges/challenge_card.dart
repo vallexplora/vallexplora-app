@@ -130,27 +130,30 @@ class _ChallengeCardState extends State<ChallengeCard> {
                   const SizedBox(
                     width: 16,
                   ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name,
-                        textAlign: TextAlign.justify,
-                        style: Theme.of(context).textTheme.titleMedium!.merge(
-                              TextStyle(
-                                  color: type == ChallengeStates.attained.value
-                                      ? Theme.of(context)
-                                          .colorScheme
-                                          .onTertiaryContainer
-                                      : Theme.of(context)
-                                          .colorScheme
-                                          .onSurface),
-                            ),
-                      ),
-                      Container(
-                        constraints: const BoxConstraints(maxWidth: 144),
-                        child: Text(
+                  Container(
+                    constraints: const BoxConstraints(maxWidth: 144),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.justify,
+                          style: Theme.of(context).textTheme.titleMedium!.merge(
+                                TextStyle(
+                                    color:
+                                        type == ChallengeStates.attained.value
+                                            ? Theme.of(context)
+                                                .colorScheme
+                                                .onTertiaryContainer
+                                            : Theme.of(context)
+                                                .colorScheme
+                                                .onSurface),
+                              ),
+                        ),
+                        Text(
                           description,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
@@ -162,8 +165,8 @@ class _ChallengeCardState extends State<ChallengeCard> {
                                 ),
                               ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ],
               ),

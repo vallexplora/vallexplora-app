@@ -163,6 +163,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                 changePasswordVisible:
                                     _bloc.changePasswordVisible,
                                 passwordVisible: _bloc.passwordVisible,
+                                logout: _bloc.logout,
                               ),
                             ],
                           ),

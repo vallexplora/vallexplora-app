@@ -104,7 +104,7 @@ class _HeadingSectionState extends State<HeadingSection> {
               height: 16,
             ),
             Text(
-              "N puntos esta temporada",
+              "$pointsTotal ${AppLocalizations.of(context)!.sProfileCurrentPoints}",
               style: Theme.of(context).textTheme.titleLarge!.merge(
                     TextStyle(
                       color: Theme.of(context).colorScheme.primary,
@@ -115,7 +115,7 @@ class _HeadingSectionState extends State<HeadingSection> {
               height: 16,
             ),
             Text(
-              pointsTotal.toString(),
+              "$pointsTotal ${AppLocalizations.of(context)!.sProfileTotalPoints}",
               style: Theme.of(context).textTheme.titleSmall!.merge(
                     TextStyle(
                       color: Theme.of(context).colorScheme.primary,

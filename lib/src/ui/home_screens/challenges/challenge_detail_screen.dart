@@ -135,7 +135,7 @@ class _ChallengeDetailScreenState extends State<ChallengeDetailScreen> {
                     height: 8,
                   ),
                   Text(
-                    "$points puntos",
+                    AppLocalizations.of(context)!.sChallengesPoints(points),
                     style:
                         Theme.of(context).textTheme.titleLarge!.merge(TextStyle(
                               color: Theme.of(context).colorScheme.primary,
@@ -159,7 +159,11 @@ class _ChallengeDetailScreenState extends State<ChallengeDetailScreen> {
                             )),
                       ),
                       Text(
-                        "${type == -1 ? "Venció el" : "Vence el"} ${DateFormat.yMd(Localizations.localeOf(context).languageCode).format(expirationDate)}",
+                        AppLocalizations.of(context)!.sChallengesExpiry(
+                            type == -1 ? "done" : "other",
+                            DateFormat.yMd(Localizations.localeOf(context)
+                                    .languageCode)
+                                .format(expirationDate)),
                         style: Theme.of(context)
                             .textTheme
                             .titleSmall!
@@ -231,7 +235,8 @@ class _ChallengeDetailScreenState extends State<ChallengeDetailScreen> {
                               height: 16,
                             ),
                             Text(
-                              "Este desafío requiere que subas una foto en el lugar",
+                              AppLocalizations.of(context)!
+                                  .sChallengesPicNotice,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall!
@@ -290,7 +295,8 @@ class _ChallengeDetailScreenState extends State<ChallengeDetailScreen> {
                               height: 16,
                             ),
                             Text(
-                              "Este desafío requiere que subas una foto en el lugar",
+                              AppLocalizations.of(context)!
+                                  .sChallengesPicNotice,
                               style: Theme.of(context)
                                   .textTheme
                                   .bodySmall!
@@ -322,8 +328,10 @@ class _ChallengeDetailScreenState extends State<ChallengeDetailScreen> {
                                     Navigator.of(context).pop();
                                   },
                             child: type == 1
-                                ? const Text("¡Hecho!")
-                                : const Text("¡Completado!"),
+                                ? Text(AppLocalizations.of(context)!
+                                    .gDoneExclamationButton)
+                                : Text(AppLocalizations.of(context)!
+                                    .gCompleteButton),
                           ),
                         ),
                         const SizedBox(
@@ -335,7 +343,8 @@ class _ChallengeDetailScreenState extends State<ChallengeDetailScreen> {
                               changeProofImage("");
                               Navigator.of(context).pop();
                             },
-                            child: const Text("Cerrar"),
+                            child: Text(
+                                AppLocalizations.of(context)!.gCloseButton),
                           ),
                         ),
                       ],
