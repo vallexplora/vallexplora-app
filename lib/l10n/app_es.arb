@@ -36,7 +36,7 @@
     "@gEvents": {
         "description": "The label for the events tab destination."
     },
-    "gRewards": "{count, plural, =1 {Recompensa} other{Recompensas}}",
+    "gRewards": "{count, plural, =1 {Premio} other{Premios}}",
     "@gRewards": {
         "description": "The label for the rewards tab destination."
     },
@@ -361,7 +361,7 @@
     "@sPlaceDetailAbout": {
         "description": "Used in the place detail screen. The text span before the place description."
     },
-    "sRewardDetailTypeTooltip": "Esta recompensa se redime por medio de {type, select, false{puntos} other{posición en el tablero}}",
+    "sRewardDetailTypeTooltip": "Este premio se redime por medio de {type, select, false{puntos} other{posición en el tablero}}",
     "@sRewardDetailTypeTooltip": {
         "description": "Used in the reward detail screen. The type icon tooltip.",
         "placeholders": {
@@ -382,15 +382,15 @@
             }
         }
     },
-    "sRewardDetailAbout": "Acerca de la recompensa: ",
+    "sRewardDetailAbout": "Acerca del premio: ",
     "@sRewardDetailAbout": {
         "description": "Used in the reward detail screen. The text span before the event description."
     },
-    "sRewardDetailClaim": "Reclamar recompensa",
+    "sRewardDetailClaim": "Reclamar premio",
     "@sRewardDetailClaim": {
         "description": "Used in the reward detail screen. The claim reward button label."
     },
-    "sRewardDetailClaimed": "Recompensa reclamada",
+    "sRewardDetailClaimed": "Premio reclamada",
     "@sRewardDetailClaimed": {
         "description": "Used in the reward detail screen. The disabled claim reward button label."
     },
@@ -454,7 +454,7 @@
     "@sDeleteDialogTitle": {
         "description": "Used in the profile delete dialog screen. The title for the delete account screen."
     },
-    "sDeleteDialogBody": "Al eliminar tu cuenta, se perderán todos sus datos, incluidos tus puntos, recompensas y configuración local de la app. Esta acción no se puede deshacer.\n\n¿Estás seguro de que quieres eliminar tu cuenta de forma permanente?",
+    "sDeleteDialogBody": "Al eliminar tu cuenta, se perderán todos sus datos, incluidos tus puntos, premios y configuración local de la app. Esta acción no se puede deshacer.\n\n¿Estás seguro de que quieres eliminar tu cuenta de forma permanente?",
     "@sDeleteDialogBody": {
         "description": "Used in the profile delete dialog screen. The message for the delete account screen."
     },
