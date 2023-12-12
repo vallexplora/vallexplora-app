@@ -10,6 +10,13 @@ class FirestoreResources {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
+  // Places
+
+  Stream<QuerySnapshot> placesList() => _firestore
+      .collection("places")
+      .orderBy("openTime", descending: false)
+      .snapshots();
+
   // Events
 
   Stream<QuerySnapshot> eventsList() => _firestore

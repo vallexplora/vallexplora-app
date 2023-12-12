@@ -16,6 +16,7 @@ class EventCard extends StatefulWidget {
   final List<Map<String, dynamic>>? location;
   final List<Map<String, dynamic>>? points;
   final bool hasAR;
+  final String information;
 
   const EventCard({
     super.key,
@@ -30,6 +31,7 @@ class EventCard extends StatefulWidget {
     this.location,
     this.points,
     required this.hasAR,
+    this.information = "No hay AR para los eventos :0",
   });
 
   @override
@@ -48,6 +50,7 @@ class _EventCardState extends State<EventCard> {
   late List<Map<String, dynamic>>? location;
   late List<Map<String, dynamic>>? points;
   late bool hasAR;
+  late String information;
 
   @override
   void initState() {
@@ -62,6 +65,7 @@ class _EventCardState extends State<EventCard> {
     imagePath = widget.imagePath;
     location = widget.location;
     hasAR = widget.hasAR;
+    information = widget.information;
   }
 
   @override
@@ -80,6 +84,7 @@ class _EventCardState extends State<EventCard> {
             imagePath: imagePath,
             location: location,
             hasAR: hasAR,
+            information: information,
           ),
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class SalesDetailsScreen extends StatefulWidget {
+class RewardDetailsScreen extends StatefulWidget {
   final String name;
   final String description;
   final String companyName;
@@ -11,7 +11,7 @@ class SalesDetailsScreen extends StatefulWidget {
   final bool requirementType;
   final String city;
 
-  const SalesDetailsScreen({
+  const RewardDetailsScreen({
     super.key,
     required this.name,
     required this.description,
@@ -24,10 +24,10 @@ class SalesDetailsScreen extends StatefulWidget {
   });
 
   @override
-  State<SalesDetailsScreen> createState() => _SalesDetailsScreenState();
+  State<RewardDetailsScreen> createState() => _RewardDetailsScreenState();
 }
 
-class _SalesDetailsScreenState extends State<SalesDetailsScreen> {
+class _RewardDetailsScreenState extends State<RewardDetailsScreen> {
   late String name;
   late String description;
   late String companyName;

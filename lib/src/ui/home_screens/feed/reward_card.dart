@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:vallexplora/src/constants/colors.dart';
-import 'package:vallexplora/src/ui/home_screens/feed/sale_details_screen.dart';
+import 'package:vallexplora/src/ui/home_screens/feed/reward_details_screen.dart';
 
-class SaleCard extends StatefulWidget {
+class RewardCard extends StatefulWidget {
   final String name;
   final String description;
   final String companyName;
@@ -13,7 +13,7 @@ class SaleCard extends StatefulWidget {
   final bool requirementType;
   final String city;
 
-  const SaleCard({
+  const RewardCard({
     super.key,
     required this.name,
     required this.description,
@@ -26,10 +26,10 @@ class SaleCard extends StatefulWidget {
   });
 
   @override
-  State<StatefulWidget> createState() => _SaleCardState();
+  State<StatefulWidget> createState() => _RewardCardState();
 }
 
-class _SaleCardState extends State<SaleCard> {
+class _RewardCardState extends State<RewardCard> {
   late String name;
   late String description;
   late String companyName;
@@ -57,7 +57,7 @@ class _SaleCardState extends State<SaleCard> {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => SalesDetailsScreen(
+          builder: (context) => RewardDetailsScreen(
             name: name,
             description: description,
             companyName: companyName,

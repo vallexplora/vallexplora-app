@@ -29,6 +29,10 @@ class Repository {
 
   // Home
 
+  // Places
+
+  Stream<QuerySnapshot> placesList() => _dbResources.placesList();
+
   // Events
   Stream<QuerySnapshot> eventsList() => _dbResources.eventsList();
 
@@ -122,5 +126,7 @@ class Repository {
 
   // Leaderboards
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> getPodium() => _dbResources.getPodium();
+  Stream<QuerySnapshot<Map<String, dynamic>>> getPodium() =>
+      _dbResources.getPodium();
+
 }

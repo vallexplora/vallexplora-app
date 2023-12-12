@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/blocs/profile/profile_bloc.dart';
 import 'package:vallexplora/src/constants/colors.dart';
-import 'package:vallexplora/src/constants/sizes.dart';
 import 'package:vallexplora/src/ui/profile/heading_section.dart';
 import 'package:vallexplora/src/ui/profile/notifications_danger_zone.dart';
 import 'package:vallexplora/src/ui/profile/personal_information.dart';

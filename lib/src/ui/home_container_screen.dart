@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/home_screen.dart';
+import 'package:vallexplora/src/ui/home_screens/feed/rewards_screen.dart';
 import 'package:vallexplora/src/ui/profile/profile_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:vallexplora/src/utils/theme/color_schemes.dart';
@@ -25,6 +26,7 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
     HomeScreen(),
     GuideScreen(),
     ChallengesScreen(),
+    RewardsScreen(),
     LeaderboardScreen(),
   ];
   @override
@@ -78,6 +80,11 @@ class _HomeContainerScreenState extends State<HomeContainerScreen> {
                   icon: const Icon(Icons.workspace_premium_outlined),
                   selectedIcon: const Icon(Icons.workspace_premium_rounded),
                   label: AppLocalizations.of(context)!.gChallenges,
+                ),
+                NavigationDestination(
+                  icon: const Icon(Icons.local_activity_outlined),
+                  selectedIcon: const Icon(Icons.local_activity),
+                  label: AppLocalizations.of(context)!.gRewards(2),
                 ),
                 NavigationDestination(
                   icon: const Icon(Icons.emoji_events_outlined),

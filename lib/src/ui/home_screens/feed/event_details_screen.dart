@@ -16,6 +16,7 @@ class EventDetailsScreen extends StatefulWidget {
   final String imagePath;
   final List<Map<String, dynamic>>? location;
   final bool hasAR;
+  final String information;
 
   const EventDetailsScreen({
     super.key,
@@ -29,6 +30,7 @@ class EventDetailsScreen extends StatefulWidget {
     required this.imagePath,
     this.location,
     required this.hasAR,
+    required this.information,
   });
 
   @override
@@ -46,6 +48,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
   late String imagePath;
   late List<Map<String, dynamic>>? location;
   late bool hasAR;
+  late String information;
 
   @override
   void initState() {
@@ -60,6 +63,7 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
     imagePath = widget.imagePath;
     location = widget.location;
     hasAR = widget.hasAR;
+    information = widget.information;
   }
 
   @override
@@ -179,7 +183,9 @@ class _EventDetailsScreenState extends State<EventDetailsScreen> {
                             ? () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => const ARView(),
+                                    builder: (context) => ARView(
+                                      information: information,
+                                    ),
                                   ),
                                 );
                               }

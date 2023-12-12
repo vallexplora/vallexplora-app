@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_unity_widget/flutter_unity_widget.dart';
 
 class ARView extends StatefulWidget {
-  const ARView({super.key});
+  final String information;
+
+  const ARView({
+    super.key,
+    required this.information,
+  });
 
   @override
   State<ARView> createState() => _ARViewState();
@@ -10,10 +15,12 @@ class ARView extends StatefulWidget {
 
 class _ARViewState extends State<ARView> {
   UnityWidgetController? _unityWidgetController;
+  late String information;
 
   @override
   void initState() {
     super.initState();
+    information = widget.information;
   }
 
   @override
@@ -48,11 +55,9 @@ class _ARViewState extends State<ARView> {
     _unityWidgetController!.isLoaded()!.then((loaded) {
       if (!loaded!) {
         _unityWidgetController!.create();
-
-        const String text = "This text is being sent from Flutter to Unity";
-        _unityWidgetController!
-            .postMessage("TextController", "ChangeTextAction", text);
       }
+      _unityWidgetController?.postMessage(
+          "TextController", "SetComingText", information);
     });
   }
 

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class SaleModel {
+class RewardModel {
   String id;
   String name;
   String description;
@@ -11,7 +11,7 @@ class SaleModel {
   bool requirementType;
   String city;
 
-  SaleModel({
+  RewardModel({
     required this.id,
     required this.name,
     required this.description,
@@ -23,8 +23,8 @@ class SaleModel {
     required this.city,
   });
 
-  static SaleModel fromDocument(DocumentSnapshot document) {
-    return SaleModel(
+  static RewardModel fromDocument(DocumentSnapshot document) {
+    return RewardModel(
       id: document.id,
       name: document['name'],
       description: document['description'],

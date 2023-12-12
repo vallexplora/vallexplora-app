@@ -86,6 +86,7 @@ class GuideBloc implements Bloc {
                   endDate: (docSnap["end"] as Timestamp).toDate(),
                   imagePath: docSnap["imagePath"],
                   hasAR: docSnap["hasAugmentedReality"],
+                  information: "",
                 ),
               ),
             ),

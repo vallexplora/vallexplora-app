@@ -28,6 +28,10 @@
     "@gLeaderboard": {
         "description": "The label for the leaderboard navbar destination."
     },
+    "gPlaces": "{count, plural, =1 {Lugar} other{Lugares}}",
+    "@gPlaces": {
+        "description": "The label for the places tab destination."
+    },
     "gEvents": "{count, plural, =1 {Evento} other{Eventos}}",
     "@gEvents": {
         "description": "The label for the events tab destination."
@@ -340,6 +344,22 @@
     "sEventDetailMapButtonLabel": "Mostrar en el mapa",
     "@sEventDetailMapButtonLabel": {
         "description": "Used in the event detail screen. The view on map button label."
+    },
+    "sPlaceOpenCloseTimeText": "De {openTime} a {closeTime}",
+    "@sPlaceOpenCloseTimeText": {
+        "description": "used in the places tab and details screen. The text to display the opening hours of a given place.",
+        "placeholders": {
+            "openTime": {
+                "type": "String"
+            },
+            "closeTime": {
+                "type": "String"
+            }
+        }
+    },
+    "sPlaceDetailAbout": "Acerca del lugar: ",
+    "@sPlaceDetailAbout": {
+        "description": "Used in the place detail screen. The text span before the place description."
     },
     "sRewardDetailTypeTooltip": "Esta recompensa se redime por medio de {type, select, false{puntos} other{posición en el tablero}}",
     "@sRewardDetailTypeTooltip": {

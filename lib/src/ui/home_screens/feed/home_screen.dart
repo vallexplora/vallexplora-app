@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vallexplora/src/ui/home_screens/feed/events_view.dart';
-import 'package:vallexplora/src/ui/home_screens/feed/sales_view.dart';
+import 'package:vallexplora/src/ui/home_screens/feed/places_view.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:vallexplora/src/blocs/home/home_screen_bloc.dart';
 import 'package:vallexplora/src/utils/theme/color_schemes.dart';
@@ -31,12 +31,12 @@ class _HomeScreenState extends State<HomeScreen>
         controller: _tabController,
         tabs: [
           Tab(
-            icon: const Icon(Icons.event_outlined),
-            text: AppLocalizations.of(context)!.gEvents(2),
+            icon: const Icon(Icons.place_outlined),
+            text: AppLocalizations.of(context)!.gPlaces(2),
           ),
           Tab(
-            icon: const Icon(Icons.local_activity_outlined),
-            text: AppLocalizations.of(context)!.gRewards(2),
+            icon: const Icon(Icons.event_outlined),
+            text: AppLocalizations.of(context)!.gEvents(2),
           ),
         ],
       );
@@ -64,8 +64,8 @@ class _HomeScreenState extends State<HomeScreen>
               child: TabBarView(
                 controller: _tabController,
                 children: const [
+                  PlacesViewTab(),
                   EventsViewTab(),
-                  SalesViewTab(),
                 ],
               ),
             ),
